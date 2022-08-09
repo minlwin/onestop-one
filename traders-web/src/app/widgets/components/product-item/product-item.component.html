@@ -1,0 +1,42 @@
+<div class="card mb-3 shadow-sm">
+
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-baseline">
+
+      <h5>{{item.name}}</h5>
+
+      <div>
+        <a [routerLink]="['/public/products/seller', item.seller.id]" class="btn-link text-decoration-none">
+          <i class="bi-person"></i> {{ item.seller?.name || 'Owner'}}
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <ng-template appImageHost ></ng-template>
+
+    <div class="d-flex justify-content-between mt-3">
+
+      <div class="text-secondary">
+        <span class="me-2">
+          <i class="bi-info-circle"></i> {{item.condition}}
+        </span>
+        <span class="me-2">
+          <i class="bi-tag"></i> {{item.category.name}}
+        </span>
+        <span>
+          <i class="bi-hourglass"></i> {{item.publishAt | dateToDuration}}</span>
+      </div>
+      <div>
+        <span class="me-2">
+          <i class="bi-currency-dollar"></i>{{item.price}}
+        </span>
+        <a [routerLink]="['/public', 'products', 'details', item.id]" class="btn-link">
+          <i class="bi-cart"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

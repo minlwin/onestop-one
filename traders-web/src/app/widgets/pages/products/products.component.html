@@ -1,0 +1,20 @@
+<div class="card mb-3 shadow-sm">
+  <div class="card-header d-flex justify-content-between">
+    <span>Search {{title}}</span>
+    <a (click)="clear()" href="#">
+      <i class="bi-trash"></i>
+    </a>
+  </div>
+  <div class="card-body">
+    <form action="#" [formGroup]="form">
+      <div class="input-group">
+        <input formControlName="keyword" type="text" placeholder="Keyword ..." class="form-control">
+        <button (click)="search()" class="input-group-text">
+          <i class="bi-search"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-product-item *ngFor="let item of list" [item]="item"></app-product-item>

@@ -1,0 +1,28 @@
+<div class="card">
+  <h4 class="card-header">Change Password</h4>
+
+  <form [formGroup]="form" class="card-body">
+
+    <div class="mb-2">
+      <label class="form-label">Old Password</label>
+      <div class="input-group">
+        <i class="bi-key-fill input-group-text"></i>
+        <input formControlName="oldPass" type="password" class="form-control" placeholder="Enter Old Password">
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <label class="form-label">New Password</label>
+      <div class="input-group">
+        <i class="bi-key input-group-text"></i>
+        <input formControlName="newPass" type="password" class="form-control" placeholder="Enter New Password">
+      </div>
+    </div>
+
+    <div class="pt-3">
+      <button class="btn btn-outline-secondary me-2 " (click)="changePass()" [class.disabled]="!form.valid"  >
+        <i class="bi-lock"></i> Change Password
+      </button>
+    </div>
+  </form>
+</div>

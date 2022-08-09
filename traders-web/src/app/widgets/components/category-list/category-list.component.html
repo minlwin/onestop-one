@@ -1,0 +1,16 @@
+<div class="list-group ">
+  <span class="list-group-item bg-light">
+    <i class="bi-tags"></i> Category
+  </span>
+
+  <a [routerLink]="['products', {category: item.id}]" *ngFor="let item of list" class="list-group-item d-flex justify-content-between">
+    <span>{{item.name}}</span>
+    <span class="badge bg-info rounded-pill">
+      {{item.products}}
+    </span>
+  </a>
+</div>
+
+<div class="pt-2" *ngIf="list.length <= 5">
+  <button (click)="loadMore()" class="btn btn-outline-primary">Load More ...</button>
+</div>

@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Aung Aung",
+    "sales": 158019
+  },
+  {
+    "id": 2,
+    "name": "Maung Maung",
+    "sales": 453009
+  },
+  {
+    "id": 3,
+    "name": "Thidar",
+    "sales": 1029273
+  },
+  {
+    "id": 4,
+    "name": "Nilar",
+    "sales": 98171
+  },
+  {
+    "id": 5,
+    "name": "Nway Oo Maw",
+    "sales": 330393
+  },
+  {
+    "id": 6,
+    "name": "Thaung Tin",
+    "sales": 92726
+  },
+  {
+    "id": 7,
+    "name": "Thein Oo",
+    "sales": 92863
+  },
+  {
+    "id": 8,
+    "name": "Aung Nway Oo",
+    "sales": 37363
+  },
+  {
+    "id": 9,
+    "name": "Thin Zaw",
+    "sales": 5524
+  },
+  {
+    "id": 10,
+    "name": "Thein Naing Tun",
+    "sales": 38373
+  }
+]

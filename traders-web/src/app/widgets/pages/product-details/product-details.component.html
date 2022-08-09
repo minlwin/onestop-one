@@ -1,0 +1,63 @@
+<h5>{{data?.name}}</h5>
+
+<!-- Summary Information -->
+<div class="d-flex mb-2 text-secondary justify-content-between">
+
+  <div class="d-flex">
+    <div class="me-2">
+      <i class="bi-info-circle"></i> {{data?.condition}}
+    </div>
+
+    <div class="me-2">
+      <i class="bi-tag"></i> {{data?.category?.name}}
+    </div>
+
+    <div class="me-2">
+      <i class="bi-person"></i> {{data?.seller?.name}}
+    </div>
+
+    <div class="me-2">
+      <i class="bi-hourglass"></i> {{data?.publishAt | dateToDuration}}
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <div>
+      <i class="bi-currency-dollar"></i> {{data?.price | number}}
+    </div>
+  </div>
+
+</div>
+
+<!-- Product Image Viewr -->
+<app-product-image [image]="coverImage" ></app-product-image>
+
+<div class="d-flex flex-row mt-2" *ngIf="data?.images?.length > 1">
+  <div class="me-2" *ngFor="let item of data?.images" (click)="coverImage = item">
+    <app-product-image [height]="100" [width]="100" [image]="item"></app-product-image>
+  </div>
+</div>
+
+<!-- Controls -->
+<div class="mt-4 d-flex">
+
+  <button (click)="askQuestion()" class="btn btn-outline-primary me-2">
+    <i class="bi-chat"></i> Ask About Product
+  </button>
+
+  <button (click)="purchase(data.id)" class="btn btn-outline-danger">
+    <i class="bi-cart"></i> Purchase
+  </button>
+</div>
+
+
+<!-- Properties -->
+<h5 class="mt-4">Properties</h5>
+
+<div class="list-group list-group-flush mb-5">
+  <div *ngFor="let item of features" class="list-group-item d-flex flex-column">
+    <span class="text-secondary">{{item}}</span>
+    <span>{{data.features[item]}}</span>
+  </div>
+</div>
+

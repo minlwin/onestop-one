@@ -1,0 +1,52 @@
+[
+	{
+		"id": 1,
+		"name": "Foods",
+    "products": 10
+	},
+	{
+		"id": 2,
+		"name": "Drinks",
+    "products": 18
+	},
+	{
+		"id": 3,
+		"name": "Fashions",
+    "products": 120
+	},
+	{
+		"id": 4,
+		"name": "Mens",
+    "products": 81
+	},
+	{
+		"id": 5,
+		"name": "Girls",
+    "products": 250
+	},
+	{
+		"id": 6,
+		"name": "Beauty",
+    "products": 110
+	},
+	{
+		"id": 7,
+		"name": "Health",
+    "products": 11
+	},
+	{
+		"id": 8,
+		"name": "Electrics",
+    "products": 30
+	},
+	{
+		"id": 9,
+		"name": "IT Devices",
+    "products": 36
+	},
+	{
+		"id": 10,
+		"name": "Mobiles",
+    "products": 91
+	}
+]

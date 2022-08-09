@@ -1,0 +1,26 @@
+.product-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 0.5px solid gray;
+  border-radius: 5px;
+}
+
+body {
+  margin-top: 5rem;
+}
+
+.sticky-top {
+  top: 4rem;
+}
+
+.inline-btn-wrapper {
+  padding-top: 2rem;
+}
+
+.img-profile {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  margin-top: 1rem;
+}

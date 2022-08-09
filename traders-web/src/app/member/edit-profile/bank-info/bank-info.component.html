@@ -1,0 +1,24 @@
+<form *ngFor="let item of bankInfo.controls; index as i" [formGroup]="item" class="row mb-3">
+
+  <div class="col">
+    <label *ngIf="i == 0" class="form-label">Banking</label>
+    <input [readonly]="readonly" formControlName="type" type="text" class="form-control" placeholder="Banking Name">
+  </div>
+
+  <div class="col">
+    <label *ngIf="i == 0" class="form-label">Account No</label>
+    <input [readonly]="readonly" formControlName="accountNumber" type="text" class="form-control" placeholder="Account No.">
+  </div>
+
+  <div class="col">
+    <label *ngIf="i == 0" class="form-label">Account Name</label>
+    <input [readonly]="readonly" formControlName="accountName" type="text" class="form-control" placeholder="Account Name">
+  </div>
+
+  <div *ngIf="!readonly" class="col-auto" [class.inline-btn-wrapper]="i == 0">
+    <button (click)="removeItem(i)" class="btn btn-outline-danger">
+      <i class="bi-dash-lg"></i>
+    </button>
+  </div>
+
+</form>
