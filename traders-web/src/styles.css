@@ -7,11 +7,11 @@
 }
 
 body {
-  margin-top: 5rem;
+  margin-top: 5rem !important;
 }
 
 .sticky-top {
-  top: 4rem;
+  top: 4rem !important;
 }
 
 .inline-btn-wrapper {
