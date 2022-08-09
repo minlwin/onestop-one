@@ -1,7 +1,8 @@
-import { map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractService } from './abstract.service';
+
+const API = 'seller/top'
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,12 @@ export class TopSellersService extends AbstractService{
   }
 
   getTopSellers() {
-    return this.http.get<any[]>(this.getBaseApi('sellers'))
-      .pipe(
-        map(array => array.sort((a, b) => b.sales - a.sales))
-      )
+    let params = {limit: 10}
+    return this.http.get<any[]>(this.getBaseApi(API), {params: params})
   }
 
-  findById(id:number) {
-    return this.http.get<any[]>(this.getBaseApi('sellers'))
-      .pipe(
-        map(array => array.filter(item => item.id == id).pop())
-      )
+  findById(id: number) {
+    return this.http.get<any>(`${this.getBaseApi(API)}/${id}`)
   }
+
 }

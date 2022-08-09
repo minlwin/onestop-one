@@ -1,6 +1,7 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { EditProfileState } from './../edit-profile.state';
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from 'src/app/services/api/location.service';
 
 @Component({
   templateUrl: './shipping-info.component.html',
@@ -9,11 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShippingInfoComponent implements OnInit {
 
-  constructor(private state:EditProfileState) {
+  divisions:any[] = []
+
+  constructor(private state:EditProfileState, private locations:LocationService) {
     state.view = 'ship'
   }
 
   ngOnInit(): void {
+    this.locations.findDivisions().subscribe(data => this.divisions = data)
   }
 
   get addresses() {

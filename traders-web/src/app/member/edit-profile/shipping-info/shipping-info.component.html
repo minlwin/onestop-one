@@ -18,6 +18,7 @@
       <label class="form-label">Division</label>
       <select class="form-select">
         <option value="">Select Division</option>
+        <option *ngFor="let item of divisions" [value]="item.id">{{item.name}}</option>
       </select>
     </div>
 
