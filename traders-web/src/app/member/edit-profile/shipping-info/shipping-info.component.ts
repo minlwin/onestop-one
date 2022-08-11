@@ -10,22 +10,17 @@ import { LocationService } from 'src/app/services/api/location.service';
 })
 export class ShippingInfoComponent implements OnInit {
 
-  divisions:any[] = []
+  townships:any[] = []
 
-  constructor(private state:EditProfileState, private locations:LocationService) {
+  constructor(private state:EditProfileState) {
     state.view = 'ship'
   }
 
   ngOnInit(): void {
-    this.locations.findDivisions().subscribe(data => this.divisions = data)
   }
 
   get addresses() {
     return this.state.address
-  }
-
-  getFormStyleClass(i:number) {
-    return i < this.addresses.controls.length - 1 ? 'pb-2 border-bottom border-1' : '';
   }
 
   removeItem(index:number) {

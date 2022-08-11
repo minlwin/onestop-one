@@ -7,11 +7,17 @@ import { AbstractService } from './abstract.service';
 })
 export class LocationService extends AbstractService {
 
+
   constructor(private http:HttpClient) {
     super()
   }
 
   findDivisions() {
     return this.http.get<any[]>(`${this.getBaseApi('location')}/division`)
+  }
+
+  findTownships(divisionId: string) {
+    return this.http.get<any[]>(`${this.getBaseApi('location')}/township`,
+      {params: {division: divisionId}})
   }
 }

@@ -1,0 +1,39 @@
+<form [formGroup]="form"
+  [ngClass]="formStyleClass"
+  [class.pt-4]="index > 0">
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Name</label>
+      <input formControlName="name" type="text" class="form-control" placeholder="Enter Shipping Address Name">
+    </div>
+    <div class="col-auto inline-btn-wrapper">
+      <button (click)="removeItem()" class="btn btn-outline-danger">
+        <i class="bi-dash-lg"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-3">
+      <label class="form-label">Division</label>
+      <select #divisionSelect (change)="changeDivision(divisionSelect.value)" class="form-select">
+        <option value="">Select Division</option>
+        <option *ngFor="let item of divisions" [value]="item.id">{{item.name}}</option>
+      </select>
+    </div>
+
+    <div class="col-3">
+      <label class="form-label">Township</label>
+      <select formControlName="township" class="form-select">
+        <option value="">Select Township</option>
+        <option *ngFor="let item of townships" [value]="item.id">{{item.name}}</option>
+      </select>
+    </div>
+
+    <div class="col">
+      <label class="form-label">Address</label>
+      <input type="text" formControlName="address" class="form-control" placeholder="Enter Address">
+    </div>
+
+  </div>
+</form>

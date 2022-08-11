@@ -13,6 +13,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PersonalInfoComponent } from './edit-profile/personal-info/personal-info.component';
 import { BankInfoComponent } from './edit-profile/bank-info/bank-info.component';
 import { ShippingInfoComponent } from './edit-profile/shipping-info/shipping-info.component';
+import { ShippingEditFormComponent } from './edit-profile/shipping-info/shipping-edit-form/shipping-edit-form.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ShippingInfoComponent } from './edit-profile/shipping-info/shipping-inf
     PersonalInfoComponent,
     BankInfoComponent,
     ShippingInfoComponent,
+    ShippingEditFormComponent,
   ],
   imports: [
     CommonModule,
