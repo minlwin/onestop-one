@@ -13,7 +13,7 @@ export class CategoryService extends AbstractService{
   }
 
   getCategories(count?:number):Observable<any[]> {
-    let params:any = {limit: count}
+    let params:any = count ? {limit: count} : undefined
     return this.http.get<any[]>(this.baseApi, {params: params})
   }
 
