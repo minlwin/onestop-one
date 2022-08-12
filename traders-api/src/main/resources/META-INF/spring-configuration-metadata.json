@@ -1,0 +1,7 @@
+{
+	"properties" : [
+		{"name" : "app.jwt.token"},
+		{"name" : "app.jwt.issuer"},
+		{"name" : "app.jwt.limit"}
+	]
+}
