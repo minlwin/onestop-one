@@ -9,15 +9,15 @@ import { AbstractService } from './abstract.service';
 export class CategoryService extends AbstractService{
 
   constructor(private http:HttpClient) {
-    super()
+    super('category')
   }
 
   getCategories(count?:number):Observable<any[]> {
     let params:any = {limit: count}
-    return this.http.get<any[]>(this.getBaseApi('category'), {params: params})
+    return this.http.get<any[]>(this.baseApi, {params: params})
   }
 
   findById(id: number) {
-    return this.http.get<any>(`${this.getBaseApi('category')}/${id}`)
+    return this.http.get<any>(`${this.baseApi}/${id}`)
   }
 }

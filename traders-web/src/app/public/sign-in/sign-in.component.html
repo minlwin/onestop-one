@@ -23,9 +23,6 @@
       <a [routerLink]="['/public', 'signup']" [queryParams]="{target: target}" class="btn btn-outline-secondary me-2">
         <i class="bi-person-plus"></i> Sign Up
       </a>
-      <button class="btn btn-outline-secondary me-2">
-        <i class="bi-google"></i> Google Sign In
-      </button>
       <button class="btn btn-outline-secondary me-2 " (click)="signIn()" [class.disabled]="!form.valid"  >
         <i class="bi-door-open-fill"></i> Sign In
       </button>

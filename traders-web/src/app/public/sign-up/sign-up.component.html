@@ -1,12 +1,12 @@
 <div class="card">
   <h4 class="card-header">Member Sign Up</h4>
 
-  <form action="#" class="card-body">
+  <form [formGroup]="form" class="card-body">
     <div class="mb-2">
       <label class="form-label">Member Name</label>
       <div class="input-group">
         <i class="bi-person input-group-text"></i>
-        <input type="text" class="form-control" placeholder="Enter Name">
+        <input formControlName="name" type="text" class="form-control" placeholder="Enter Name">
       </div>
     </div>
 
@@ -14,7 +14,7 @@
       <label class="form-label">Email</label>
       <div class="input-group">
         <i class="bi-envelope input-group-text"></i>
-        <input type="email" class="form-control" placeholder="Enter Email Address">
+        <input formControlName="email" type="email" class="form-control" placeholder="Enter Email Address">
       </div>
     </div>
 
@@ -22,18 +22,15 @@
       <label class="form-label">Password</label>
       <div class="input-group">
         <i class="bi-key input-group-text"></i>
-        <input type="password" class="form-control" placeholder="Enter Password">
+        <input formControlName="password" type="password" class="form-control" placeholder="Enter Password">
       </div>
     </div>
 
     <div class="pt-3">
-      <a [routerLink]="['/public', 'signin']" class="btn btn-outline-secondary me-2">
+      <a [routerLink]="['/public', 'signin']" [queryParams]="target" class="btn btn-outline-secondary me-2">
         <i class="bi-person-check"></i> Sign In
       </a>
-      <button class="btn btn-outline-secondary me-2">
-        <i class="bi-google"></i> Google Sign Up
-      </button>
-      <button class="btn btn-outline-secondary me-2">
+      <button (click)="signUp()" class="btn btn-outline-secondary me-2">
         <i class="bi-person-plus"></i> Sign Up
       </button>
     </div>

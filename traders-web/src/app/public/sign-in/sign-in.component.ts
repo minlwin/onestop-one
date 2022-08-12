@@ -12,16 +12,18 @@ export class SignInComponent implements OnInit {
 
   form:FormGroup
   target?:string[]
+  message?:string
 
   constructor(
     builder:FormBuilder,
     route:ActivatedRoute,
     private service:SecurityService,
     private router:Router) {
+
     this.form = builder.group({
-        email: ["", [Validators.required, Validators.email]],
-        password: ["", [Validators.required, Validators.minLength(8)]]
-      })
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(8)]]
+    })
 
     route.queryParams.subscribe(params => this.target = params['target'])
   }
@@ -31,10 +33,14 @@ export class SignInComponent implements OnInit {
 
   signIn() {
     if(this.form.valid) {
-      this.service.signIn(this.form.value)
-      this.router.navigate(this.target || ['/'])
+      this.service.signIn(this.form.value).subscribe(result => {
+        if(result.success) {
+          this.router.navigate(this.target || ['/'])
+        } else {
+          this.message = result.message
+        }
+      })
     }
   }
-
 
 }

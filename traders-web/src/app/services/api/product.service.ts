@@ -6,14 +6,14 @@ import { AbstractService } from './abstract.service';
 export class ProductSerivce extends AbstractService {
 
   constructor(private http:HttpClient) {
-    super()
+    super('product')
   }
 
   findById(id:number) {
-    return this.http.get<any[]>(`this.getBaseApi('product')/${id}`)
+    return this.http.get<any[]>(`${this.baseApi}/${id}`)
   }
 
   search(form:any) {
-    return this.http.get<any[]>(this.getBaseApi('product'), {params: form})
+    return this.http.get<any[]>(this.baseApi, {params: form})
   }
 }

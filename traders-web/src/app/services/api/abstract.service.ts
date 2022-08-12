@@ -1,7 +1,9 @@
 import { environment } from './../../../environments/environment';
 export class AbstractService {
 
-  protected getBaseApi(resource:string):string {
-    return `${environment.baseApi}/${resource}`
+  constructor(private resource:string) {}
+
+  protected get baseApi():string {
+    return `${environment.baseApi}/${this.resource}`
   }
 }
