@@ -2,12 +2,14 @@ package com.jdc.one.traders.model.dto.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -36,8 +38,19 @@ public class Account implements Serializable{
 	@Column(name = "update_at")
 	private LocalDateTime updateAt;
 	
+	@OneToMany(mappedBy = "seller")
+	private List<Product> product;
+	
 	public enum Role {
 		Admin, Member
+	}
+
+	public List<Product> getProduct() {
+		return product;
+	}
+
+	public void setProduct(List<Product> product) {
+		this.product = product;
 	}
 
 	public int getId() {

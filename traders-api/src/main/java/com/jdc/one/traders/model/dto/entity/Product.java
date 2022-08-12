@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,10 +21,10 @@ import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @Table(name = "product")
-public class Product implements Serializable{
+public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(generator = "product_seq")
 	@SequenceGenerator(name = "product_seq")
@@ -39,7 +40,7 @@ public class Product implements Serializable{
 	@CreatedDate
 	@Column(name = "publish_at")
 	private LocalDateTime publishAt;
-	
+
 	@ElementCollection
 	@CollectionTable(name = "product_feature")
 	@MapKeyColumn(name = "name")
@@ -47,11 +48,22 @@ public class Product implements Serializable{
 	@ElementCollection
 	@CollectionTable(name = "product_photo")
 	private List<String> photos;
-	
+
+	@OneToMany(mappedBy = "product")
+	private List<Sale> sale;
+
 	private boolean soldOut;
 
 	public enum Condition {
 		New, Used
+	}
+
+	public List<Sale> getSale() {
+		return sale;
+	}
+
+	public void setSale(List<Sale> sale) {
+		this.sale = sale;
 	}
 
 	public int getId() {

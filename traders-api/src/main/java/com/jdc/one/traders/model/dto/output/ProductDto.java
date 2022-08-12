@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import com.jdc.one.traders.model.dto.entity.Product;
+import com.jdc.one.traders.model.dto.entity.Product.Condition;
+
 public record ProductDto(
 		int id,
 		String name,
@@ -11,11 +14,15 @@ public record ProductDto(
 		String category,
 		int sellerId,
 		String seller,
-		String condition,
+		Condition condition,
 		int price,
 		LocalDateTime publishAt,
 		Map<String, String> features,
 		List<String> photos
 		) {
 
+	public ProductDto(Product p) {
+		this(p.getId(), p.getName(), p.getCategory().getId(), p.getCategory().getName(), p.getSeller().getId(), p.getSeller().getName(), 
+				p.getCondition(), p.getPrice(), p.getPublishAt(), p.getFeatures(), p.getPhotos());
+	}
 }

@@ -1,8 +1,10 @@
 package com.jdc.one.traders.model.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,11 +16,13 @@ import com.jdc.one.traders.model.dto.input.SignInDto;
 import com.jdc.one.traders.model.dto.input.SignUpDto;
 import com.jdc.one.traders.model.dto.output.LoginResultDto;
 import com.jdc.one.traders.model.dto.output.LoginUserDto;
+import com.jdc.one.traders.model.dto.output.TopSellerDto;
 import com.jdc.one.traders.model.repo.AccountRepo;
 import com.jdc.one.traders.model.service.AccountSecurity;
+import com.jdc.one.traders.model.service.AccountService;
 
 @Service
-public class AccountServiceImpl implements AccountSecurity {
+public class AccountServiceImpl implements AccountSecurity, AccountService {
 
 	@Autowired
 	private AuthenticationManager authManager;
@@ -59,6 +63,11 @@ public class AccountServiceImpl implements AccountSecurity {
 	public Optional<Account> findByEmail(String email) {
 		return repo.findOne((root, query, builder) -> 
 				builder.equal(root.get("email"), email));
+	}
+
+	@Override
+	public List<TopSellerDto> getTopSellers(Optional<Integer> limit) {
+		return repo.getTopSeller(limit.map(size -> PageRequest.ofSize(size)).orElse(null));
 	}
 	
 	
