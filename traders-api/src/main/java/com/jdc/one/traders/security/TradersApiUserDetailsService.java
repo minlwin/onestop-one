@@ -8,24 +8,25 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.jdc.one.traders.model.service.AccountSecurity;
+import com.jdc.one.traders.model.repo.AccountRepo;
 
 @Service
 public class TradersApiUserDetailsService implements UserDetailsService{
 
 	@Autowired
-	private AccountSecurity accSecurity;
+	private AccountRepo repo;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return accSecurity.findByEmail(username)
-				.map(acc -> User.builder()
-						.username(username)
-						.password(acc.getPassword())
-						.authorities(AuthorityUtils.createAuthorityList(acc.getRole().name()))
-						.disabled(acc.isSuspend())
-						.build())
-				.orElseThrow(() -> new UsernameNotFoundException(username));
+		return repo.findOne((root, query, builder) -> 
+			builder.equal(root.get("email"), username))
+					.map(acc -> User.builder()
+							.username(username)
+							.password(acc.getPassword())
+							.authorities(AuthorityUtils.createAuthorityList(acc.getRole().name()))
+							.disabled(acc.isSuspend())
+							.build())
+					.orElseThrow(() -> new UsernameNotFoundException(username));
 	}
 
 }
