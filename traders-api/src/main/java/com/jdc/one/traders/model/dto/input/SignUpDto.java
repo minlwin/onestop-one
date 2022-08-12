@@ -13,6 +13,7 @@ public record SignUpDto(
 	
 	public Account account() {
 		var account = new Account();
+		account.setEmail(email);
 		account.setName(name);
 		account.setRole(Role.Member);
 		account.setSuspend(false);

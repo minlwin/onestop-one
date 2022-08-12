@@ -7,11 +7,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.jdc.one.traders.model.dto.entity.Account.Role;
 import com.jdc.one.traders.security.JwtTokenAuthenticationFilter;
 
 @Configuration
@@ -33,10 +35,11 @@ public class TradersApiSecurityConfig {
 					.cors().and()
 					.csrf().disable()
 					.authorizeRequests()
-						.mvcMatchers("").permitAll()
-						.mvcMatchers("/admin/**").hasAnyAuthority("Admin")
+						.mvcMatchers("/admin/**").hasAnyAuthority(Role.Admin.toString())
+						.mvcMatchers("/security/**").permitAll()
 						.anyRequest().authenticated().and()
 						.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
+						.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 					.build();
 	}
 	
