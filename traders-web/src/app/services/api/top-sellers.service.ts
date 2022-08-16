@@ -5,7 +5,7 @@ import { AbstractService } from './abstract.service';
 const API = 'seller/top'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class TopSellersService extends AbstractService{
 

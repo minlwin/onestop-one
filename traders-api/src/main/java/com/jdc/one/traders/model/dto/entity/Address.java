@@ -16,13 +16,22 @@ public class Address implements Serializable {
 	@Id
 	private int id;
 	private String name;
-	@ManyToOne
-	private Account account;
 	private String address;
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Township township;
+	
+	@ManyToOne(optional = false)
+	private Profile profile;
 
 	private boolean deleted;
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
 
 	public int getId() {
 		return id;
@@ -38,14 +47,6 @@ public class Address implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
 	}
 
 	public String getAddress() {

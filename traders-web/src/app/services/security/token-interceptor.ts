@@ -20,9 +20,9 @@ export class TokenInterceptor implements HttpInterceptor{
     }
 
     return next.handle(cloneRequest).pipe(
-      tap(req => {
-        if(req instanceof HttpResponse) {
-          this.context.token = req.headers.get(TOKEN_NAME)
+      tap(event => {
+        if(event instanceof HttpResponse) {
+          this.context.token = event.headers.get(TOKEN_NAME)
         }
       })
     )

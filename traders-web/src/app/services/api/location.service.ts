@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AbstractService } from './abstract.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class LocationService extends AbstractService {
 
