@@ -3,17 +3,17 @@ import { Injectable } from '@angular/core';
 import { AbstractService } from './abstract.service';
 
 @Injectable({providedIn: 'root'})
-export class ProductSerivce extends AbstractService {
+export class ProfileService extends AbstractService {
 
   constructor(private http:HttpClient) {
-    super('product')
+    super('profile')
   }
 
   findById(id:number) {
-    return this.http.get<any[]>(`${this.baseApi}/${id}`)
+    return this.http.get<any>(`${this.baseApi}/${id}`)
   }
 
-  search(form:any) {
-    return this.http.get<any[]>(this.baseApi, {params: form})
+  save(form:any) {
+    return this.http.put<any>(this.baseApi, form)
   }
 }

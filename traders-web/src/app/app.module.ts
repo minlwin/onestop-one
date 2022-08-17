@@ -1,4 +1,4 @@
-import { SecurityContext } from './services/security/sercurity-context';
+import { LogoutInterceptor } from './services/security/logout-interceptor';
 import { TokenInterceptor } from './services/security/token-interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -17,7 +17,8 @@ import { AppComponent } from './app.component';
     HttpClientModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LogoutInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

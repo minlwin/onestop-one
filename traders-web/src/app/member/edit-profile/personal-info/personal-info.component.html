@@ -1,43 +1,51 @@
 <div class="row">
 
   <div class="col-auto">
-    <img src="/assets/images/profile.jpg" class="img-profile img-thumbnail"  alt="">
+    <img [src]="coverPhoto | profileImage" class="img-profile img-thumbnail"  alt="">
   </div>
 
   <div class="col">
-    <div class="form">
+    <div [formGroup]="form" class="form">
 
       <div class="row mb-3">
         <div class="col">
           <label class="form-label">Name</label>
-          <input type="text" class="form-control" placeholder="Enter Name">
+          <input [readonly]="readonly" formControlName="name" type="text" class="form-control" placeholder="Enter Name">
         </div>
         <div class="col">
           <label class="form-label">Email</label>
-          <input type="email" class="form-control" placeholder="Enter Email">
+          <input readonly formControlName="email" type="email" class="form-control" placeholder="Enter Email">
         </div>
       </div>
 
-      <div class="row mb-3">
-        <div class="col">
-          <label class="form-label">Date of Birth</label>
-          <input type="date" class="form-control" placeholder="Enter Date of Birth">
+      <section formGroupName="personalInfo">
+        <div class="row mb-3">
+          <div class="col">
+            <label class="form-label">Date of Birth</label>
+            <input [readonly]="readonly" formControlName="dateOfBirth" type="date" class="form-control" placeholder="Enter Date of Birth">
+          </div>
+          <div class="col">
+            <label class="form-label">Gender</label>
+            <select *ngIf="!readonly" formControlName="gender" class="form-select">
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <input readonly *ngIf="readonly" formControlName="gender" class="form-control" placeholder="Gender">
+          </div>
         </div>
-        <div class="col">
-          <label class="form-label">Gender</label>
-          <select name="" class="form-select">
-            <option value="Male">Male</option>
-            <option value="Male">Female</option>
-          </select>
-        </div>
-      </div>
 
-      <div>
-        <label class="form-label">Greeting</label>
-        <textarea cols="30" rows="4" class="form-control"></textarea>
-      </div>
+        <div>
+          <label class="form-label">Greeting</label>
+          <textarea [readonly]="readonly" formControlName="greeting" cols="30" rows="4" class="form-control"></textarea>
+        </div>
+      </section>
 
     </div>
   </div>
 
 </div>
+
+<form action="#" class="d-none">
+  <input name="file" type="file" #photo (change)="uploadProfileImage(photo.files)">
+</form>

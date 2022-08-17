@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class EditProfileState {
@@ -9,6 +10,8 @@ export class EditProfileState {
   editable = false
 
   view = 'profile'
+
+  loadImage = new Subject
 
   constructor(private builder:FormBuilder) {
     this.userProfile = builder.group({
@@ -24,10 +27,29 @@ export class EditProfileState {
       bankingInfo: builder.array([]),
       address: builder.array([])
     })
-
-    this.addBankingInfo()
-    this.addAddress()
   }
+
+  init(profile: any): void {
+    const {personalInfo, bankingInfo, address, ... account} = profile
+    this.userProfile.patchValue(account)
+
+    if(personalInfo) {
+      this.userProfile.get('personalInfo')?.patchValue(personalInfo)
+    }
+
+    if(bankingInfo) {
+      this.setBankingInfo(bankingInfo)
+    } else {
+      this.addBankingInfo()
+    }
+
+    if(address) {
+      this.setAddress(address)
+    } else {
+      this.addAddress()
+    }
+  }
+
 
   get bankingInfo() {
     return this.userProfile.get('bankingInfo') as FormArray<FormGroup>
@@ -35,15 +57,6 @@ export class EditProfileState {
 
   get address() {
     return this.userProfile.get('address') as FormArray<FormGroup>
-  }
-
-  deleteBankingInfo(index:number) {
-    let target = this.bankingInfo.at(index) as FormGroup
-    if(target.get('id')?.value == 0) {
-      this.bankingInfo.removeAt(index)
-    } else {
-      target.patchValue({deleted : true})
-    }
   }
 
   addBankingInfo() {
@@ -57,13 +70,16 @@ export class EditProfileState {
     }))
   }
 
-  deleteAddress(index:number) {
-    let target = this.address.at(index) as FormGroup
-    if(target.get('id')?.value == 0) {
-      this.address.removeAt(index)
-    } else {
-      target.patchValue({deleted : true})
-    }
+  setBankingInfo(array:Array<any>) {
+    array.forEach(item => this.bankingInfo.push(
+        this.builder.group({
+          id: item.id,
+          type: [item.type, Validators.required],
+          accountName: [item.accountName, Validators.required],
+          accountNumber: [item.accountNumber, Validators.required],
+          deleted: item.deleted
+        })
+    ))
   }
 
   addAddress() {
@@ -75,4 +91,39 @@ export class EditProfileState {
       deleted: false
     }))
   }
+
+  setAddress(array:Array<any>) {
+    array.forEach(item => this.address.push(
+      this.builder.group({
+        id: item.id,
+        name: [item.name, Validators.required],
+        address: [item.address, Validators.required],
+        township: [item.township, Validators.required],
+        deleted: item.deleted
+      })
+    ))
+  }
+
+  deleteBankingInfo(index:number) {
+    let target = this.bankingInfo.at(index) as FormGroup
+    if(target.get('id')?.value == 0) {
+      this.bankingInfo.removeAt(index)
+    } else {
+      target.patchValue({deleted : true})
+    }
+  }
+
+  deleteAddress(index:number) {
+    let target = this.address.at(index) as FormGroup
+    if(target.get('id')?.value == 0) {
+      this.address.removeAt(index)
+    } else {
+      target.patchValue({deleted : true})
+    }
+  }
+
+  set coverImage(image:string) {
+    this.userProfile.get('personalInfo')?.patchValue({coverImage : image})
+  }
+
 }

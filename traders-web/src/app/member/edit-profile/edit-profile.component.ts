@@ -1,3 +1,5 @@
+import { SecurityContext } from './../../services/security/sercurity-context';
+import { ProfileService } from './../../services/api/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { EditProfileState } from './edit-profile.state';
 
@@ -16,7 +18,16 @@ export class EditProfileComponent implements OnInit {
     return !this.state.editable
   }
 
-  constructor(private state:EditProfileState) { }
+  constructor(
+    private state:EditProfileState,
+    private service:ProfileService,
+    private context:SecurityContext) { }
+
+  ngOnInit(): void {
+    this.service.findById(this.context.security?.id!).subscribe(
+      profile => this.state.init(profile)
+    )
+  }
 
   get userProfile() {
     return this.state.userProfile
@@ -24,9 +35,6 @@ export class EditProfileComponent implements OnInit {
 
   get view() {
     return this.state.view
-  }
-
-  ngOnInit(): void {
   }
 
 
@@ -49,7 +57,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   uploadProfileImage() {
-
+    this.state.loadImage.next("Load Imaeg")
   }
 
   get disabledAddBankInfo() {

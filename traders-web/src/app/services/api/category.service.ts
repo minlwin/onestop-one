@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AbstractService } from './abstract.service';
 
 @Injectable({
-  providedIn: 'any'
+  providedIn: 'root'
 })
 export class CategoryService extends AbstractService{
 

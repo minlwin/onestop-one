@@ -17,6 +17,7 @@ import { BackgroundImagePipe } from './pipes/background-image.pipe';
 import { ProductImageComponent } from './components/product-image/product-image.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { MemberSideMenuComponent } from './components/member-side-menu/member-side-menu.component';
+import { ProfileImagePipe } from './pipes/profile-image.pipe';
 
 
 
@@ -36,7 +37,8 @@ import { MemberSideMenuComponent } from './components/member-side-menu/member-si
     BackgroundImagePipe,
     ProductImageComponent,
     ProductDetailsComponent,
-    MemberSideMenuComponent
+    MemberSideMenuComponent,
+    ProfileImagePipe
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { MemberSideMenuComponent } from './components/member-side-menu/member-si
     CompactNumberPipe,
     DateToDurationPipe,
     BackgroundImagePipe,
+    ProfileImagePipe,
     MemberSideMenuComponent
   ]
 })
