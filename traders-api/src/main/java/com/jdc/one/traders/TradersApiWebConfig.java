@@ -15,6 +15,6 @@ public class TradersApiWebConfig implements WebMvcConfigurer{
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/photo").addResourceLocations(photoLocation);
+		registry.addResourceHandler("/photo/**").addResourceLocations("file:%s".formatted(photoLocation));
 	}
 }

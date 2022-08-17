@@ -36,7 +36,7 @@ public class TradersApiSecurityConfig {
 					.csrf().disable()
 					.authorizeRequests()
 						.mvcMatchers("/admin/**").hasAnyAuthority(Role.Admin.toString())
-						.mvcMatchers("/security/**", "/category", "/seller/top", "/product").permitAll()
+						.mvcMatchers("/security/**", "/category", "/seller/top", "/product", "/photo/**").permitAll()
 						.anyRequest().authenticated().and()
 						.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
 						.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

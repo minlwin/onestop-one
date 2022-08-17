@@ -29,9 +29,10 @@ import com.jdc.one.traders.model.repo.ProfileRepo;
 import com.jdc.one.traders.model.repo.TownshipRepo;
 import com.jdc.one.traders.model.service.AccountSecurity;
 import com.jdc.one.traders.model.service.AccountService;
+import com.jdc.one.traders.model.service.ProfileService;
 
 @Service
-public class AccountServiceImpl implements AccountSecurity, AccountService {
+public class AccountServiceImpl implements AccountSecurity, AccountService, ProfileService {
 
 	@Autowired
 	private AuthenticationManager authManager;

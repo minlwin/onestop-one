@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jdc.one.traders.model.dto.output.PhotoUploadResult;
 import com.jdc.one.traders.model.service.PhotoService;
 
 @RestController
@@ -18,7 +19,7 @@ public class PhotoUploadApi {
 	private PhotoService service;
 
 	@PostMapping("{account}")
-	String uploadPhoto(
+	PhotoUploadResult uploadPhoto(
 			@PathVariable int account, 
 			@RequestParam MultipartFile file) {
 		return service.save(account, file);
