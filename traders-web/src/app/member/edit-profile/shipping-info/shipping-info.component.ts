@@ -1,7 +1,5 @@
-import { FormArray, FormGroup } from '@angular/forms';
 import { EditProfileState } from './../edit-profile.state';
 import { Component, OnInit } from '@angular/core';
-import { LocationService } from 'src/app/services/api/location.service';
 
 @Component({
   templateUrl: './shipping-info.component.html',

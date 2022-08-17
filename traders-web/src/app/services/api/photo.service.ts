@@ -1,6 +1,4 @@
-import { map } from 'rxjs';
 import { SecurityContext } from './../security/sercurity-context';
-import { HttpRequest, HttpResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { AbstractService } from './abstract.service';
 import { Injectable } from '@angular/core';
