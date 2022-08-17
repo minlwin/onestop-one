@@ -33,12 +33,8 @@ export class SignInComponent implements OnInit {
 
   signIn() {
     if(this.form.valid) {
-      this.service.signIn(this.form.value).subscribe(result => {
-        if(result.success) {
-          this.router.navigate(this.target || ['/'])
-        } else {
-          this.message = result.message
-        }
+      this.service.signIn(this.form.value).subscribe((_) => {
+        this.router.navigate(this.target || ['/'])
       })
     }
   }

@@ -30,4 +30,8 @@ export class SecurityService extends AbstractService{
       })
     )
   }
+
+  changePass(form:any) {
+    return this.http.post<any>(`${this.baseApi}/changepass/${this.context.security?.id}`, form)
+  }
 }

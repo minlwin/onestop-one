@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { SecurityContext } from './sercurity-context';
 
 @Injectable()
@@ -15,7 +15,8 @@ export class LogoutInterceptor implements HttpInterceptor {
 
         if(error.status == 401 || error.status == 403) {
           this.context.signOut()
-          this.router.navigate(['/public', 'signin'])
+          this.router.navigate(['/public', 'signin'], {queryParams: {message: 'Authentication Fails!'}})
+          of()
         }
 
         throw(error)

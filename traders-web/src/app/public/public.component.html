@@ -16,6 +16,10 @@
 
 <main class="container-fluid mt-4">
 
+  <div *ngIf="info.message" class="alert alert-info" >
+    {{info.message}}
+  </div>
+
   <div class="row">
 
     <nav class="col-3">

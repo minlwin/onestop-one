@@ -2,10 +2,10 @@ package com.jdc.one.traders.model.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jdc.one.traders.model.dto.output.PhotoUploadResult;
+import com.jdc.one.traders.model.dto.output.SimpleResult;
 
 public interface PhotoService {
 
-	PhotoUploadResult save(int account, MultipartFile file);
+	SimpleResult save(int account, MultipartFile file);
 
 }

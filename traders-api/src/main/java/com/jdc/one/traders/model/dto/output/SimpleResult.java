@@ -1,15 +1,15 @@
 package com.jdc.one.traders.model.dto.output;
 
-public record PhotoUploadResult(
+public record SimpleResult(
 		String message,
 		boolean success
 		) {
 	
-	public static PhotoUploadResult success(String message) {
-		return new PhotoUploadResult(message, true);
+	public static SimpleResult success(String message) {
+		return new SimpleResult(message, true);
 	}
 
-	public static PhotoUploadResult fails(String message) {
-		return new PhotoUploadResult(message, false);
+	public static SimpleResult fails(String message) {
+		return new SimpleResult(message, false);
 	}
 }

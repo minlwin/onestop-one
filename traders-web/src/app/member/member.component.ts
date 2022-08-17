@@ -10,13 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MemberComponent implements OnInit {
 
-  constructor(private context:SecurityContext, route:ActivatedRoute) {
+  info:any
+
+  constructor(private context:SecurityContext, private route:ActivatedRoute) {
     route.params.subscribe(params => this.hideSideBar = params['hideSideBar'])
   }
 
   hideSideBar = false
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => this.info = params)
   }
 
   get userName() {

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublicComponent implements OnInit {
 
-  constructor() { }
+  info:any
+
+  constructor(private route:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(result => this.info = result)
   }
 
 }

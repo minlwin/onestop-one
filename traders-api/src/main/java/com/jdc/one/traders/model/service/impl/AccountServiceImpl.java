@@ -19,10 +19,12 @@ import com.jdc.one.traders.model.dto.entity.Profile;
 import com.jdc.one.traders.model.dto.input.AccountProfile;
 import com.jdc.one.traders.model.dto.input.AddressDto;
 import com.jdc.one.traders.model.dto.input.BankingDto;
+import com.jdc.one.traders.model.dto.input.ChangePasswordDto;
 import com.jdc.one.traders.model.dto.input.SignInDto;
 import com.jdc.one.traders.model.dto.input.SignUpDto;
 import com.jdc.one.traders.model.dto.output.LoginResultDto;
 import com.jdc.one.traders.model.dto.output.LoginUserDto;
+import com.jdc.one.traders.model.dto.output.SimpleResult;
 import com.jdc.one.traders.model.dto.output.TopSellerDto;
 import com.jdc.one.traders.model.repo.AccountRepo;
 import com.jdc.one.traders.model.repo.ProfileRepo;
@@ -134,6 +136,22 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 				.orElseThrow(EntityNotFoundException::new));
 		return address;
 	}
+
+	@Override
+	@Transactional
+	public SimpleResult changePass(int accountId, ChangePasswordDto dto) {
+		
+		var account = accountRepo.findById(accountId).orElseThrow(EntityNotFoundException::new);
+		
+		if(!encoder.matches(dto.oldPass(), account.getPassword())) {
+			return SimpleResult.fails("Please check your old password.");
+		}
+		
+		account.setPassword(encoder.encode(dto.newPass()));
+		
+		return SimpleResult.success("Your password has been changed successfully!");
+	}
+
 	
 	
 }
