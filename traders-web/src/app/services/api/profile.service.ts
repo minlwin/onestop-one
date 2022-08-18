@@ -1,3 +1,4 @@
+import { SecurityContext } from './../security/sercurity-context';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractService } from './abstract.service';
@@ -5,7 +6,7 @@ import { AbstractService } from './abstract.service';
 @Injectable({providedIn: 'root'})
 export class ProfileService extends AbstractService {
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private context:SecurityContext) {
     super('profile')
   }
 
@@ -16,4 +17,12 @@ export class ProfileService extends AbstractService {
   save(form:any) {
     return this.http.put<any>(this.baseApi, form)
   }
+
+  uploadImage(image:File) {
+    const form = new FormData()
+    form.append('file', image, image.name)
+    return this.http.put<any>(`${this.baseApi}/image/${this.context.security?.id}`, form)
+  }
+
+
 }

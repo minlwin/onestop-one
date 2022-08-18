@@ -32,7 +32,7 @@
       <i class="bi-camera"></i> Profile Photo
     </button>
 
-    <button (click)="addAddress()" class="btn btn-outline-danger me-2" *ngIf="!readonly && view == 'ship'">
+    <button (click)="addAddress()" [class.disabled]="disabledAddAddress" class="btn btn-outline-danger me-2" *ngIf="!readonly && view == 'ship'">
       <i class="bi-train-front"></i> Add Address
     </button>
 
@@ -40,7 +40,7 @@
       <i class="bi-bank"></i> Add Banking Info
     </button>
 
-    <button (click)="save()" *ngIf="!readonly" class="btn btn-outline-danger me-2">
+    <button (click)="save()" *ngIf="!readonly" [class.disabled]="disabledSaveBtn" class="btn btn-outline-danger me-2">
       <i class="bi-save"></i> Save
     </button>
   </div>

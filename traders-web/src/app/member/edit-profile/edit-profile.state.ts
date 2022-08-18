@@ -37,16 +37,15 @@ export class EditProfileState {
       this.userProfile.get('personalInfo')?.patchValue(personalInfo)
     }
 
+    this.bankingInfo.clear()
+    this.address.clear()
+
     if(bankingInfo) {
       this.setBankingInfo(bankingInfo)
-    } else {
-      this.addBankingInfo()
     }
 
     if(address) {
       this.setAddress(address)
-    } else {
-      this.addAddress()
     }
   }
 
@@ -71,7 +70,7 @@ export class EditProfileState {
   }
 
   setBankingInfo(array:Array<any>) {
-    array.forEach(item => this.bankingInfo.push(
+    array.filter(item => !item.deleted).forEach(item => this.bankingInfo.push(
         this.builder.group({
           id: item.id,
           type: [item.type, Validators.required],
@@ -93,7 +92,7 @@ export class EditProfileState {
   }
 
   setAddress(array:Array<any>) {
-    array.forEach(item => this.address.push(
+    array.filter(item => !item.deleted).forEach(item => this.address.push(
       this.builder.group({
         id: item.id,
         name: [item.name, Validators.required],

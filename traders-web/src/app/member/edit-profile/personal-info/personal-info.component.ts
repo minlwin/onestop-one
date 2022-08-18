@@ -1,3 +1,4 @@
+import { ProfileService } from './../../../services/api/profile.service';
 import { EditProfileState } from './../edit-profile.state';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PhotoService } from 'src/app/services/api/photo.service';
@@ -12,7 +13,9 @@ export class PersonalInfoComponent implements OnInit {
   @ViewChild("photo")
   imageInput?:ElementRef
 
-  constructor(private state:EditProfileState, private photoService:PhotoService) {
+  constructor(
+    private state:EditProfileState,
+    private profileService:ProfileService) {
     state.view = 'profile'
   }
 
@@ -24,10 +27,8 @@ export class PersonalInfoComponent implements OnInit {
 
   uploadProfileImage(files:FileList | null) {
     if(files && files.length > 0) {
-      this.photoService.upload(files[0]).subscribe(result => {
-        if(result.success) {
-          this.state.coverImage = result.message
-        }
+      this.profileService.uploadImage(files[0]).subscribe(result => {
+        this.state.init(result)
       })
     }
   }
