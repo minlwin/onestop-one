@@ -25,4 +25,8 @@ export class ShippingInfoComponent implements OnInit {
     this.addresses.removeAt(index)
   }
 
+  get readonly() {
+    return !this.state.editable
+  }
+
 }

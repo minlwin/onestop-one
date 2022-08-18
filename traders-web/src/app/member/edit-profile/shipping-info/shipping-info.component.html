@@ -1,4 +1,4 @@
 <app-shipping-edit-form
   *ngFor="let item of addresses.controls; index as i"
-  [form]="item" [index]="i" (deleteEvent)="removeItem($event)"
+  [form]="item" [index]="i" [readonly]="readonly" (deleteEvent)="removeItem($event)"
   ></app-shipping-edit-form>

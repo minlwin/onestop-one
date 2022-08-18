@@ -1,7 +1,6 @@
 import { ProfileService } from './../../../services/api/profile.service';
 import { EditProfileState } from './../edit-profile.state';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { PhotoService } from 'src/app/services/api/photo.service';
 
 @Component({
   templateUrl: './personal-info.component.html',

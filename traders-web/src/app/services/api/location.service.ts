@@ -21,4 +21,8 @@ export class LocationService extends AbstractService {
       {params: {division: divisionId}}
     )
   }
+
+  findTownshipById(id:number) {
+    return this.http.get<any>(`${this.baseApi}/township/${id}`)
+  }
 }

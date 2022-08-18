@@ -28,7 +28,11 @@ export class ChangePassComponent implements OnInit {
   changePass() {
     if(this.form.valid) {
       this.service.changePass(this.form.value).subscribe(result => {
-        this.router.navigate(['/member'], {queryParams: result});
+        if(result.success) {
+          this.router.navigate(['/member'], {queryParams: result});
+        } else {
+          this.router.navigate(['/member', 'profile', 'changepass'], {queryParams: result})
+        }
       })
     }
   }
