@@ -39,9 +39,14 @@ export class EditProfileComponent implements OnInit {
 
 
   save() {
-    // save form data
 
-    // reload view
+    if(this.state.userProfile.valid) {
+      // save form data
+      this.service.save(this.state.userProfile.value).subscribe(result => {
+        this.state.init(result)
+        this.state.editable = false
+      })
+    }
   }
 
   edit() {
@@ -57,11 +62,19 @@ export class EditProfileComponent implements OnInit {
   }
 
   uploadProfileImage() {
-    this.state.loadImage.next("Load Imaeg")
+    this.state.loadImage.next("Load Image")
   }
 
   get disabledAddBankInfo() {
     return !this.state.bankingInfo.valid
+  }
+
+  get disabledAddAddress() {
+    return !this.state.address.valid
+  }
+
+  get disabledSaveBtn() {
+    return !this.state.userProfile.valid
   }
 
 }

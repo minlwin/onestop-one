@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jdc.one.traders.model.dto.entity.Account;
 import com.jdc.one.traders.model.dto.entity.Address;
@@ -27,10 +28,13 @@ import com.jdc.one.traders.model.dto.output.LoginUserDto;
 import com.jdc.one.traders.model.dto.output.SimpleResult;
 import com.jdc.one.traders.model.dto.output.TopSellerDto;
 import com.jdc.one.traders.model.repo.AccountRepo;
+import com.jdc.one.traders.model.repo.AddressRepo;
+import com.jdc.one.traders.model.repo.BankingInfoRepo;
 import com.jdc.one.traders.model.repo.ProfileRepo;
 import com.jdc.one.traders.model.repo.TownshipRepo;
 import com.jdc.one.traders.model.service.AccountSecurity;
 import com.jdc.one.traders.model.service.AccountService;
+import com.jdc.one.traders.model.service.PhotoService;
 import com.jdc.one.traders.model.service.ProfileService;
 
 @Service
@@ -49,6 +53,14 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 	
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	@Autowired
+	private PhotoService photoService;
+	
+	@Autowired
+	private BankingInfoRepo bankRepo;
+	@Autowired
+	private AddressRepo addressRepo;
 	
 
 	@Override
@@ -109,11 +121,25 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 		profile.setGreeting(dto.personalInfo().greeting());
 		
 		final Profile finalProfile = profile;
+		finalProfile.getBankingInfo().clear();
+		finalProfile.getAddress().clear();
 		
 		dto.bankingInfo().stream().map(BankingDto::getEntity)
+			.map(entity -> {
+				if(entity.getId() > 0) {
+					return bankRepo.save(entity);
+				}
+				return entity;
+			})
 			.forEach(finalProfile::addBankingInfo);
-		
+				
 		dto.address().stream().map(this::getAddress)
+			.map(entity -> {
+				if(entity.getId() > 0) {
+					return addressRepo.save(entity);
+				}
+				return entity;
+			})
 			.forEach(finalProfile::addAddress);
 		
 		return findOne(dto.id());
@@ -150,6 +176,27 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 		account.setPassword(encoder.encode(dto.newPass()));
 		
 		return SimpleResult.success("Your password has been changed successfully!");
+	}
+
+	@Override
+	@Transactional
+	public AccountProfile updateProfileImage(int id, MultipartFile file) {
+		var result = photoService.save(id, file);
+		
+		if(result.success()) {
+			var account = accountRepo.findById(id).orElseThrow(EntityNotFoundException::new);
+			var profile = account.getProfile();
+			
+			if(null == profile) {
+				profile = new Profile();
+				profile.setAccount(account);
+				account.setProfile(profile);
+			}
+			
+			profile.setCoverImage(result.message());
+
+		}
+		return findOne(id);
 	}
 
 	

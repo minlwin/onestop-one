@@ -5,8 +5,7 @@
     {
       "name": "Launch Chrome",
       "request": "launch",
-      "type": "firefox",
-      "preLaunchTask": "npm: start",
+      "type": "chrome",
       "url": "http://localhost:4200/",
     },
   ]
