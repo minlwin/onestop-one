@@ -1,4 +1,4 @@
-package com.jdc.one.traders.model.dto.input;
+package com.jdc.one.traders.model.dto.output;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,11 +18,12 @@ public record ProductDto(
 		int price,
 		LocalDateTime publishAt,
 		Map<String, String> features,
-		List<String> photos
+		List<String> photos,
+		boolean soldOut
 		) {
 
 	public ProductDto(Product p) {
 		this(p.getId(), p.getName(), p.getCategory().getId(), p.getCategory().getName(), p.getSeller().getId(), p.getSeller().getName(), 
-				p.getCondition(), p.getPrice(), p.getPublishAt(), p.getFeatures(), p.getPhotos());
+				p.getCondition(), p.getPrice(), p.getPublishAt(), p.getFeatures(), p.getPhotos(), p.isSoldOut());
 	}
 }

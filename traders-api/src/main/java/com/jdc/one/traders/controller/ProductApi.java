@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jdc.one.traders.model.dto.input.ProductDto;
+import com.jdc.one.traders.model.dto.input.ProductInputDto;
+import com.jdc.one.traders.model.dto.output.ProductDto;
 import com.jdc.one.traders.model.service.ProductService;
 
 @RestController
@@ -31,12 +33,12 @@ public class ProductApi {
 	}
 	
 	@PostMapping
-	Object create() {
-		return null;
+	ProductDto create(@RequestBody ProductInputDto dto) {
+		return service.save(dto);
 	}
 
 	@PutMapping
-	Object update() {
-		return null;
+	ProductDto update(@RequestBody ProductInputDto dto) {
+		return service.save(dto);
 	}
 }

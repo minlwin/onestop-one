@@ -2,6 +2,8 @@ package com.jdc.one.traders.model.dto.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +11,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -18,9 +21,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "product")
+@EntityListeners(AuditingEntityListener.class)
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -53,6 +58,12 @@ public class Product implements Serializable {
 	private List<Sale> sale;
 
 	private boolean soldOut;
+	
+	public Product() {
+		features = new HashMap<>();
+		photos = new ArrayList<>();
+		sale = new ArrayList<>();
+	}
 
 	public enum Condition {
 		New, Used
