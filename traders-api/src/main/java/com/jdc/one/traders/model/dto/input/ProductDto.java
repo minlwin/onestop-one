@@ -1,4 +1,4 @@
-package com.jdc.one.traders.model.dto.output;
+package com.jdc.one.traders.model.dto.input;
 
 import java.time.LocalDateTime;
 import java.util.List;

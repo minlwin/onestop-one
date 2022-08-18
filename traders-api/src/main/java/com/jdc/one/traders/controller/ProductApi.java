@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jdc.one.traders.model.dto.output.ProductDto;
+import com.jdc.one.traders.model.dto.input.ProductDto;
 import com.jdc.one.traders.model.service.ProductService;
 
 @RestController

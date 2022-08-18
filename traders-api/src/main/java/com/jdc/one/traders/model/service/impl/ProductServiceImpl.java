@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.jdc.one.traders.model.dto.entity.Product;
-import com.jdc.one.traders.model.dto.output.ProductDto;
+import com.jdc.one.traders.model.dto.input.ProductDto;
 import com.jdc.one.traders.model.repo.ProductRepo;
 import com.jdc.one.traders.model.service.ProductService;
 
