@@ -11,4 +11,6 @@ public interface LocationService {
 
 	List<TownshipDto> findTownships(int division);
 
+	TownshipDto findTownshipById(int id);
+
 }

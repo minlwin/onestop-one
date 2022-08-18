@@ -2,6 +2,8 @@ package com.jdc.one.traders.model.service.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +33,13 @@ public class LocationServiceImpl implements LocationService {
 	public List<TownshipDto> findTownships(int division) {
 		return townships.findByDivisionId(division)
 				.map(TownshipDto::new).toList();
+	}
+
+	@Override
+	public TownshipDto findTownshipById(int id) {
+		return townships.findById(id)
+				.map(TownshipDto::new)
+				.orElseThrow(EntityNotFoundException::new);
 	}
 
 }

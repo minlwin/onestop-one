@@ -133,7 +133,8 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 			})
 			.forEach(finalProfile::addBankingInfo);
 				
-		dto.address().stream().map(this::getAddress)
+		dto.address().stream()
+			.map(this::getAddress)
 			.map(entity -> {
 				if(entity.getId() > 0) {
 					return addressRepo.save(entity);
@@ -169,6 +170,10 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 		
 		var account = accountRepo.findById(accountId).orElseThrow(EntityNotFoundException::new);
 		
+		if(dto.oldPass().equals(dto.newPass())) {
+			return SimpleResult.fails("You can't use same password with old password.");
+		}
+
 		if(!encoder.matches(dto.oldPass(), account.getPassword())) {
 			return SimpleResult.fails("Please check your old password.");
 		}

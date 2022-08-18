@@ -2,15 +2,14 @@ package com.jdc.one.traders.model.dto.input;
 
 import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jdc.one.traders.model.dto.entity.Profile;
 import com.jdc.one.traders.model.dto.entity.Profile.Gender;
 
 public record PersonalInfoDto(
 		String greeting,
 		String coverImage,
-		@DateTimeFormat(pattern = "yyyy-MM-dd")
+		@JsonFormat(pattern = "yyyy-MM-dd")
 		LocalDate dateOfBirth,
 		Gender gender
 		) {
