@@ -2,3 +2,5 @@
   *ngFor="let item of addresses.controls; index as i"
   [form]="item" [index]="i" [readonly]="readonly" (deleteEvent)="removeItem($event)"
   ></app-shipping-edit-form>
+
+<app-no-items *ngIf="addresses.controls.length == 0" message="There is no shipping address."></app-no-items>

@@ -1,3 +1,4 @@
+import { ProductEditComponent } from './my-products/product-edit/product-edit.component';
 import { MemberSideMenuComponent } from './../widgets/components/member-side-menu/member-side-menu.component';
 import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
 import { MySalesComponent } from './my-sales/my-sales.component';
@@ -12,6 +13,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PersonalInfoComponent } from './edit-profile/personal-info/personal-info.component';
 import { BankInfoComponent } from './edit-profile/bank-info/bank-info.component';
 import { ShippingInfoComponent } from './edit-profile/shipping-info/shipping-info.component';
+import { ProductListComponent } from './my-products/product-list/product-list.component';
 
 const routes: Routes = [
   {
@@ -27,7 +29,12 @@ const routes: Routes = [
             {path: 'shipping', component: ShippingInfoComponent},
             {path: '', redirectTo: 'personal', pathMatch: 'full'}
           ]},
-          {path: 'products', component: MyProductsComponent},
+          {path: 'products', component: MyProductsComponent, children: [
+            {path: 'list', component: ProductListComponent},
+            {path: 'edit', component: ProductEditComponent},
+            {path: 'details/:id', component: ProductDetailsComponent},
+            {path: '', redirectTo: 'list', pathMatch: 'full'}
+          ]},
           {path: 'sales', component: MySalesComponent},
           {path: 'purchases', component: MyPurchasesComponent},
           {path: 'changepass', component: ChangePassComponent}

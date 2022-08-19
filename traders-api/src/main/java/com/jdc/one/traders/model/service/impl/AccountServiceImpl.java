@@ -42,7 +42,7 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 
 	@Autowired
 	private AuthenticationManager authManager;
-	
+
 	@Autowired
 	private AccountRepo accountRepo;
 	@Autowired
@@ -50,24 +50,23 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 
 	@Autowired
 	private TownshipRepo townshipRepo;
-	
+
 	@Autowired
 	private PasswordEncoder encoder;
-	
+
 	@Autowired
 	private PhotoService photoService;
-	
+
 	@Autowired
 	private BankingInfoRepo bankRepo;
 	@Autowired
 	private AddressRepo addressRepo;
-	
 
 	@Override
 	public LoginResultDto signIn(SignInDto dto) {
 		var auth = authManager.authenticate(dto.authenticationToken());
 		SecurityContextHolder.getContext().setAuthentication(auth);
-		
+
 		return findByEmail(dto.email()).map(LoginUserDto::new).map(LoginResultDto::success)
 				.orElse(LoginResultDto.error("There is no account with email. %s".formatted(dto.email())));
 	}
@@ -75,12 +74,12 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 	@Transactional
 	@Override
 	public LoginResultDto signUp(SignUpDto dto) {
-		
+
 		// Create Account
 		var account = dto.account();
 		account.setPassword(encoder.encode(dto.password()));
 		accountRepo.save(account);
-		
+
 		// Authenticate
 		var auth = authManager.authenticate(dto.authenticationToken());
 		SecurityContextHolder.getContext().setAuthentication(auth);
@@ -91,8 +90,7 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 
 	@Override
 	public Optional<Account> findByEmail(String email) {
-		return accountRepo.findOne((root, query, builder) -> 
-				builder.equal(root.get("email"), email));
+		return accountRepo.findOne((root, query, builder) -> builder.equal(root.get("email"), email));
 	}
 
 	@Override
@@ -103,83 +101,75 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 	@Transactional
 	@Override
 	public AccountProfile save(AccountProfile dto) {
-		
+
 		var account = accountRepo.findById(dto.id()).orElseThrow(EntityNotFoundException::new);
 		account.setName(dto.name());
-		
+
 		var profile = account.getProfile();
-		
-		if(null == profile) {
+
+		if (null == profile) {
 			profile = new Profile();
 			profile.setAccount(account);
 			profile = profileRepo.save(profile);
 		}
-		
+
 		profile.setCoverImage(dto.personalInfo().coverImage());
 		profile.setGender(dto.personalInfo().gender());
 		profile.setDateOfBirth(dto.personalInfo().dateOfBirth());
 		profile.setGreeting(dto.personalInfo().greeting());
-		
+
 		final Profile finalProfile = profile;
 		finalProfile.getBankingInfo().clear();
 		finalProfile.getAddress().clear();
-		
-		dto.bankingInfo().stream().map(BankingDto::getEntity)
-			.map(entity -> {
-				if(entity.getId() > 0) {
-					return bankRepo.save(entity);
-				}
-				return entity;
-			})
-			.forEach(finalProfile::addBankingInfo);
-				
-		dto.address().stream()
-			.map(this::getAddress)
-			.map(entity -> {
-				if(entity.getId() > 0) {
-					return addressRepo.save(entity);
-				}
-				return entity;
-			})
-			.forEach(finalProfile::addAddress);
-		
+
+		dto.bankingInfo().stream().map(BankingDto::getEntity).map(entity -> {
+			if (entity.getId() > 0) {
+				return bankRepo.save(entity);
+			}
+			return entity;
+		}).forEach(finalProfile::addBankingInfo);
+
+		dto.address().stream().map(this::getAddress).map(entity -> {
+			if (entity.getId() > 0) {
+				return addressRepo.save(entity);
+			}
+			return entity;
+		}).forEach(finalProfile::addAddress);
+
 		return findOne(dto.id());
 	}
 
 	@Override
 	public AccountProfile findOne(int id) {
-		return accountRepo.findById(id)
-				.map(AccountProfile::from)
-				.orElseThrow(EntityNotFoundException::new);
+		return accountRepo.findById(id).map(AccountProfile::from).orElseThrow(EntityNotFoundException::new);
 	}
-	
+
 	private Address getAddress(AddressDto dto) {
 		var address = new Address();
 		address.setId(dto.id());
 		address.setAddress(dto.address());
 		address.setName(dto.name());
 		address.setDeleted(dto.deleted());
-		address.setTownship(townshipRepo.findById(dto.township())
-				.orElseThrow(EntityNotFoundException::new));
+		address.setTownship(townshipRepo.findById(dto.township()).orElseThrow(EntityNotFoundException::new));
 		return address;
 	}
 
 	@Override
 	@Transactional
 	public SimpleResult changePass(int accountId, ChangePasswordDto dto) {
-		
+
 		var account = accountRepo.findById(accountId).orElseThrow(EntityNotFoundException::new);
-		
-		if(dto.oldPass().equals(dto.newPass())) {
+
+		if (dto.oldPass().equals(dto.newPass())) {
 			return SimpleResult.fails("You can't use same password with old password.");
 		}
 
-		if(!encoder.matches(dto.oldPass(), account.getPassword())) {
+		if (!encoder.matches(dto.oldPass(), account.getPassword())) {
 			return SimpleResult.fails("Please check your old password.");
 		}
-		
+
 		account.setPassword(encoder.encode(dto.newPass()));
-		
+
 		return SimpleResult.success("Your password has been changed successfully!");
 	}
 
@@ -187,23 +177,21 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 	@Transactional
 	public AccountProfile updateProfileImage(int id, MultipartFile file) {
 		var result = photoService.save(id, file);
-		
-		if(result.success()) {
+
+		if (result.success()) {
 			var account = accountRepo.findById(id).orElseThrow(EntityNotFoundException::new);
 			var profile = account.getProfile();
-			
-			if(null == profile) {
+
+			if (null == profile) {
 				profile = new Profile();
 				profile.setAccount(account);
 				account.setProfile(profile);
 			}
-			
+
 			profile.setCoverImage(result.message());
 
 		}
 		return findOne(id);
 	}
 
-	
-	
 }

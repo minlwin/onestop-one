@@ -22,3 +22,5 @@
   </div>
 
 </form>
+
+<app-no-items *ngIf="bankInfo.controls.length == 0" message="There is no bank information."></app-no-items>

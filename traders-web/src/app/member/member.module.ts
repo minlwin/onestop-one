@@ -14,6 +14,11 @@ import { PersonalInfoComponent } from './edit-profile/personal-info/personal-inf
 import { BankInfoComponent } from './edit-profile/bank-info/bank-info.component';
 import { ShippingInfoComponent } from './edit-profile/shipping-info/shipping-info.component';
 import { ShippingEditFormComponent } from './edit-profile/shipping-info/shipping-edit-form/shipping-edit-form.component';
+import { ProductEditComponent } from './my-products/product-edit/product-edit.component';
+import { ProductListComponent } from './my-products/product-list/product-list.component';
+import { ProductInfoComponent } from './my-products/product-edit/product-info/product-info.component';
+import { ProductFeaturesComponent } from './my-products/product-edit/product-features/product-features.component';
+import { ProductPhotosComponent } from './my-products/product-edit/product-photos/product-photos.component';
 
 
 @NgModule({
@@ -28,6 +33,11 @@ import { ShippingEditFormComponent } from './edit-profile/shipping-info/shipping
     BankInfoComponent,
     ShippingInfoComponent,
     ShippingEditFormComponent,
+    ProductEditComponent,
+    ProductListComponent,
+    ProductInfoComponent,
+    ProductFeaturesComponent,
+    ProductPhotosComponent,
   ],
   imports: [
     CommonModule,

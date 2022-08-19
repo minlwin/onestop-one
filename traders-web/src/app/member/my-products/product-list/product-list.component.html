@@ -1,0 +1,32 @@
+<form action="" class="mb-4 row">
+  <div class="col-auto">
+    <select class="form-select">
+      <option value="">Search Category</option>
+    </select>
+  </div>
+
+  <div class="col-4">
+    <input type="text" placeholder="Search Keyword" class="form-control">
+  </div>
+
+  <div class="col">
+    <button class="btn btn-outline-info me-2">
+      <i class="bi-search"></i> Search
+    </button>
+
+    <a [routerLink]="['../', 'edit']" class="btn btn-outline-success">
+      <i class="bi-plus-lg"></i> New Product
+    </a>
+  </div>
+</form>
+
+<table *ngIf="list.length > 0" class="mt-4 table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+</table>
+
+<app-no-items *ngIf="list.length == 0"></app-no-items>

@@ -1,38 +1,7 @@
-<div class="card">
-  <div class="card-header">
-    <span>
-      <i class="bi-gift"></i> My Products
-    </span>
-  </div>
+<h3>
+  <i class="bi-gift"></i> My Products
+</h3>
 
-  <form action="" class="card-body row">
-    <div class="col-auto">
-      <select class="form-select">
-        <option value="">Search Category</option>
-      </select>
-    </div>
-
-    <div class="col-4">
-      <input type="text" placeholder="Search Keyword" class="form-control">
-    </div>
-
-    <div class="col">
-      <button class="btn btn-outline-info me-2">
-        <i class="bi-search"></i> Search
-      </button>
-
-      <button class="btn btn-outline-success">
-        <i class="bi-plus-lg"></i> New Product
-      </button>
-    </div>
-  </form>
+<div class="mt-3">
+  <router-outlet></router-outlet>
 </div>
-
-<table class="mt-4 table">
-  <thead>
-    <tr>
-      <th>Product</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-</table>
