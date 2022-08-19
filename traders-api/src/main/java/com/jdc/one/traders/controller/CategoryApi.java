@@ -23,13 +23,25 @@ public class CategoryApi {
 	private CategoryService service;
 
 	@GetMapping
+	List<SimpleCategory> getAll() {
+		return service.getAll();
+	}
+
+	@GetMapping("{id}")
+	SimpleCategory findById(@PathVariable int id) {
+		return service.findById(id);
+	}
+
+	@GetMapping("top")
 	List<CategoryDto> search(@RequestParam Optional<Integer> limit) {
 		return service.topCategories(limit);
 	}
+	
 	
 	@GetMapping("seller/{sellerId}")
 	List<SimpleCategory> getSellerCategory(@PathVariable int sellerId) {
 		return service.getSellerCategory(sellerId);
 	}
+	
 	
 }

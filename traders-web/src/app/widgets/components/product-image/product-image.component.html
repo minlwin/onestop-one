@@ -1,4 +1,1 @@
-<div class="product-image"
-  [style.height.px]="height || 300"
-  [style.width.px]="width"
-  [style.background-image]="image | backgroundImage"></div>
+<img class="card-img product-image" [src]="image! | productImage : dummy" [height]="height" width="width" alt="Product Image">

@@ -2,7 +2,10 @@
   <div class="row">
     <div class="col">
       <label class="form-label">Category</label>
-      <input [readonly]="state.readonly" formControlName="category" type="text" class="form-control" placeholder="Enter Category Name">
+      <input [readonly]="state.readonly" list="categories" formControlName="category" type="text" class="form-control" placeholder="Enter Category Name">
+      <datalist id="categories">
+        <option *ngFor="let item of categoryNames" [value]="item"></option>
+      </datalist>
     </div>
     <div class="col">
       <label class="form-label">Product Name</label>

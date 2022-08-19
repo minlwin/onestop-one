@@ -29,11 +29,13 @@ export class ProductsComponent implements OnInit {
       keyword: ''
     })
 
-    route.params.subscribe(param => {
+    route.queryParams.subscribe(param => {
       if(param['category']) {
         this.form.patchValue({category : param['category']})
         categoryService.findById(param['category'])
-          .subscribe(data => this.title = data.name)
+          .subscribe(data => {
+            this.title = data?.name
+          })
       }
 
       if(param['seller']) {

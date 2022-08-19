@@ -15,4 +15,8 @@ public interface CategoryService {
 
 	List<SimpleCategory> getSellerCategory(int sellerId);
 
+	List<SimpleCategory> getAll();
+
+	SimpleCategory findById(int id);
+
 }

@@ -25,6 +25,7 @@ import com.jdc.one.traders.model.dto.input.SignInDto;
 import com.jdc.one.traders.model.dto.input.SignUpDto;
 import com.jdc.one.traders.model.dto.output.LoginResultDto;
 import com.jdc.one.traders.model.dto.output.LoginUserDto;
+import com.jdc.one.traders.model.dto.output.SellerDto;
 import com.jdc.one.traders.model.dto.output.SimpleResult;
 import com.jdc.one.traders.model.dto.output.TopSellerDto;
 import com.jdc.one.traders.model.repo.AccountRepo;
@@ -192,6 +193,11 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 
 		}
 		return findOne(id);
+	}
+
+	@Override
+	public SellerDto findToSellerById(int id) {
+		return accountRepo.findById(id).map(SellerDto::from).orElseThrow(EntityNotFoundException::new);
 	}
 
 }

@@ -3,7 +3,7 @@
     <i class="bi-award"></i> Best Sellers
   </span>
 
-  <a [routerLink]="['products', {seller: item.id}]" *ngFor="let item of list" class="list-group-item d-flex justify-content-between">
+  <a [routerLink]="['products']" [queryParams]="{seller: item.id}" *ngFor="let item of list" class="list-group-item d-flex justify-content-between">
     <span><i class="bi-person me-2"></i> {{ item.name }}</span>
     <span class="text-secondary">{{ item.sales | compactNumber }}</span>
   </a>

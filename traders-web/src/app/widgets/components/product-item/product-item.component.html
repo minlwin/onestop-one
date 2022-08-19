@@ -6,8 +6,8 @@
       <h5>{{item.name}}</h5>
 
       <div>
-        <a [routerLink]="['/public/products/seller', item.seller.id]" class="btn-link text-decoration-none">
-          <i class="bi-person"></i> {{ item.seller?.name || 'Owner'}}
+        <a [routerLink]="['/public/products']" [queryParams]="{seller: item.sellerId}" class="btn-link text-decoration-none">
+          <i class="bi-person"></i> {{ item.seller || 'Owner'}}
         </a>
       </div>
     </div>

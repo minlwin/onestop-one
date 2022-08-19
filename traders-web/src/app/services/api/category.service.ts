@@ -12,16 +12,21 @@ export class CategoryService extends AbstractService{
     super('category')
   }
 
-  getCategories(count?:number):Observable<any[]> {
-    let params:any = count ? {limit: count} : undefined
-    return this.http.get<any[]>(this.baseApi, {params: params})
+  getAll() {
+    return this.http.get<any[]>(`${this.baseApi}`)
   }
 
   findById(id: number) {
     return this.http.get<any>(`${this.baseApi}/${id}`)
   }
 
+  getCategories(count?:number):Observable<any[]> {
+    let params:any = count ? {limit: count} : undefined
+    return this.http.get<any[]>(`${this.baseApi}/top`, {params: params})
+  }
+
   getSellerCategory(sellerId:number) {
     return this.http.get<any[]>(`${this.baseApi}/seller/${sellerId}`)
   }
+
 }

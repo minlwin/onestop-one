@@ -1,9 +1,8 @@
 import { ImgTwoComponent } from './img-two/img-two.component';
 import { ImgThreeComponent } from './img-three/img-three.component';
 import { ImgFourComponent } from './img-four/img-four.component';
-import { ImgComponent } from './img-component';
 import { ImageHostDirective } from './image-host.directive';
-import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ImgOneComponent } from './img-one/img-one.component';
 
 @Component({
@@ -25,8 +24,8 @@ export class ProductItemComponent implements OnInit {
   ngOnInit(): void {
     let viewRef = this.imgHost.containerRef
     viewRef.clear()
-    let imageComponent = viewRef.createComponent(this.getImageComponent(this.item.images.length))
-    imageComponent.instance.images = this.item.images
+    let imageComponent = viewRef.createComponent(this.getImageComponent(this.item.photos.length))
+    imageComponent.instance.images = this.item.photos
   }
 
   private getImageComponent(size:number) {

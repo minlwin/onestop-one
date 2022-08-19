@@ -40,4 +40,16 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<SimpleCategory> getSellerCategory(int sellerId) {
 		return repo.findSellerCategory(sellerId);
 	}
+
+	@Override
+	public List<SimpleCategory> getAll() {
+		return repo.findAll()
+				.stream()
+				.map(SimpleCategory::new).toList();
+	}
+
+	@Override
+	public SimpleCategory findById(int id) {
+		return repo.findById(id).map(SimpleCategory::new).orElseThrow();
+	}
 }

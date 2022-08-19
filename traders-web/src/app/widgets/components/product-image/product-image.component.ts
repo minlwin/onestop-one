@@ -12,6 +12,9 @@ export class ProductImageComponent implements OnInit {
   image?:string
 
   @Input()
+  dummy:boolean = false
+
+  @Input()
   height?:number
 
   @Input()
