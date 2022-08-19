@@ -1,1 +1,19 @@
-<p>product-features works!</p>
+<app-no-items *ngIf="state.features.controls.length == 0" message="There is no product features."></app-no-items>
+
+<div class="row" *ngFor="let item of state.features.controls; index as i;"
+  [formGroup]="state.features.controls[i]"
+  [class.mb-3]="i < state.features.controls.length - 1">
+  <div class="col-4">
+    <label class="form-label" *ngIf="i == 0">Feature Name</label>
+    <input [readonly]="state.readonly" formControlName="name" type="text" class="form-control" placeholder="Enter Feature Name">
+  </div>
+  <div class="col">
+    <label class="form-label" *ngIf="i == 0">Feature Value</label>
+    <input [readonly]="state.readonly" formControlName="value" type="text" class="form-control" placeholder="Enter Feature Value">
+  </div>
+  <div class="col-auto" [class.inline-btn-wrapper]="i == 0" >
+    <button (click)="state.deleteFeature(i)" class="btn btn-outline-danger">
+      <i class="bi-dash-lg"></i>
+    </button>
+  </div>
+</div>

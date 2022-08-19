@@ -7,7 +7,7 @@ export class ProductEditState {
 
   form:FormGroup
   view:string = ''
-  readonly:boolean = true
+  readonly:boolean = false
 
   constructor(private builder:FormBuilder, context:SecurityContext) {
     this.form = builder.group({
@@ -20,6 +20,35 @@ export class ProductEditState {
       photos: builder.array([]),
       features: builder.array([])
     })
+  }
+
+  init(value:any) {
+    this.readonly = true
+    const {features, photos, ... others} = value
+    this.form.patchValue(others)
+
+    this.photos.clear()
+    this.addPhoto(photos)
+
+    this.features.clear()
+    for(let key in features) {
+      this.features.push(this.builder.group({
+        name: [key, Validators.required],
+        value: [features[key], Validators.required]
+      }))
+    }
+  }
+
+  get formValue() {
+    let {features, ... value} = this.form.value
+    value['features'] = {}
+
+    let array = features as any[]
+    array.forEach(item => {
+      value.features[item.name] = item.value
+    })
+
+    return value
   }
 
   get photos() {
@@ -44,8 +73,8 @@ export class ProductEditState {
 
   addFeature() {
     this.features.push(this.builder.group({
-      name: '',
-      value: ''
+      name: ['', Validators.required],
+      value: ['', Validators.required]
     }))
   }
 }

@@ -19,6 +19,7 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 import { MemberSideMenuComponent } from './components/member-side-menu/member-side-menu.component';
 import { ProfileImagePipe } from './pipes/profile-image.pipe';
 import { NoItemsComponent } from './components/no-items/no-items.component';
+import { ProductImagePipe } from './pipes/product-image.pipe';
 
 
 
@@ -40,7 +41,8 @@ import { NoItemsComponent } from './components/no-items/no-items.component';
     ProductDetailsComponent,
     MemberSideMenuComponent,
     ProfileImagePipe,
-    NoItemsComponent
+    NoItemsComponent,
+    ProductImagePipe
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { NoItemsComponent } from './components/no-items/no-items.component';
     BackgroundImagePipe,
     ProfileImagePipe,
     NoItemsComponent,
-    MemberSideMenuComponent
+    MemberSideMenuComponent,
+    ProductImagePipe
   ]
 })
 export class WidgetsModule { }

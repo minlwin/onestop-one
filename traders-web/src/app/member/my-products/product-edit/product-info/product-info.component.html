@@ -2,25 +2,26 @@
   <div class="row">
     <div class="col">
       <label class="form-label">Category</label>
-      <input formControlName="category" type="text" class="form-control" placeholder="Enter Category Name">
+      <input [readonly]="state.readonly" formControlName="category" type="text" class="form-control" placeholder="Enter Category Name">
     </div>
     <div class="col">
       <label class="form-label">Product Name</label>
-      <input formControlName="name" type="text" class="form-control" placeholder="Enter Product Name">
+      <input [readonly]="state.readonly" formControlName="name" type="text" class="form-control" placeholder="Enter Product Name">
     </div>
   </div>
 
   <div class="row mt-4">
     <div class="col">
       <label class="form-label">Condition</label>
-      <select formControlName="condition" class="form-select">
+      <input *ngIf="state.readonly" class="form-control" formControlName="condition" type="text">
+      <select *ngIf="!state.readonly" formControlName="condition" class="form-select">
         <option value="New">New</option>
         <option value="Used">Used</option>
       </select>
     </div>
     <div class="col">
       <label class="form-label">Price</label>
-      <input formControlName="price" type="number" class="form-control" placeholder="Enter Product Price">
+      <input [readonly]="state.readonly" formControlName="price" type="number" class="form-control" placeholder="Enter Product Price">
     </div>
   </div>
 

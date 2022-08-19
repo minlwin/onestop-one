@@ -16,4 +16,11 @@ export class ProductSerivce extends AbstractService {
   search(form:any) {
     return this.http.get<any[]>(this.baseApi, {params: form})
   }
+
+  save(form:any) {
+    if(form.id == 0) {
+      return this.http.post<any>(this.baseApi, form)
+    }
+    return this.http.put<any>(this.baseApi, form)
+  }
 }
