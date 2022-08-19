@@ -28,18 +28,26 @@ public class ProductServiceImpl implements ProductService {
 	private CategoryService categoryService;
 
 	@Override
-	public List<ProductDto> search(Optional<Integer> category, Optional<Integer> seller, Optional<String> keyword) {
+	public List<ProductDto> search(Optional<String> category, Optional<String> seller, Optional<String> keyword) {
 
 		Specification<Product> spec = Specification.where(null);
 
-		var catWhere = category.filter(c -> c > 0).map(c -> {
+		var catWhere = category
+				.filter(c -> StringUtils.hasLength(c))
+				.map(Integer::parseInt)
+				.filter(c -> c > 0)
+				.map(c -> {
 			Specification<Product> where = (root, query, builder) -> builder.equal(root.get("category").get("id"), c);
 			return where;
 		}).orElse(Specification.where(null));
 
 		spec = spec.and(catWhere);
 
-		var sellerWhere = seller.filter(c -> c > 0).map(c -> {
+		var sellerWhere = seller
+				.filter(c -> StringUtils.hasLength(c))
+				.map(Integer::parseInt)
+				.filter(c -> c > 0)
+				.map(c -> {
 			Specification<Product> where = (root, query, builder) -> builder.equal(root.get("seller").get("id"), c);
 			return where;
 		}).orElse(Specification.where(null));

@@ -5,11 +5,14 @@ import java.util.Optional;
 
 import com.jdc.one.traders.model.dto.entity.Category;
 import com.jdc.one.traders.model.dto.output.CategoryDto;
+import com.jdc.one.traders.model.dto.output.SimpleCategory;
 
 public interface CategoryService {
 
 	List<CategoryDto> topCategories(Optional<Integer> limit);
 
 	Category getByName(String category);
+
+	List<SimpleCategory> getSellerCategory(int sellerId);
 
 }

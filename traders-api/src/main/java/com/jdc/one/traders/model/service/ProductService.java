@@ -8,7 +8,7 @@ import com.jdc.one.traders.model.dto.output.ProductDto;
 
 public interface ProductService {
 
-	List<ProductDto> search(Optional<Integer> category, Optional<Integer> seller, Optional<String> keyword);
+	List<ProductDto> search(Optional<String> category, Optional<String> seller, Optional<String> keyword);
 
 	ProductDto save(ProductInputDto dto);
 

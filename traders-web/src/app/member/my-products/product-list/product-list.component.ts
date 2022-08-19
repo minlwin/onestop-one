@@ -1,3 +1,5 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { CategoryService } from './../../../services/api/category.service';
 import { SecurityContext } from './../../../services/security/sercurity-context';
 import { ProductSerivce } from './../../../services/api/product.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,11 +12,29 @@ import { Component, OnInit } from '@angular/core';
 export class ProductListComponent implements OnInit {
 
   list:any[] = []
+  categories:any[] = []
 
-  constructor(private service:ProductSerivce, private context:SecurityContext) { }
+  form:FormGroup
+
+  constructor(
+    builder:FormBuilder,
+    private service:ProductSerivce,
+    private categoryService:CategoryService,
+    private context:SecurityContext) {
+      this.form = builder.group({
+        category: '',
+        keyword: '',
+        seller: context.security?.id
+      })
+    }
 
   ngOnInit(): void {
-    this.service.search({seller: this.context.security?.id}).subscribe(result => this.list = result)
+    this.categoryService.getSellerCategory(this.context.security?.id!)
+      .subscribe(result => this.categories = result)
+  }
+
+  search() {
+    this.service.search(this.form.value).subscribe(result => this.list = result)
   }
 
 }

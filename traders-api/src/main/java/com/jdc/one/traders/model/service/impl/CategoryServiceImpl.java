@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.one.traders.model.dto.entity.Category;
 import com.jdc.one.traders.model.dto.output.CategoryDto;
+import com.jdc.one.traders.model.dto.output.SimpleCategory;
 import com.jdc.one.traders.model.repo.CategoryRepo;
 import com.jdc.one.traders.model.service.CategoryService;
 
@@ -33,5 +34,10 @@ public class CategoryServiceImpl implements CategoryService {
 			c.setName(category);
 			return repo.save(c);
 		});
+	}
+
+	@Override
+	public List<SimpleCategory> getSellerCategory(int sellerId) {
+		return repo.findSellerCategory(sellerId);
 	}
 }

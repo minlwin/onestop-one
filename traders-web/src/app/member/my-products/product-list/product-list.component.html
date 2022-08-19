@@ -1,7 +1,8 @@
 <form action="" class="mb-4 row">
-  <div class="col-auto">
+  <div *ngIf="categories.length > 0" class="col-auto">
     <select class="form-select">
       <option value="">Search Category</option>
+      <option *ngFor="let c of categories" [value]="c.id">{{c.name}}</option>
     </select>
   </div>
 

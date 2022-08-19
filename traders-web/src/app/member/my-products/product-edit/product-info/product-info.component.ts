@@ -1,3 +1,4 @@
+import { ProductEditState } from './../product-edit.state';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public state:ProductEditState) {
+    this.state.view = "info"
+  }
 
   ngOnInit(): void {
   }

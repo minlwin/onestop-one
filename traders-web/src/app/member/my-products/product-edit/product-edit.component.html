@@ -1,1 +1,33 @@
-<p>product-edit works!</p>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a routerLink="info" routerLinkActive="active" class="nav-link">Product Infomation</a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="features" routerLinkActive="active" class="nav-link">Other Features</a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="photos" routerLinkActive="active" class="nav-link">Photos</a>
+  </li>
+</ul>
+
+<div class="mt-4 mb-4">
+  <router-outlet></router-outlet>
+</div>
+
+<div>
+  <button (click)="state.readonly = false" *ngIf="state.readonly" class="btn btn-outline-primary me-2">
+    <i class="bi-pencil"></i> Edit
+  </button>
+  <button *ngIf="!state.readonly" class="btn btn-outline-primary me-2">
+    <i class="bi-arrow-left"></i> Cancel
+  </button>
+  <button *ngIf="showAddFeaturesBtn" class="btn btn-outline-primary me-2">
+    <i class="bi-plus-lg"></i> Add Feature
+  </button>
+  <button *ngIf="showPhotoBtn" class="btn btn-outline-primary me-2">
+    <i class="bi-camera"></i> Upload Photos
+  </button>
+  <button *ngIf="!state.readonly" class="btn btn-outline-primary ">
+    <i class="bi-save"></i> Save
+  </button>
+</div>

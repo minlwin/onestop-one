@@ -25,8 +25,8 @@ public class ProductApi {
 
 	@GetMapping
 	List<ProductDto> search(
-			@RequestParam Optional<Integer> category,
-			@RequestParam Optional<Integer> seller,
+			@RequestParam Optional<String> category,
+			@RequestParam Optional<String> seller,
 			@RequestParam Optional<String> keyword
 			) {
 		return service.search(category, seller, keyword);

@@ -20,4 +20,8 @@ export class CategoryService extends AbstractService{
   findById(id: number) {
     return this.http.get<any>(`${this.baseApi}/${id}`)
   }
+
+  getSellerCategory(sellerId:number) {
+    return this.http.get<any[]>(`${this.baseApi}/seller/${sellerId}`)
+  }
 }

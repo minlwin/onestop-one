@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.jdc.one.traders.model.dto.entity.Category;
 import com.jdc.one.traders.model.dto.output.CategoryDto;
+import com.jdc.one.traders.model.dto.output.SimpleCategory;
 
 public interface CategoryRepo extends JpaRepository<Category, Integer>, JpaSpecificationExecutor<Category>{
 
@@ -22,6 +23,12 @@ public interface CategoryRepo extends JpaRepository<Category, Integer>, JpaSpeci
 	List<CategoryDto> getTopCategory(Pageable page);
 
 	Optional<Category> findOneByName(String category);
+
+	@Query("""
+			select new com.jdc.one.traders.model.dto.output.SimpleCategory(c.id, c.name) from Category c
+			join c.product p where p.seller.id = :sellerId order by c.name
+			""")
+	List<SimpleCategory> findSellerCategory(int sellerId);
 	
 	
 }

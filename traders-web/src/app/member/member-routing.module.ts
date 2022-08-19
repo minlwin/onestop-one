@@ -1,3 +1,6 @@
+import { ProductPhotosComponent } from './my-products/product-edit/product-photos/product-photos.component';
+import { ProductFeaturesComponent } from './my-products/product-edit/product-features/product-features.component';
+import { ProductInfoComponent } from './my-products/product-edit/product-info/product-info.component';
 import { ProductEditComponent } from './my-products/product-edit/product-edit.component';
 import { MemberSideMenuComponent } from './../widgets/components/member-side-menu/member-side-menu.component';
 import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
@@ -31,7 +34,12 @@ const routes: Routes = [
           ]},
           {path: 'products', component: MyProductsComponent, children: [
             {path: 'list', component: ProductListComponent},
-            {path: 'edit', component: ProductEditComponent},
+            {path: 'edit', component: ProductEditComponent, children: [
+              {path: 'info', component: ProductInfoComponent},
+              {path: 'features', component: ProductFeaturesComponent},
+              {path: 'photos', component: ProductPhotosComponent},
+              {path: '', redirectTo: 'info', pathMatch: 'full'}
+            ]},
             {path: 'details/:id', component: ProductDetailsComponent},
             {path: '', redirectTo: 'list', pathMatch: 'full'}
           ]},
