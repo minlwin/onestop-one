@@ -23,4 +23,12 @@ export class ProductSerivce extends AbstractService {
     }
     return this.http.put<any>(this.baseApi, form)
   }
+
+  uploadPhoto(productId:number, files:FileList) {
+    const form = new FormData()
+    for(let i = 0; i < files.length; i ++) {
+      form.append("files", files[i], files[i].name)
+    }
+    return this.http.put<any>(`${this.baseApi}/${productId}/photos`, form)
+  }
 }

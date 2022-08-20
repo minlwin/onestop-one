@@ -1,5 +1,6 @@
 package com.jdc.one.traders.model.service.impl;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jdc.one.traders.model.dto.entity.Product;
 import com.jdc.one.traders.model.dto.input.ProductInputDto;
@@ -15,6 +17,7 @@ import com.jdc.one.traders.model.dto.output.ProductDto;
 import com.jdc.one.traders.model.repo.AccountRepo;
 import com.jdc.one.traders.model.repo.ProductRepo;
 import com.jdc.one.traders.model.service.CategoryService;
+import com.jdc.one.traders.model.service.PhotoService;
 import com.jdc.one.traders.model.service.ProductService;
 
 @Service
@@ -26,6 +29,9 @@ public class ProductServiceImpl implements ProductService {
 	private AccountRepo accountRepo;
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private PhotoService photoService;
 
 	@Override
 	public List<ProductDto> search(Optional<String> category, Optional<String> seller, Optional<String> keyword) {
@@ -83,6 +89,21 @@ public class ProductServiceImpl implements ProductService {
 			return p;
 		}).map(ProductDto::new).orElseThrow();
 
+	}
+
+	@Override
+	@Transactional
+	public ProductDto uploadPhoto(int id, MultipartFile[] files) {
+		return productRepo.findById(id).map(p -> {
+			var photos = photoService.create(Path.of("products"), "prod-%d".formatted(id), files).toList();
+			p.setPhotos(photos);
+			return p;
+		}).map(ProductDto::new).orElseThrow();
+	}
+
+	@Override
+	public ProductDto findById(int id) {
+		return productRepo.findById(id).map(ProductDto::new).orElseThrow();
 	}
 
 }

@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductSerivce } from './../../../services/api/product.service';
 import { ProductEditState } from './product-edit.state';
 import { Component, OnInit } from '@angular/core';
@@ -10,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductEditComponent implements OnInit {
 
-  constructor(public state:ProductEditState, private service:ProductSerivce) { }
+  constructor(
+    public state:ProductEditState,
+    private service:ProductSerivce,
+    private route:ActivatedRoute,
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(param => {
+      if(param['id']) {
+        this.service.findById(param['id']).subscribe(result => this.state.init(result))
+      }
+    })
   }
 
   get showPhotoBtn() {
@@ -27,6 +38,16 @@ export class ProductEditComponent implements OnInit {
     if(this.state.form.valid) {
       this.service.save(this.state.formValue)
         .subscribe(result => this.state.init(result))
+    }
+  }
+
+  uploadImage(files:FileList | null) {
+    if(files) {
+      this.service.uploadPhoto(this.state.form.get('id')?.value, files)
+        .subscribe(result => {
+          this.state.init(result)
+          this.router.navigate(['/member', {hideSideBar: true}, 'profile', 'products', 'edit', 'photos'], {queryParams: {id: this.state.form.get('id')?.value}})
+        })
     }
   }
 }

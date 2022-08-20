@@ -30,7 +30,10 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryService.getSellerCategory(this.context.security?.id!)
-      .subscribe(result => this.categories = result)
+      .subscribe(result => {
+        this.categories = result
+        this.search()
+      })
   }
 
   search() {

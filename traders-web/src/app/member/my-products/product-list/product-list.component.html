@@ -1,17 +1,17 @@
-<form action="" class="mb-4 row">
+<form [formGroup]="form" class="mb-4 row">
   <div *ngIf="categories.length > 0" class="col-auto">
-    <select class="form-select">
+    <select formControlName="category" class="form-select">
       <option value="">Search Category</option>
       <option *ngFor="let c of categories" [value]="c.id">{{c.name}}</option>
     </select>
   </div>
 
   <div class="col-4">
-    <input type="text" placeholder="Search Keyword" class="form-control">
+    <input type="text" formControlName="keyword" placeholder="Search Keyword" class="form-control">
   </div>
 
   <div class="col">
-    <button class="btn btn-outline-info me-2">
+    <button (click)="search()" class="btn btn-outline-info me-2">
       <i class="bi-search"></i> Search
     </button>
 
@@ -25,9 +25,25 @@
   <thead>
     <tr>
       <th>Product</th>
+      <th>Condition</th>
       <th>Price</th>
+      <th>Publish At</th>
+      <th></th>
     </tr>
   </thead>
+  <tbody>
+    <tr class="align-middle" *ngFor="let item of list">
+      <td>{{item.name}}</td>
+      <td>{{item.condition}}</td>
+      <td>{{item.price | number}}</td>
+      <td>{{item.publishAt | date}}</td>
+      <td>
+        <a [routerLink]="['../edit']" [queryParams]="{id: item.id}" class="btn btn-link">
+          <i class="bi-pencil"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <app-no-items *ngIf="list.length == 0"></app-no-items>

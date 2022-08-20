@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jdc.one.traders.model.dto.entity.Product;
 import com.jdc.one.traders.model.dto.entity.Product.Condition;
 
@@ -16,6 +17,7 @@ public record ProductDto(
 		String seller,
 		Condition condition,
 		int price,
+		@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 		LocalDateTime publishAt,
 		Map<String, String> features,
 		List<String> photos,

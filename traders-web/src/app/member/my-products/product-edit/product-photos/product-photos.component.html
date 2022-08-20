@@ -2,7 +2,7 @@
 
 <div class="row row-cols-4">
   <div *ngFor="let item of state.photos.controls; index as i" class="col mb-4 d-flex flex-column justify-content-end">
-    <img [src]="item.value | productImage : true" class="img-fluid img-thumbnail">
+    <img [src]="item.value | productImage " class="img-fluid img-thumbnail">
     <button (click)="state.deletePhoto(i)" class="btn btn-outline-primary w-100 mt-2">
       <i class="bi-trash"></i> Delete Image
     </button>

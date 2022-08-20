@@ -1,11 +1,28 @@
 package com.jdc.one.traders.model.service;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.Path;
+import java.util.Optional;
+import java.util.stream.Stream;
 
-import com.jdc.one.traders.model.dto.output.SimpleResult;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface PhotoService {
 
-	SimpleResult save(int account, MultipartFile file);
-
+	/**
+	 * Upload Single Photo
+	 * @param folder
+	 * @param fileName
+	 * @param file
+	 * @return
+	 */
+	Optional<String> create(Path folder, String fileName, MultipartFile file);
+	
+	/**
+	 * Upload Multiple Photos
+	 * @param folder
+	 * @param fileName
+	 * @param file
+	 * @return
+	 */
+	Stream<String> create(Path folder, String fileName, MultipartFile[] file);
 }

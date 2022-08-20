@@ -11,7 +11,7 @@
     <label class="form-label" *ngIf="i == 0">Feature Value</label>
     <input [readonly]="state.readonly" formControlName="value" type="text" class="form-control" placeholder="Enter Feature Value">
   </div>
-  <div class="col-auto" [class.inline-btn-wrapper]="i == 0" >
+  <div class="col-auto" *ngIf="!state.readonly" [class.inline-btn-wrapper]="i == 0" >
     <button (click)="state.deleteFeature(i)" class="btn btn-outline-danger">
       <i class="bi-dash-lg"></i>
     </button>

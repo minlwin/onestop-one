@@ -1,5 +1,6 @@
 package com.jdc.one.traders.model.service.impl;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
@@ -177,22 +178,18 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 	@Override
 	@Transactional
 	public AccountProfile updateProfileImage(int id, MultipartFile file) {
-		var result = photoService.save(id, file);
-
-		if (result.success()) {
-			var account = accountRepo.findById(id).orElseThrow(EntityNotFoundException::new);
-			var profile = account.getProfile();
-
-			if (null == profile) {
-				profile = new Profile();
-				profile.setAccount(account);
-				account.setProfile(profile);
-			}
-
-			profile.setCoverImage(result.message());
-
-		}
-		return findOne(id);
+		return accountRepo.findById(id).flatMap(
+				account -> photoService.create(Path.of("profiles"), "profile-%d".formatted(id), file)
+				.map(fileName -> {
+					var profile = account.getProfile();
+					if(null == profile) {
+						profile = new Profile();
+						profile.setAccount(account);
+						account.setProfile(profile);
+					}
+					profile.setCoverImage(fileName);
+					return account.getId();
+				})).map(accountId -> findOne(accountId)).orElseThrow();
 	}
 
 	@Override

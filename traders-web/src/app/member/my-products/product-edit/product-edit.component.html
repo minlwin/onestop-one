@@ -5,7 +5,7 @@
   <li class="nav-item">
     <a routerLink="features" routerLinkActive="active" class="nav-link">Other Features</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="state.form.get('id')?.value > 0">
     <a routerLink="photos" routerLinkActive="active" class="nav-link">Photos</a>
   </li>
 </ul>
@@ -24,10 +24,14 @@
   <button *ngIf="showAddFeaturesBtn" (click)="state.addFeature()" [class.disabled]="!state.features.valid" class="btn btn-outline-primary me-2">
     <i class="bi-plus-lg"></i> Add Feature
   </button>
-  <button *ngIf="showPhotoBtn" [class.disabled]="!state.form.valid" class="btn btn-outline-primary me-2">
+  <button *ngIf="state.form.get('id')?.value > 0" (click)="image.click()" class="btn btn-outline-primary me-2">
     <i class="bi-camera"></i> Upload Photos
   </button>
   <button (click)="save()" *ngIf="!state.readonly" [class.disabled]="!state.form.valid" class="btn btn-outline-primary ">
     <i class="bi-save"></i> Save
   </button>
 </div>
+
+<form class="d-none">
+  <input type="file" #image multiple="true" (change)="uploadImage(image.files)">
+</form>
