@@ -15,10 +15,7 @@ export class ProductImageComponent implements OnInit {
   dummy:boolean = false
 
   @Input()
-  height?:number
-
-  @Input()
-  width?:number
+  height?:number = 240
 
   constructor() { }
 

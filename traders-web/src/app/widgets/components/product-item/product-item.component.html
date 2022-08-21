@@ -20,19 +20,20 @@
 
       <div class="text-secondary">
         <span class="me-2">
+          <i class="bi-tag"></i> {{item.category}}
+        </span>
+        <span class="me-2">
           <i class="bi-info-circle"></i> {{item.condition}}
         </span>
         <span class="me-2">
-          <i class="bi-tag"></i> {{item.category.name}}
+          <i class="bi-hourglass"></i> {{item.publishAt | dateToDuration}}
         </span>
-        <span>
-          <i class="bi-hourglass"></i> {{item.publishAt | dateToDuration}}</span>
-      </div>
-      <div>
         <span class="me-2">
           <i class="bi-currency-dollar"></i>{{item.price}}
         </span>
-        <a [routerLink]="['/public', 'products', 'details', item.id]" class="btn-link">
+      </div>
+      <div>
+        <a [routerLink]="['details', item.id]" class="btn-link">
           <i class="bi-cart"></i>
         </a>
       </div>

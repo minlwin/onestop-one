@@ -30,11 +30,11 @@
 </div>
 
 <!-- Product Image Viewr -->
-<app-product-image [image]="coverImage" ></app-product-image>
+<app-product-image [image]="coverImage" [height]="400" ></app-product-image>
 
-<div class="d-flex flex-row mt-2" *ngIf="data?.images?.length > 1">
-  <div class="me-2" *ngFor="let item of data?.images" (click)="coverImage = item">
-    <app-product-image [height]="100" [width]="100" [image]="item"></app-product-image>
+<div class="d-flex flex-row mt-2" *ngIf="data?.photos?.length > 1">
+  <div class="me-2" *ngFor="let item of data?.photos" (click)="coverImage = item">
+    <app-product-image [height]="100" [image]="item"></app-product-image>
   </div>
 </div>
 

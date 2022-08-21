@@ -1,5 +1,5 @@
 .product-image {
-  object-fit: contain;
+  object-fit: cover;
 }
 
 body {
@@ -15,8 +15,7 @@ body {
 }
 
 .img-profile {
-  width: 300px;
-  height: 300px;
+  height: 200px !important;
   object-fit: cover;
   margin-top: 1rem;
 }

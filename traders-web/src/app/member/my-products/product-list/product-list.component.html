@@ -38,7 +38,7 @@
       <td>{{item.price | number}}</td>
       <td>{{item.publishAt | date}}</td>
       <td>
-        <a [routerLink]="['../edit']" [queryParams]="{id: item.id}" class="btn btn-link">
+        <a [routerLink]="['../edit']" [queryParams]="{id: item.id, full: true}" class="btn btn-link">
           <i class="bi-pencil"></i>
         </a>
       </td>

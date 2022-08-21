@@ -1,12 +1,12 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a routerLink="info" routerLinkActive="active" class="nav-link">Product Infomation</a>
+    <a routerLink="info" routerLinkActive="active" [queryParams]="{full: true}" class="nav-link">Product Infomation</a>
   </li>
   <li class="nav-item">
-    <a routerLink="features" routerLinkActive="active" class="nav-link">Other Features</a>
+    <a routerLink="features" routerLinkActive="active" [queryParams]="{full: true}" class="nav-link">Other Features</a>
   </li>
   <li class="nav-item" *ngIf="state.form.get('id')?.value > 0">
-    <a routerLink="photos" routerLinkActive="active" class="nav-link">Photos</a>
+    <a routerLink="photos" routerLinkActive="active" [queryParams]="{full: true}" class="nav-link">Photos</a>
   </li>
 </ul>
 

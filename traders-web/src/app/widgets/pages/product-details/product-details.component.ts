@@ -24,7 +24,7 @@ export class ProductDetailsComponent implements OnInit {
       mergeMap(id => service.findById(id))
     ).subscribe(result => {
       this.data = result
-      this.coverImage = this.data.images[0]
+      this.coverImage = this.data.photos[0]
     })
   }
 

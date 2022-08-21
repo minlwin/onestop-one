@@ -6,9 +6,9 @@
       <label class="form-label">Name</label>
       <input formControlName="name" type="text" class="form-control" [readonly]="readonly" placeholder="Enter Shipping Address Name">
     </div>
-    <div class="col-auto inline-btn-wrapper">
+    <div *ngIf="!readonly" class="col-auto inline-btn-wrapper">
       <button (click)="removeItem()" class="btn btn-outline-danger">
-        <i class="bi-dash-lg"></i>
+        <i class="bi-trash"></i>
       </button>
     </div>
   </div>
