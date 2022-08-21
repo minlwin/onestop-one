@@ -46,12 +46,14 @@ export class ProductDetailsComponent implements OnInit {
     this.router.navigate(['/public', 'signin'], {queryParams: {target: routeInfo}})
   }
 
-  askQuestion() {
-    if(this.securityContext.security) {
+  askQuestion(id:number) {
+    let routeInfo = ['/member', 'conversation', 'product', id]
 
+    if(this.securityContext.security) {
+      this.router.navigate(routeInfo)
     }
 
-    this.router.navigate(['/public', 'signin'])
+    this.router.navigate(['/public', 'signin'], {queryParams: {target: routeInfo}})
   }
 
   conversations() {
