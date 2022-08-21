@@ -12,7 +12,7 @@ import { SecurityContext } from '../../../services/security/sercurity-context';
 export class ProductDetailsComponent implements OnInit {
 
   data?:any
-  coverImage:string = ""
+  coverImage:string | undefined | null
 
   constructor(
     route:ActivatedRoute,
@@ -29,6 +29,10 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  get ownProduct() {
+    return this.securityContext.security?.id == this.data?.sellerId
   }
 
   purchase(id:number) {
@@ -48,6 +52,14 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     this.router.navigate(['/public', 'signin'])
+  }
+
+  conversations() {
+
+  }
+
+  editProduct() {
+
   }
 
   get features() {

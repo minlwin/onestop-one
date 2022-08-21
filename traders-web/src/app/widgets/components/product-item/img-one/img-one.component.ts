@@ -16,7 +16,7 @@ export class ImgOneComponent implements ImgComponent, OnInit {
   }
 
   get image() {
-    return this.images.length > 0 ? this.images[0] : 'default.png'
+    return this.images.length > 0 ? this.images[0] : undefined
   }
 
 }

@@ -13,13 +13,11 @@ import { ImgThreeComponent } from './components/product-item/img-three/img-three
 import { ImgFourComponent } from './components/product-item/img-four/img-four.component';
 import { DateToDurationPipe } from './pipes/date-to-duration.pipe';
 import { ImageHostDirective } from './components/product-item/image-host.directive';
-import { BackgroundImagePipe } from './pipes/background-image.pipe';
 import { ProductImageComponent } from './components/product-image/product-image.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { MemberSideMenuComponent } from './components/member-side-menu/member-side-menu.component';
-import { ProfileImagePipe } from './pipes/profile-image.pipe';
 import { NoItemsComponent } from './components/no-items/no-items.component';
-import { ProductImagePipe } from './pipes/product-image.pipe';
+import { AppImagePipe } from './pipes/app-image.pipe';
 
 
 
@@ -36,13 +34,11 @@ import { ProductImagePipe } from './pipes/product-image.pipe';
     ImgFourComponent,
     DateToDurationPipe,
     ImageHostDirective,
-    BackgroundImagePipe,
     ProductImageComponent,
     ProductDetailsComponent,
     MemberSideMenuComponent,
-    ProfileImagePipe,
     NoItemsComponent,
-    ProductImagePipe
+    AppImagePipe,
   ],
   imports: [
     CommonModule,
@@ -54,11 +50,9 @@ import { ProductImagePipe } from './pipes/product-image.pipe';
     TopSellersComponent,
     CompactNumberPipe,
     DateToDurationPipe,
-    BackgroundImagePipe,
-    ProfileImagePipe,
     NoItemsComponent,
     MemberSideMenuComponent,
-    ProductImagePipe
+    AppImagePipe,
   ]
 })
 export class WidgetsModule { }

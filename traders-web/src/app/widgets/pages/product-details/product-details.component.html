@@ -9,11 +9,11 @@
     </div>
 
     <div class="me-2">
-      <i class="bi-tag"></i> {{data?.category?.name}}
+      <i class="bi-tag"></i> {{data?.category}}
     </div>
 
     <div class="me-2">
-      <i class="bi-person"></i> {{data?.seller?.name}}
+      <i class="bi-person"></i> {{data?.seller}}
     </div>
 
     <div class="me-2">
@@ -41,23 +41,34 @@
 <!-- Controls -->
 <div class="mt-4 d-flex">
 
-  <button (click)="askQuestion()" class="btn btn-outline-primary me-2">
+  <button (click)="askQuestion()" *ngIf="!ownProduct" class="btn btn-outline-primary me-2">
     <i class="bi-chat"></i> Ask About Product
   </button>
 
-  <button (click)="purchase(data.id)" class="btn btn-outline-danger">
+  <button (click)="purchase(data.id)" *ngIf="!ownProduct" class="btn btn-outline-danger">
     <i class="bi-cart"></i> Purchase
   </button>
+
+  <button (click)="conversations()" *ngIf="ownProduct" class="btn btn-outline-primary me-2">
+    <i class="bi-chat"></i> Conversations
+  </button>
+
+  <button (click)="editProduct()" *ngIf="ownProduct" class="btn btn-outline-primary me-2">
+    <i class="bi-pen"></i> Edit
+  </button>
+
 </div>
 
 
 <!-- Properties -->
-<h5 class="mt-4">Properties</h5>
+<section *ngIf="features.length">
+  <h5 class="mt-4">Features</h5>
 
-<div class="list-group list-group-flush mb-5">
-  <div *ngFor="let item of features" class="list-group-item d-flex flex-column">
-    <span class="text-secondary">{{item}}</span>
-    <span>{{data.features[item]}}</span>
+  <div class="list-group list-group-flush mb-5">
+    <div *ngFor="let item of features" class="list-group-item d-flex flex-column">
+      <span class="text-secondary">{{item}}</span>
+      <span>{{data.features[item]}}</span>
+    </div>
   </div>
-</div>
+</section>
 

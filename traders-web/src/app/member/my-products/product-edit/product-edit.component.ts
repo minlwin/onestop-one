@@ -37,7 +37,9 @@ export class ProductEditComponent implements OnInit {
   save() {
     if(this.state.form.valid) {
       this.service.save(this.state.formValue)
-        .subscribe(result => this.state.init(result))
+        .subscribe(result => {
+          this.router.navigate(['/member', 'products', 'details', result.id])
+        })
     }
   }
 
@@ -45,8 +47,7 @@ export class ProductEditComponent implements OnInit {
     if(files) {
       this.service.uploadPhoto(this.state.form.get('id')?.value, files)
         .subscribe(result => {
-          this.state.init(result)
-          this.router.navigate(['/member', {hideSideBar: true}, 'profile', 'products', 'edit', 'photos'], {queryParams: {id: this.state.form.get('id')?.value}})
+          this.router.navigate(['/member', 'products', 'details', result.id])
         })
     }
   }
