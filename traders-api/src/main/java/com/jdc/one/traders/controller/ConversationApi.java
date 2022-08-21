@@ -18,7 +18,7 @@ import com.jdc.one.traders.model.dto.output.ConversationVO;
 import com.jdc.one.traders.model.service.ConversationService;
 
 @RestController
-@RequestMapping("conversations")
+@RequestMapping("conversation")
 public class ConversationApi {
 	
 	@Autowired
