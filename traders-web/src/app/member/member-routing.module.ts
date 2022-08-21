@@ -1,3 +1,4 @@
+import { ConversationsComponent } from './conversations/conversations.component';
 import { ProductPhotosComponent } from './my-products/product-edit/product-photos/product-photos.component';
 import { ProductFeaturesComponent } from './my-products/product-edit/product-features/product-features.component';
 import { ProductInfoComponent } from './my-products/product-edit/product-info/product-info.component';
@@ -48,6 +49,7 @@ const routes: Routes = [
       },
       {path: 'products/details/:id', component: ProductDetailsComponent},
       {path: 'products', component: ProductsComponent},
+      {path: 'conversations', component: ConversationsComponent},
       {path: '', redirectTo: 'products', pathMatch: 'prefix'}
     ]
   }
