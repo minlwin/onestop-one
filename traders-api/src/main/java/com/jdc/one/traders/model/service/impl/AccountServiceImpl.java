@@ -32,7 +32,6 @@ import com.jdc.one.traders.model.dto.output.TopSellerDto;
 import com.jdc.one.traders.model.repo.AccountRepo;
 import com.jdc.one.traders.model.repo.AddressRepo;
 import com.jdc.one.traders.model.repo.BankingInfoRepo;
-import com.jdc.one.traders.model.repo.ProfileRepo;
 import com.jdc.one.traders.model.repo.TownshipRepo;
 import com.jdc.one.traders.model.service.AccountSecurity;
 import com.jdc.one.traders.model.service.AccountService;
@@ -47,8 +46,6 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 
 	@Autowired
 	private AccountRepo accountRepo;
-	@Autowired
-	private ProfileRepo profileRepo;
 
 	@Autowired
 	private TownshipRepo townshipRepo;
@@ -112,7 +109,7 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 		if (null == profile) {
 			profile = new Profile();
 			profile.setAccount(account);
-			profile = profileRepo.save(profile);
+			account.setProfile(profile);
 		}
 
 		profile.setCoverImage(dto.personalInfo().coverImage());

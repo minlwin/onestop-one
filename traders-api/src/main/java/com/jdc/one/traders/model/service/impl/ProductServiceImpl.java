@@ -95,7 +95,7 @@ public class ProductServiceImpl implements ProductService {
 	@Transactional
 	public ProductDto uploadPhoto(int id, MultipartFile[] files) {
 		return productRepo.findById(id).map(p -> {
-			var photos = photoService.create(Path.of("products"), "prod-%d".formatted(id), files).toList();
+			var photos = photoService.create(Path.of("products", "prod-%d".formatted(id)), "prod", files).toList();
 			p.setPhotos(photos);
 			return p;
 		}).map(ProductDto::new).orElseThrow();

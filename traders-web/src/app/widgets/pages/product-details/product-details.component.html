@@ -53,9 +53,9 @@
     <i class="bi-chat"></i> Conversations
   </button>
 
-  <button (click)="editProduct()" *ngIf="ownProduct" class="btn btn-outline-primary me-2">
+  <a [routerLink]="['/member', 'profile', 'products', 'edit']" [queryParams]="{id: data.id, full: true}" *ngIf="ownProduct" class="btn btn-outline-primary me-2">
     <i class="bi-pen"></i> Edit
-  </button>
+  </a>
 
 </div>
 

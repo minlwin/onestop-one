@@ -44,14 +44,16 @@ public class PhotoServiceImpl implements PhotoService{
 
 		return IntStream.range(0, files.length).mapToObj(index -> {
 			var file = files[index];
+			
 			// Extract File Extension
-			// Image File
-			var imageFile = Path.of("%s-%d.%s".formatted(fileName, index, extension(files[index])));
+			// Image Path
+			var imagePath = Path.of("%s-%d.%s".formatted(fileName, index + 1, extension(files[index])));
+			
 			// Save File
-			saveFile(imageFolder.resolve(imageFile), file);
+			saveFile(imageFolder.resolve(imagePath), file);
 
 			// Return File Name
-			return folder.resolve(imageFile).toString();
+			return folder.resolve(imagePath).toString();
 		});
 	}
 

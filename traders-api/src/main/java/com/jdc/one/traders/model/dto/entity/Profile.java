@@ -88,7 +88,7 @@ public class Profile implements Serializable {
 
 	public void setAccount(Account account) {
 		this.account = account;
-		this.id = account.getId();
+		this.id = account.getId();	
 	}
 
 	public String getGreeting() {
