@@ -1,4 +1,4 @@
-import { ConversationsComponent } from './conversations/conversations.component';
+import { MessageDetailsComponent } from './messages/message-details/message-details.component';
 import { ProductPhotosComponent } from './my-products/product-edit/product-photos/product-photos.component';
 import { ProductFeaturesComponent } from './my-products/product-edit/product-features/product-features.component';
 import { ProductInfoComponent } from './my-products/product-edit/product-info/product-info.component';
@@ -17,6 +17,7 @@ import { PersonalInfoComponent } from './edit-profile/personal-info/personal-inf
 import { BankInfoComponent } from './edit-profile/bank-info/bank-info.component';
 import { ShippingInfoComponent } from './edit-profile/shipping-info/shipping-info.component';
 import { ProductListComponent } from './my-products/product-list/product-list.component';
+import { MessageListComponent } from './messages/message-list/message-list.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,10 @@ const routes: Routes = [
       },
       {path: 'products/details/:id', component: ProductDetailsComponent},
       {path: 'products', component: ProductsComponent},
-      {path: 'conversation', component: ConversationsComponent},
+      {path: 'message', children: [
+        {path: 'list/:type', component: MessageListComponent},
+        {path: 'details', component: MessageDetailsComponent},
+      ]},
       {path: '', redirectTo: 'products', pathMatch: 'prefix'}
     ]
   }

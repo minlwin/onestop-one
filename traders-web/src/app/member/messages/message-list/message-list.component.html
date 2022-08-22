@@ -1,0 +1,46 @@
+<h3 class="mb-3">
+  <i [class.bi-chat-dots]="type == 'in'" [class.bi-chat]="type == 'out'"></i> {{type == 'in' ? 'Received' : 'Send'}} Messages
+</h3>
+
+<form [formGroup]="form" class="mb-4 row">
+
+  <div class="col-auto">
+    <input type="date" formControlName="from" class="form-control">
+  </div>
+
+  <div class="col-4">
+    <input type="text" formControlName="keyword" placeholder="Search Keyword" class="form-control">
+  </div>
+
+  <div class="col">
+    <button (click)="search()" class="btn btn-outline-info me-2">
+      <i class="bi-search"></i> Search
+    </button>
+  </div>
+</form>
+
+<table class="mt-4 table" *ngIf="list.length > 0">
+  <thead>
+    <tr>
+      <th>{{type == 'in' ? 'Sender' : 'Owner'}}</th>
+      <th>Category</th>
+      <th>Condition</th>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Messages</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of list">
+      <td>{{type == 'in' ? item.sender : item.product.seller}}</td>
+      <td>{{item.product.category}}</td>
+      <td>{{item.product.condition}}</td>
+      <td>{{item.product.name}}</td>
+      <td>{{item.product.price}}</td>
+      <td>{{item.product.messages}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<app-no-items *ngIf="list.length == 0" message="There is no messages!"></app-no-items>

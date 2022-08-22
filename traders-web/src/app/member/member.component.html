@@ -28,6 +28,17 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
           <li>
+            <a [routerLink]="['/member', 'message', 'list', 'in']" class="dropdown-item">
+              <i class="bi-chat-dots"></i> Message Received
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/member', 'message', 'list', 'out']" class="dropdown-item">
+              <i class="bi-chat"></i> Message Send
+            </a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
             <a [routerLink]="['/member', 'profile', 'edit']"  class="dropdown-item">
               <i class="bi-person-check"></i> Edit Profile
             </a>

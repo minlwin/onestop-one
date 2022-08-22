@@ -19,11 +19,8 @@ import { ProductListComponent } from './my-products/product-list/product-list.co
 import { ProductInfoComponent } from './my-products/product-edit/product-info/product-info.component';
 import { ProductFeaturesComponent } from './my-products/product-edit/product-features/product-features.component';
 import { ProductPhotosComponent } from './my-products/product-edit/product-photos/product-photos.component';
-import { ConversationsComponent } from './conversations/conversations.component';
-import { ConversationToMeComponent } from './conversations/conversation-to-me/conversation-to-me.component';
-import { ConversationFromMeComponent } from './conversations/conversation-from-me/conversation-from-me.component';
-import { ConversationDetailsComponent } from './conversations/conversation-details/conversation-details.component';
-
+import { MessageListComponent } from './messages/message-list/message-list.component';
+import { MessageDetailsComponent } from './messages/message-details/message-details.component';
 
 @NgModule({
   declarations: [
@@ -42,10 +39,8 @@ import { ConversationDetailsComponent } from './conversations/conversation-detai
     ProductInfoComponent,
     ProductFeaturesComponent,
     ProductPhotosComponent,
-    ConversationsComponent,
-    ConversationToMeComponent,
-    ConversationFromMeComponent,
-    ConversationDetailsComponent,
+    MessageListComponent,
+    MessageDetailsComponent,
   ],
   imports: [
     CommonModule,

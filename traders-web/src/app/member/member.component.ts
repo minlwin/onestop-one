@@ -1,7 +1,7 @@
 import { SecurityContext } from './../services/security/sercurity-context';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FullScreen, isLayoutMetadata, LayoutMetadata, ThreeColumn } from './member-layout';
+import { isLayoutMetadata, LayoutMetadata, ThreeColumn } from './member-layout';
 
 @Component({
   selector: 'app-member',
