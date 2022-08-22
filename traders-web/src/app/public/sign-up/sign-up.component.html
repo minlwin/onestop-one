@@ -27,10 +27,10 @@
     </div>
 
     <div class="pt-3">
-      <a [routerLink]="['/public', 'signin']" [queryParams]="target" class="btn btn-outline-secondary me-2">
+      <a [routerLink]="['/public', 'signin']" [queryParams]="queryString" class="btn btn-outline-secondary me-2">
         <i class="bi-person-check"></i> Sign In
       </a>
-      <button (click)="signUp()" class="btn btn-outline-secondary me-2">
+      <button (click)="signUp()" class="btn btn-outline-secondary me-2" [class.disabled]="!form.valid" >
         <i class="bi-person-plus"></i> Sign Up
       </button>
     </div>

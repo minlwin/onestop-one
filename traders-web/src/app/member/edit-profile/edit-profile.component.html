@@ -2,19 +2,19 @@
 
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a [routerLink]="['personal']" routerLinkActive="active"  [queryParams]="{full: true}" class="nav-link">
+    <a [routerLink]="['personal']" routerLinkActive="active"  class="nav-link">
       <i class="bi-person"></i> Personal Information
     </a>
   </li>
 
   <li class="nav-item">
-    <a [routerLink]="['bank']" routerLinkActive="active"  [queryParams]="{full: true}" class="nav-link">
+    <a [routerLink]="['bank']" routerLinkActive="active"  class="nav-link">
       <i class="bi-bank"></i> Banking Information
     </a>
   </li>
 
   <li class="nav-item">
-    <a [routerLink]="['shipping']" routerLinkActive="active"  [queryParams]="{full: true}" class="nav-link">
+    <a [routerLink]="['shipping']" routerLinkActive="active"  class="nav-link">
       <i class="bi-train-front"></i> Shipping Information
     </a>
   </li>
@@ -28,7 +28,7 @@
       <i [ngClass]="readonly ? 'bi-pencil' : 'bi-arrow-left'"></i> {{readonly ? 'Edit' : 'Cancel'}}
     </button>
 
-    <button (click)="uploadProfileImage()" class="btn btn-outline-danger me-2" *ngIf="!readonly && view == 'profile'">
+    <button (click)="photo.click()" class="btn btn-outline-danger me-2" *ngIf="!readonly && view == 'profile'">
       <i class="bi-camera"></i> Profile Photo
     </button>
 
@@ -45,3 +45,8 @@
     </button>
   </div>
 </div>
+
+<form action="#" class="d-none">
+  <input name="file" type="file" #photo (change)="uploadProfileImage(photo.files)" >
+</form>
+

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jdc.one.traders.model.dto.entity.pk.ConversationPk;
 import com.jdc.one.traders.model.dto.input.ConversationMessageDto;
-import com.jdc.one.traders.model.dto.input.ConversationStart;
 import com.jdc.one.traders.model.dto.output.ConversationSummary;
 import com.jdc.one.traders.model.dto.output.ConversationVO;
 import com.jdc.one.traders.model.service.ConversationService;
@@ -33,16 +33,11 @@ public class ConversationApi {
 		return service.search(product, owner, sender);
 	}
 	
-	@GetMapping("{id}")
-	ConversationVO findById(@PathVariable long id) {
-		return service.findById(id);
+	@GetMapping("{product}/{sender}")
+	ConversationVO findById(@PathVariable int product, @PathVariable int sender) {
+		return service.findById(ConversationPk.generate(product, sender));
 	}
 
-	@PostMapping
-	ConversationVO create(ConversationStart dto) {
-		return service.create(dto);
-	}
-	
 	@PostMapping("message")
 	ConversationVO sendMessage(ConversationMessageDto dto) {
 		return service.addMessage(dto);

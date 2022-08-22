@@ -19,17 +19,6 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.state.loadImage.subscribe(_ => {
-      this.imageInput?.nativeElement.click()
-    })
-  }
-
-  uploadProfileImage(files:FileList | null) {
-    if(files && files.length > 0) {
-      this.profileService.uploadImage(files[0]).subscribe(result => {
-        this.state.init(result)
-      })
-    }
   }
 
   get form() {

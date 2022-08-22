@@ -8,7 +8,7 @@ import com.jdc.one.traders.model.dto.entity.Conversation;
 import com.jdc.one.traders.model.dto.entity.Product.Condition;
 
 public record ConversationVO(
-		long id,
+		int customerId,
 		String customer,
 		int productId,
 		String product,
@@ -25,7 +25,7 @@ public record ConversationVO(
 	
 	public ConversationVO(Conversation entity) {
 		this(
-			entity.getId(),
+			entity.getSender().getId(),
 			entity.getSender().getName(),
 			entity.getProduct().getId(),
 			entity.getProduct().getName(),

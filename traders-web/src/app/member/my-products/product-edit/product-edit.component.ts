@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductSerivce } from './../../../services/api/product.service';
 import { ProductEditState } from './product-edit.state';
 import { Component, OnInit } from '@angular/core';
+import { LeftSideBar } from '../../member-layout';
 
 @Component({
   templateUrl: './product-edit.component.html',
@@ -16,7 +17,8 @@ export class ProductEditComponent implements OnInit {
     private service:ProductSerivce,
     private route:ActivatedRoute,
     private router:Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(param => {

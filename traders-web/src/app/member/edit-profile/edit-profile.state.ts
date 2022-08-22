@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
 
 @Injectable()
 export class EditProfileState {
@@ -10,8 +9,6 @@ export class EditProfileState {
   editable = false
 
   view = 'profile'
-
-  loadImage = new Subject
 
   constructor(private builder:FormBuilder) {
     this.userProfile = builder.group({

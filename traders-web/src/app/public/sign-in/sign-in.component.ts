@@ -11,7 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class SignInComponent implements OnInit {
 
   form:FormGroup
-  target?:string[]
+  route?:string[]
+  query?:any
   message?:string
 
   constructor(
@@ -25,16 +26,39 @@ export class SignInComponent implements OnInit {
       password: ["", [Validators.required, Validators.minLength(8)]]
     })
 
-    route.queryParams.subscribe(params => this.target = params['target'])
+    route.queryParams.subscribe(params => {
+      if(params['route']) {
+        this.route = JSON.parse(params['route'])
+      }
+
+      if(params['query']) {
+        this.query = JSON.parse(params['query'])
+      }
+    })
   }
 
   ngOnInit(): void {
   }
 
+  get queryString() {
+    return {
+      route: this.route ? JSON.stringify(this.route) : '',
+      query: this.query ? JSON.stringify(this.query) : ''
+    }
+  }
+
   signIn() {
     if(this.form.valid) {
-      this.service.signIn(this.form.value).subscribe((_) => {
-        this.router.navigate(this.target || ['/'])
+      this.service.signIn(this.form.value).subscribe((result) => {
+        if(result.success) {
+          if(this.route) {
+            this.router.navigate(this.route, {queryParams: this.query})
+          } else {
+            this.router.navigate(['/'])
+          }
+        } else {
+          this.message = result.message
+        }
       })
     }
   }

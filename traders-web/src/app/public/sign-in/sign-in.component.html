@@ -20,7 +20,7 @@
     </div>
 
     <div class="pt-3">
-      <a [routerLink]="['/public', 'signup']" [queryParams]="{target: target}" class="btn btn-outline-secondary me-2">
+      <a [routerLink]="['/public', 'signup']" [queryParams]="queryString" class="btn btn-outline-secondary me-2">
         <i class="bi-person-plus"></i> Sign Up
       </a>
       <button class="btn btn-outline-secondary me-2 " (click)="signIn()" [class.disabled]="!form.valid"  >

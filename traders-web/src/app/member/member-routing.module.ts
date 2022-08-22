@@ -49,7 +49,7 @@ const routes: Routes = [
       },
       {path: 'products/details/:id', component: ProductDetailsComponent},
       {path: 'products', component: ProductsComponent},
-      {path: 'conversations', component: ConversationsComponent},
+      {path: 'conversation', component: ConversationsComponent},
       {path: '', redirectTo: 'products', pathMatch: 'prefix'}
     ]
   }

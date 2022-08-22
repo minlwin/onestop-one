@@ -13,12 +13,11 @@ import org.springframework.util.StringUtils;
 
 import com.jdc.one.traders.model.dto.entity.Conversation;
 import com.jdc.one.traders.model.dto.entity.ConversationMessage;
+import com.jdc.one.traders.model.dto.entity.pk.ConversationPk;
 import com.jdc.one.traders.model.dto.input.ConversationMessageDto;
-import com.jdc.one.traders.model.dto.input.ConversationStart;
 import com.jdc.one.traders.model.dto.output.ConversationSummary;
 import com.jdc.one.traders.model.dto.output.ConversationVO;
 import com.jdc.one.traders.model.repo.AccountRepo;
-import com.jdc.one.traders.model.repo.ConversationMessageRepo;
 import com.jdc.one.traders.model.repo.ConversationRepo;
 import com.jdc.one.traders.model.repo.ProductRepo;
 import com.jdc.one.traders.model.service.ConversationService;
@@ -28,8 +27,6 @@ public class ConversationServiceImpl implements ConversationService{
 	
 	@Autowired
 	private ConversationRepo conversationRepo;
-	@Autowired
-	private ConversationMessageRepo messageRepo;
 	@Autowired
 	private AccountRepo accountRepo;
 	@Autowired
@@ -80,7 +77,7 @@ public class ConversationServiceImpl implements ConversationService{
 	}
 
 	@Override
-	public ConversationVO findById(long id) {
+	public ConversationVO findById(ConversationPk id) {
 		return conversationRepo.findById(id)
 				.map(ConversationVO::new)
 				.orElseThrow(EntityNotFoundException::new);
@@ -88,23 +85,21 @@ public class ConversationServiceImpl implements ConversationService{
 	
 	@Override
 	@Transactional
-	public ConversationVO create(ConversationStart dto) {
-		var conversation = new Conversation();
-		conversation.setProduct(productRepo.findById(dto.productId()).orElseThrow());
-		conversation.setSender(accountRepo.findById(dto.customerId()).orElseThrow());
-		conversation = conversationRepo.save(conversation);
-		return findById(conversation.getId());
-	}
-
-	@Override
-	@Transactional
-	public ConversationVO addMessage(ConversationMessageDto dto) {
-		var message = new ConversationMessage();
-		message.setMessage(dto.message());
-		message.setSpeaker(accountRepo.findById(dto.senderId()).orElseThrow());
-		message.setConversation(conversationRepo.findById(dto.conversationId()).orElseThrow());
-		messageRepo.save(message);
-		return findById(dto.conversationId());
+	public ConversationVO addMessage(ConversationMessageDto dto) {		
+		return conversationRepo.findById(dto.conversationId())
+				.or(() -> {
+					var entity = new Conversation();
+					entity.setProduct(productRepo.getReferenceById(dto.productId()));
+					entity.setSender(accountRepo.getReferenceById(dto.senderId()));
+					return Optional.of(conversationRepo.save(entity));
+				})
+				.map(c -> {
+					var message = new ConversationMessage();
+					message.setSpeaker(accountRepo.getReferenceById(dto.messageSenderId()));
+					message.setMessage(dto.message());
+					return c.addMessage(message);
+				})
+				.map(ConversationVO::new).orElseThrow();
 	}
 
 }

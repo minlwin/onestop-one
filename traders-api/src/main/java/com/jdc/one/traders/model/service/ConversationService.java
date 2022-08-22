@@ -3,8 +3,8 @@ package com.jdc.one.traders.model.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.jdc.one.traders.model.dto.entity.pk.ConversationPk;
 import com.jdc.one.traders.model.dto.input.ConversationMessageDto;
-import com.jdc.one.traders.model.dto.input.ConversationStart;
 import com.jdc.one.traders.model.dto.output.ConversationSummary;
 import com.jdc.one.traders.model.dto.output.ConversationVO;
 
@@ -12,9 +12,7 @@ public interface ConversationService {
 
 	List<ConversationSummary> search(Optional<String> product, Optional<String> owner, Optional<String> sender);
 
-	ConversationVO findById(long id);
-
-	ConversationVO create(ConversationStart dto);
+	ConversationVO findById(ConversationPk id);
 
 	ConversationVO addMessage(ConversationMessageDto dto);
 

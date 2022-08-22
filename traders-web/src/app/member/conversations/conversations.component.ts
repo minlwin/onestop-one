@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { FullScreen } from '../member-layout';
 
 @Component({
   templateUrl: './conversations.component.html',
   styles: [
   ]
 })
-export class ConversationsComponent implements OnInit {
+export class ConversationsComponent extends FullScreen implements OnInit {
 
-  constructor() { }
+  constructor() {
+    super()
+  }
 
   ngOnInit(): void {
   }

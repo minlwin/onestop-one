@@ -2,6 +2,7 @@ import { SecurityContext } from './../../services/security/sercurity-context';
 import { ProfileService } from './../../services/api/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { EditProfileState } from './edit-profile.state';
+import { LeftSideBar } from '../member-layout';
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,7 +13,7 @@ import { EditProfileState } from './edit-profile.state';
   styles: [
   ]
 })
-export class EditProfileComponent implements OnInit {
+export class EditProfileComponent extends LeftSideBar implements OnInit {
 
   get readonly() {
     return !this.state.editable
@@ -21,7 +22,9 @@ export class EditProfileComponent implements OnInit {
   constructor(
     private state:EditProfileState,
     private service:ProfileService,
-    private context:SecurityContext) { }
+    private context:SecurityContext) {
+      super()
+    }
 
   ngOnInit(): void {
     this.service.findById(this.context.security?.id!).subscribe(
@@ -61,10 +64,6 @@ export class EditProfileComponent implements OnInit {
     this.state.addAddress()
   }
 
-  uploadProfileImage() {
-    this.state.loadImage.next("Load Image")
-  }
-
   get disabledAddBankInfo() {
     return !this.state.bankingInfo.valid
   }
@@ -75,6 +74,14 @@ export class EditProfileComponent implements OnInit {
 
   get disabledSaveBtn() {
     return !this.state.userProfile.valid
+  }
+
+  uploadProfileImage(files:FileList | null) {
+    if(files && files.length > 0) {
+      this.service.uploadImage(files[0]).subscribe(result => {
+        this.state.init(result)
+      })
+    }
   }
 
 }

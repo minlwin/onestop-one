@@ -1,5 +1,6 @@
+import { TARGET_ROUTE, TARGET_QUERY, TARGET } from './../../../services/commons/commons';
 import { ProductSerivce } from './../../../services/api/product.service';
-import { map, tap, mergeMap } from 'rxjs';
+import { map, mergeMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SecurityContext } from '../../../services/security/sercurity-context';
@@ -41,29 +42,29 @@ export class ProductDetailsComponent implements OnInit {
 
     if(this.securityContext.security) {
       this.router.navigate(routeInfo)
+    } else {
+      this.router.navigate(['/public', 'signin'], {queryParams: {target: routeInfo}})
     }
 
-    this.router.navigate(['/public', 'signin'], {queryParams: {target: routeInfo}})
   }
 
   askQuestion(id:number) {
-    let routeInfo = ['/member', 'conversation', 'product', id]
+    let routeInfo = ['/member', 'conversation']
+    let queryparam = {product: id}
+
 
     if(this.securityContext.security) {
-      this.router.navigate(routeInfo)
+      this.router.navigate(routeInfo, {queryParams: queryparam})
+    } else {
+      this.router.navigate(['/public', 'signin'],
+        {queryParams: {route: JSON.stringify(routeInfo), query : JSON.stringify(queryparam)}})
     }
 
-    this.router.navigate(['/public', 'signin'], {queryParams: {target: routeInfo}})
   }
 
   conversations() {
 
   }
-
-  editProduct() {
-
-  }
-
   get features() {
     return Object.keys(this.data?.features || {})
   }

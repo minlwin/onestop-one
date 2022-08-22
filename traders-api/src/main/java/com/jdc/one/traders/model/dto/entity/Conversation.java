@@ -1,38 +1,52 @@
 package com.jdc.one.traders.model.dto.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.jdc.one.traders.model.dto.entity.pk.ConversationPk;
 
 @Entity
 @Table(name = "conversation")
 public class Conversation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(generator = "conversation_seq")
-	@SequenceGenerator(name = "conversation_seq")
-	private long id;
+
+	@EmbeddedId
+	private ConversationPk id;
+	
 	@ManyToOne
+	@MapsId("product_id")
 	private Product product;
 	@ManyToOne
+	@MapsId("sender_id")
 	private Account sender;
 
-	@OneToMany(mappedBy = "conversation")
+	@OneToMany(
+			mappedBy = "conversation", 
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
+			orphanRemoval = true)
 	private List<ConversationMessage> message;
+	
+	
+	public Conversation() {
+		id = new ConversationPk();
+		message = new ArrayList<>();
+	}
 
-	public long getId() {
+	public ConversationPk getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(ConversationPk id) {
 		this.id = id;
 	}
 
@@ -42,6 +56,7 @@ public class Conversation implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+		this.id.setProudctId(product.getId());
 	}
 
 	public Account getSender() {
@@ -50,6 +65,7 @@ public class Conversation implements Serializable {
 
 	public void setSender(Account sender) {
 		this.sender = sender;
+		this.id.setSenderId(sender.getId());
 	}
 
 	public List<ConversationMessage> getMessage() {
@@ -58,6 +74,12 @@ public class Conversation implements Serializable {
 
 	public void setMessage(List<ConversationMessage> message) {
 		this.message = message;
+	}
+	
+	public Conversation addMessage(ConversationMessage entry) {
+		message.add(entry);
+		entry.setConversation(this);
+		return this;
 	}
 
 }

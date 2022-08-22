@@ -3,7 +3,7 @@
     <i class="bi-tags"></i> Category
   </span>
 
-  <a [routerLink]="[{hideSideBar: false}, 'products']" [queryParams]="{category: item.id}" *ngFor="let item of list" class="list-group-item d-flex justify-content-between">
+  <a [routerLink]="['products']" [queryParams]="{category: item.id}" *ngFor="let item of list" class="list-group-item d-flex justify-content-between">
     <span>{{item.name}}</span>
     <span class="badge bg-info rounded-pill">
       {{item.products}}
