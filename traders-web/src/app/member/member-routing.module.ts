@@ -16,6 +16,8 @@ import { BankInfoComponent } from './edit-profile/bank-info/bank-info.component'
 import { ShippingInfoComponent } from './edit-profile/shipping-info/shipping-info.component';
 import { ProductListComponent } from './my-products/product-list/product-list.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
+import { SaleListComponent } from './sales/sale-list/sale-list.component';
+import { SaleDetailsComponent } from './sales/sale-details/sale-details.component';
 
 const routes: Routes = [
   {
@@ -49,6 +51,10 @@ const routes: Routes = [
       {path: 'message', children: [
         {path: 'list/:type', component: MessageListComponent},
         {path: 'details', component: MessageDetailsComponent},
+      ]},
+      {path: 'sale', children: [
+        {path: 'list/:type', component: SaleListComponent},
+        {path: 'details', component: SaleDetailsComponent},
       ]},
       {path: '', redirectTo: 'products', pathMatch: 'prefix'}
     ]
