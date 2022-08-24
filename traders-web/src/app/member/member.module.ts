@@ -6,8 +6,6 @@ import { MemberRoutingModule } from './member-routing.module';
 import { MemberComponent } from './member.component';
 import { WidgetsModule } from '../widgets/widgets.module';
 import { MyProductsComponent } from './my-products/my-products.component';
-import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
-import { MySalesComponent } from './my-sales/my-sales.component';
 import { ChangePassComponent } from './change-pass/change-pass.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PersonalInfoComponent } from './edit-profile/personal-info/personal-info.component';
@@ -21,13 +19,13 @@ import { ProductFeaturesComponent } from './my-products/product-edit/product-fea
 import { ProductPhotosComponent } from './my-products/product-edit/product-photos/product-photos.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { MessageDetailsComponent } from './messages/message-details/message-details.component';
+import { SaleListComponent } from './sales/sale-list/sale-list.component';
+import { SaleDetailsComponent } from './sales/sale-details/sale-details.component';
 
 @NgModule({
   declarations: [
     MemberComponent,
     MyProductsComponent,
-    MyPurchasesComponent,
-    MySalesComponent,
     ChangePassComponent,
     EditProfileComponent,
     PersonalInfoComponent,
@@ -41,6 +39,8 @@ import { MessageDetailsComponent } from './messages/message-details/message-deta
     ProductPhotosComponent,
     MessageListComponent,
     MessageDetailsComponent,
+    SaleListComponent,
+    SaleDetailsComponent,
   ],
   imports: [
     CommonModule,

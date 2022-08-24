@@ -3,8 +3,6 @@ import { ProductPhotosComponent } from './my-products/product-edit/product-photo
 import { ProductFeaturesComponent } from './my-products/product-edit/product-features/product-features.component';
 import { ProductInfoComponent } from './my-products/product-edit/product-info/product-info.component';
 import { ProductEditComponent } from './my-products/product-edit/product-edit.component';
-import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
-import { MySalesComponent } from './my-sales/my-sales.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { ProductDetailsComponent } from './../widgets/pages/product-details/product-details.component';
 import { ProductsComponent } from './../widgets/pages/products/products.component';
@@ -43,8 +41,6 @@ const routes: Routes = [
             ]},
             {path: '', redirectTo: 'list', pathMatch: 'full'}
           ]},
-          {path: 'sales', component: MySalesComponent},
-          {path: 'purchases', component: MyPurchasesComponent},
           {path: 'changepass', component: ChangePassComponent}
         ]
       },
