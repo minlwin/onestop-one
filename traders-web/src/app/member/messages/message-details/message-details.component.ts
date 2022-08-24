@@ -46,6 +46,20 @@ export class MessageDetailsComponent extends FullScreen {
     })
   }
 
+
+  sendMessage() {
+    if(this.form.valid) {
+      this.service.sendMessage(this.form.value).subscribe(result => {
+        this.form.patchValue({message: ''})
+        this.dto = result
+      })
+    }
+  }
+
+  setCurrentImage(image:string) {
+    this.currentImage = image
+  }
+
   private loadData() {
     this.service.findById(this.form.get('productId')?.value, this.form.get('senderId')?.value)
       .subscribe(result => this.initState(result))
@@ -61,15 +75,5 @@ export class MessageDetailsComponent extends FullScreen {
     }
   }
 
-  sendMessage() {
-    this.service.sendMessage(this.form.value).subscribe(result => {
-      this.form.patchValue({message: ''})
-      this.dto = result
-    })
-  }
-
-  setCurrentImage(image:string) {
-    this.currentImage = image
-  }
 
 }

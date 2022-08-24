@@ -11,7 +11,53 @@
     <div class="img-thumbnail">
       <app-product-image [image]="currentImage" [height]="480" ></app-product-image>
     </div>
+
+    <!-- Product Information -->
+    <div class="card mt-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <i class="bi-tag"></i> {{dto.category}}
+          </div>
+          <div class="col">
+            <i class="bi-info"></i> {{dto.condition}}
+          </div>
+          <div class="col">
+            <i class="bi-person"></i> {{dto.seller}}
+          </div>
+          <div class="col">
+            <i class="bi-currency-dollar"></i> {{dto.price}}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="col-5"></div>
+  <div class="col-5">
+    <div class="card">
+      <div class="card-body">
+        <!-- Message List -->
+        <div class="list-group list-group-flush">
+          <div class="list-group-item" *ngFor="let item of dto.message">
+            <div>{{item.message}}</div>
+            <span class="dim-text me-2">
+              <i class="bi-clock"></i> {{item.sendTime | date : 'yyyy-MM-dd HH:mm'}}
+            </span>
+            <span class="dim-text me-4" >
+              <i class="bi-person"></i> {{item.speaker}}
+            </span>
+          </div>
+        </div>
+        <!-- Message Forn -->
+        <div class="mt-4">
+          <form [formGroup]="form">
+            <textarea formControlName="message" cols="30" rows="2" class="form-control mb-2"></textarea>
+            <button [class.disabled]="!form.valid" (click)="sendMessage()" class="btn btn-outline-info">
+              <i class="bi-send"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

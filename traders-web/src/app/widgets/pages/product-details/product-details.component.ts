@@ -1,35 +1,47 @@
-import { TARGET_ROUTE, TARGET_QUERY, TARGET } from './../../../services/commons/commons';
 import { ProductSerivce } from './../../../services/api/product.service';
 import { map, mergeMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SecurityContext } from '../../../services/security/sercurity-context';
+import { LeftSideBar } from 'src/app/member/member-layout';
+import { ConversationService } from 'src/app/services/api/conversation.service';
 
 @Component({
   templateUrl: './product-details.component.html',
   styles: [
   ]
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent extends LeftSideBar{
 
   data?:any
   coverImage:string | undefined | null
+  messages:any[] = []
 
   constructor(
-    route:ActivatedRoute,
-    service:ProductSerivce,
-    private securityContext:SecurityContext,
-    private router:Router) {
+      route:ActivatedRoute,
+      service:ProductSerivce,
+      messageService:ConversationService,
+      private securityContext:SecurityContext,
+      private router:Router) {
+    super()
+    // Loading Data
     route.params.pipe(
       map(param => param['id']),
       mergeMap(id => service.findById(id))
     ).subscribe(result => {
       this.data = result
-      this.coverImage = this.data.photos[0]
-    })
-  }
+      if(this.data.photos.length > 0) {
+        this.coverImage = this.data.photos[0]
+      }
 
-  ngOnInit(): void {
+      if(this.ownProduct) {
+        messageService.search({product: this.data.id}).subscribe(list => {
+          this.messages = list
+        })
+      } else {
+        this.messages = []
+      }
+    })
   }
 
   get ownProduct() {
@@ -62,9 +74,14 @@ export class ProductDetailsComponent implements OnInit {
 
   }
 
-  conversations() {
-
+  showDetails(product:number, sender:number) {
+    this.router.navigate(['/member', 'message', 'details'],
+      {queryParams: {
+        product: product,
+        sender: sender
+      }})
   }
+
   get features() {
     return Object.keys(this.data?.features || {})
   }

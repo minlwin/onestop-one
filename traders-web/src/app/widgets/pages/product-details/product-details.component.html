@@ -1,74 +1,114 @@
-<h5>{{data?.name}}</h5>
+<div class="card">
+  <div class="card-body">
+    <h5>{{data?.name}}</h5>
 
-<!-- Summary Information -->
-<div class="d-flex mb-2 text-secondary justify-content-between">
+    <!-- Summary Information -->
+    <div class="d-flex mb-2 text-secondary justify-content-between">
 
-  <div class="d-flex">
-    <div class="me-2">
-      <i class="bi-info-circle"></i> {{data?.condition}}
+      <div class="d-flex">
+        <div class="me-2">
+          <i class="bi-info-circle"></i> {{data?.condition}}
+        </div>
+
+        <div class="me-2">
+          <i class="bi-tag"></i> {{data?.category}}
+        </div>
+
+        <div class="me-2">
+          <i class="bi-person"></i> {{data?.seller}}
+        </div>
+
+        <div class="me-2">
+          <i class="bi-hourglass"></i> {{data?.publishAt | dateToDuration}}
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <div>
+          <i class="bi-currency-dollar"></i> {{data?.price | number}}
+        </div>
+      </div>
+
     </div>
 
-    <div class="me-2">
-      <i class="bi-tag"></i> {{data?.category}}
+    <div class="row">
+      <div class="col">
+        <!-- Product Image Viewr -->
+        <app-product-image [image]="coverImage" [height]="400" ></app-product-image>
+
+        <div class="d-flex flex-row mt-2" *ngIf="data?.photos?.length > 1">
+          <div class="me-2" *ngFor="let item of data?.photos" (click)="coverImage = item">
+            <app-product-image [height]="100" [image]="item"></app-product-image>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col">
+        <!-- Properties -->
+        <section *ngIf="features.length">
+          <h5 class="mt-4">Features</h5>
+
+          <div class="list-group list-group-flush mb-5">
+            <div *ngFor="let item of features" class="list-group-item d-flex flex-column">
+              <span class="text-secondary">{{item}}</span>
+              <span>{{data.features[item]}}</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
     </div>
 
-    <div class="me-2">
-      <i class="bi-person"></i> {{data?.seller}}
-    </div>
+    <!-- Controls -->
+    <div class="mt-4 d-flex">
 
-    <div class="me-2">
-      <i class="bi-hourglass"></i> {{data?.publishAt | dateToDuration}}
+      <button (click)="askQuestion(data.id)" *ngIf="!ownProduct" class="btn btn-outline-primary me-2">
+        <i class="bi-chat"></i> Ask About Product
+      </button>
+
+      <button (click)="purchase(data.id)" *ngIf="!ownProduct" class="btn btn-outline-danger">
+        <i class="bi-cart"></i> Purchase
+      </button>
+
+      <a [routerLink]="['/member', 'profile', 'products', 'edit']" [queryParams]="{id: data.id, full: true}" *ngIf="ownProduct" class="btn btn-outline-primary me-2">
+        <i class="bi-pen"></i> Edit
+      </a>
+
     </div>
   </div>
+</div>
 
-  <div class="d-flex justify-content-end">
-    <div>
-      <i class="bi-currency-dollar"></i> {{data?.price | number}}
-    </div>
-  </div>
+<div *ngIf="ownProduct && messages.length > 0" class="mt-4" >
+  <h4><i class="bi-chat-dots"></i> Messages</h4>
+
+  <table class="mt-4 table table-hover" *ngIf="messages.length > 0">
+    <thead>
+      <tr>
+        <th>Sender</th>
+        <th>Category</th>
+        <th>Condition</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Messages</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of messages" (click)="showDetails(item.product.id, item.senderId)">
+        <td>{{item.sender}}</td>
+        <td>{{item.product.category}}</td>
+        <td>{{item.product.condition}}</td>
+        <td>{{item.product.name}}</td>
+        <td>{{item.product.price}}</td>
+        <td>
+          {{item.messages}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>
 
-<!-- Product Image Viewr -->
-<app-product-image [image]="coverImage" [height]="400" ></app-product-image>
 
-<div class="d-flex flex-row mt-2" *ngIf="data?.photos?.length > 1">
-  <div class="me-2" *ngFor="let item of data?.photos" (click)="coverImage = item">
-    <app-product-image [height]="100" [image]="item"></app-product-image>
-  </div>
-</div>
-
-<!-- Controls -->
-<div class="mt-4 d-flex">
-
-  <button (click)="askQuestion(data.id)" *ngIf="!ownProduct" class="btn btn-outline-primary me-2">
-    <i class="bi-chat"></i> Ask About Product
-  </button>
-
-  <button (click)="purchase(data.id)" *ngIf="!ownProduct" class="btn btn-outline-danger">
-    <i class="bi-cart"></i> Purchase
-  </button>
-
-  <button (click)="conversations()" *ngIf="ownProduct" class="btn btn-outline-primary me-2">
-    <i class="bi-chat"></i> Conversations
-  </button>
-
-  <a [routerLink]="['/member', 'profile', 'products', 'edit']" [queryParams]="{id: data.id, full: true}" *ngIf="ownProduct" class="btn btn-outline-primary me-2">
-    <i class="bi-pen"></i> Edit
-  </a>
-
-</div>
-
-
-<!-- Properties -->
-<section *ngIf="features.length">
-  <h5 class="mt-4">Features</h5>
-
-  <div class="list-group list-group-flush mb-5">
-    <div *ngFor="let item of features" class="list-group-item d-flex flex-column">
-      <span class="text-secondary">{{item}}</span>
-      <span>{{data.features[item]}}</span>
-    </div>
-  </div>
-</section>
 

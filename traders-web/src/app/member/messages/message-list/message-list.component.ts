@@ -3,7 +3,7 @@ import { ConversationService } from 'src/app/services/api/conversation.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component } from '@angular/core';
 import { LeftSideBar } from '../../member-layout';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './message-list.component.html',
@@ -20,6 +20,7 @@ export class MessageListComponent extends LeftSideBar {
     builder:FormBuilder,
     route:ActivatedRoute,
     context:SecurityContext,
+    private router:Router,
     private service:ConversationService) {
     super()
     this.form = builder.group({
@@ -42,11 +43,23 @@ export class MessageListComponent extends LeftSideBar {
         this.form.removeControl('owner')
         this.form.patchValue({'sender' : context.security?.id})
       }
+
+      this.search()
     })
   }
 
   search() {
-    this.service.search(this.form.value).subscribe(result => this.list = result)
+    this.service.search(this.form.value).subscribe(result => {
+      this.list = result
+    })
+  }
+
+  showDetails(product:number, sender:number) {
+    this.router.navigate(['/member', 'message', 'details'],
+      {queryParams: {
+        product: product,
+        sender: sender
+      }})
   }
 
 }

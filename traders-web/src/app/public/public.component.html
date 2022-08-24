@@ -22,17 +22,17 @@
 
   <div class="row">
 
-    <nav class="col-3">
+    <nav class="col-3" *ngIf="layout.left">
       <div class="sticky-top">
         <app-category-list></app-category-list>
       </div>
     </nav>
 
     <section class="col">
-      <router-outlet></router-outlet>
+      <router-outlet (activate)="changeRoute($event)"></router-outlet>
     </section>
 
-    <section class="col-3">
+    <section class="col-3" *ngIf="layout.right">
       <div class="sticky-top">
         <app-top-sellers></app-top-sellers>
       </div>

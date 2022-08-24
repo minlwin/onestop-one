@@ -19,3 +19,8 @@ body {
   object-fit: cover;
   margin-top: 1rem;
 }
+
+.dim-text {
+  font-size: 10px;
+  color: gray;
+}

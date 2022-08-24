@@ -19,7 +19,7 @@
   </div>
 </form>
 
-<table class="mt-4 table" *ngIf="list.length > 0">
+<table class="mt-4 table table-hover" *ngIf="list.length > 0">
   <thead>
     <tr>
       <th>{{type == 'in' ? 'Sender' : 'Owner'}}</th>
@@ -32,13 +32,15 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let item of list">
+    <tr *ngFor="let item of list" (click)="showDetails(item.product.id, item.senderId)">
       <td>{{type == 'in' ? item.sender : item.product.seller}}</td>
       <td>{{item.product.category}}</td>
       <td>{{item.product.condition}}</td>
       <td>{{item.product.name}}</td>
       <td>{{item.product.price}}</td>
-      <td>{{item.product.messages}}</td>
+      <td>
+        {{item.messages}}
+      </td>
     </tr>
   </tbody>
 </table>
