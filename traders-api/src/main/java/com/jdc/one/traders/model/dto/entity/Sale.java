@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.LastModifiedDate;
+
 @Entity
 @Table(name = "sale")
 public class Sale implements Serializable{
@@ -44,6 +46,9 @@ public class Sale implements Serializable{
 	private LocalDateTime shippedDate;
 	@Column(name = "close_date")
 	private LocalDateTime closeDate;
+	
+	@LastModifiedDate
+	private LocalDateTime updateDate;
 
 	public enum Status {
 		Order, Paid, Shipped, Finish, Cancel
@@ -120,5 +125,23 @@ public class Sale implements Serializable{
 	public void setCloseDate(LocalDateTime closeDate) {
 		this.closeDate = closeDate;
 	}
+
+	public List<String> getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(List<String> remarks) {
+		this.remarks = remarks;
+	}
+
+	public LocalDateTime getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(LocalDateTime updateDate) {
+		this.updateDate = updateDate;
+	}
+	
+	
 
 }

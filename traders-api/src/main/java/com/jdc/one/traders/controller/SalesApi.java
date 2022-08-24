@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jdc.one.traders.model.dto.output.SaleSummary;
+import com.jdc.one.traders.model.dto.output.SaleVO;
 import com.jdc.one.traders.model.service.SaleService;
 
 @RestController
@@ -31,7 +32,7 @@ public class SalesApi {
 	}
 
 	@GetMapping("{id}")
-	void findById(@PathVariable long id) {
-		
+	SaleVO findById(@PathVariable long id) {
+		return service.findById(id);
 	}
 }

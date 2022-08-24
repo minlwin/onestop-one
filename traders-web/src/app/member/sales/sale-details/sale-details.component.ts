@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { LeftSideBar } from '../../member-layout';
 
 @Component({
   templateUrl: './sale-details.component.html',
   styles: [
   ]
 })
-export class SaleDetailsComponent implements OnInit {
+export class SaleDetailsComponent extends LeftSideBar  {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(route:ActivatedRoute) {
+    super()
   }
 
 }

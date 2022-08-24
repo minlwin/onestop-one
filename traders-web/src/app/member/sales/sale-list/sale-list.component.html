@@ -1,1 +1,32 @@
-<p>sale-list works!</p>
+<h3><i class="bi-cart"></i> My {{type == 'sale' ? 'Sales' : 'Purchases'}}</h3>
+
+<form class="my-4 row" [formGroup]="form">
+
+</form>
+
+<table *ngIf="list.length > 0" class="table table-hover">
+  <thead>
+    <tr>
+      <th>{{type == 'sale' ? 'Buyer' : 'Seller'}}</th>
+      <th>Category</th>
+      <th>Product</th>
+      <th>Condition</th>
+      <th class="text-end">Price</th>
+      <th>Status</th>
+      <th>Status Change Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of list" (click)="showDetails(item.id)">
+      <td>{{type == 'sale' ? item.buyer : item.seller}}</td>
+      <td>{{item.category}}</td>
+      <td>{{item.condition}}</td>
+      <td class="text-end">{{item.price | number}} MMK</td>
+      <td>{{item.status}}</td>
+      <td>{{item.statusChangeDate | date : 'yyyy-MM-dd HH:mm'}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
