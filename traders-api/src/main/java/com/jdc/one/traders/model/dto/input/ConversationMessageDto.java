@@ -12,4 +12,5 @@ public record ConversationMessageDto(
 	public ConversationPk conversationId() {
 		return ConversationPk.generate(productId, senderId);
 	}
+	
 }

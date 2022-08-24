@@ -14,6 +14,6 @@ public interface ConversationService {
 
 	ConversationVO findById(ConversationPk id);
 
-	ConversationVO addMessage(ConversationMessageDto dto);
+	void addMessage(ConversationMessageDto dto);
 
 }

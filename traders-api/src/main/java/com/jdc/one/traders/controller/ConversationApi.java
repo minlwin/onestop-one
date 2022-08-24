@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +40,9 @@ public class ConversationApi {
 	}
 
 	@PostMapping("message")
-	ConversationVO sendMessage(ConversationMessageDto dto) {
-		return service.addMessage(dto);
+	ConversationVO sendMessage(@RequestBody ConversationMessageDto dto) {
+		service.addMessage(dto);
+		return service.findById(dto.conversationId());
 	}
 	
 }

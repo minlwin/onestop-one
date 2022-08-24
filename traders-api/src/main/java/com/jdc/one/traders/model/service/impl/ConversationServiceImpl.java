@@ -16,6 +16,7 @@ import com.jdc.one.traders.model.dto.input.ConversationMessageDto;
 import com.jdc.one.traders.model.dto.output.ConversationSummary;
 import com.jdc.one.traders.model.dto.output.ConversationVO;
 import com.jdc.one.traders.model.repo.AccountRepo;
+import com.jdc.one.traders.model.repo.ConversationMessageRepo;
 import com.jdc.one.traders.model.repo.ConversationRepo;
 import com.jdc.one.traders.model.repo.ProductRepo;
 import com.jdc.one.traders.model.service.ConversationService;
@@ -25,6 +26,8 @@ public class ConversationServiceImpl implements ConversationService{
 	
 	@Autowired
 	private ConversationRepo conversationRepo;
+	@Autowired
+	private ConversationMessageRepo messageRepo;
 	@Autowired
 	private AccountRepo accountRepo;
 	@Autowired
@@ -48,7 +51,7 @@ public class ConversationServiceImpl implements ConversationService{
 		spec = spec.and(prodWhjere);
 		
 		// sender
-		var senderWhere = product
+		var senderWhere = sender
 				.filter(id -> StringUtils.hasLength(id))
 				.map(Integer::parseInt)
 				.filter(id -> id > 0)
@@ -60,12 +63,12 @@ public class ConversationServiceImpl implements ConversationService{
 		spec = spec.and(senderWhere);
 
 		// owner
-		var ownerWhere = product
+		var ownerWhere = owner
 				.filter(id -> StringUtils.hasLength(id))
 				.map(Integer::parseInt)
 				.filter(id -> id > 0)
 				.map(id -> {
-			Specification<Conversation> where = (root, query, builder) -> builder.equal(root.get("product").get("owner").get("id"), id);
+			Specification<Conversation> where = (root, query, builder) -> builder.equal(root.get("product").get("seller").get("id"), id);
 			return where;
 		}).orElse(Specification.where(null));
 
@@ -89,21 +92,20 @@ public class ConversationServiceImpl implements ConversationService{
 	
 	@Override
 	@Transactional
-	public ConversationVO addMessage(ConversationMessageDto dto) {		
-		return conversationRepo.findById(dto.conversationId())
-				.or(() -> {
+	public void addMessage(ConversationMessageDto dto) {		
+		var conversation = conversationRepo.findById(dto.conversationId())
+				.orElseGet(() -> {
 					var entity = new Conversation();
 					entity.setProduct(productRepo.getReferenceById(dto.productId()));
 					entity.setSender(accountRepo.getReferenceById(dto.senderId()));
-					return Optional.of(conversationRepo.save(entity));
-				})
-				.map(c -> {
-					var message = new ConversationMessage();
-					message.setSpeaker(accountRepo.getReferenceById(dto.messageSenderId()));
-					message.setMessage(dto.message());
-					return c.addMessage(message);
-				})
-				.map(ConversationVO::new).orElseThrow();
+					return conversationRepo.save(entity);
+				});
+		
+		var message = new ConversationMessage();
+		message.setMessage(dto.message());
+		message.setSpeaker(accountRepo.getReferenceById(dto.messageSenderId()));
+		message.setConversation(conversation);
+		messageRepo.save(message);
 	}
 
 }

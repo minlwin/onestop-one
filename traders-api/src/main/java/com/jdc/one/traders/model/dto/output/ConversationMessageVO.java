@@ -2,6 +2,7 @@ package com.jdc.one.traders.model.dto.output;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jdc.one.traders.model.dto.entity.ConversationMessage;
 
 public record ConversationMessageVO(
@@ -9,6 +10,7 @@ public record ConversationMessageVO(
 		int speakerId,
 		String speaker,
 		String message,
+		@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 		LocalDateTime sendTime
 		) {
 	
