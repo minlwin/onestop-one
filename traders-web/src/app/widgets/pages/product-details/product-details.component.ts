@@ -49,7 +49,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   askQuestion(id:number) {
-    let routeInfo = ['/member', 'conversation']
+    let routeInfo = ['/member', 'message', 'details']
     let queryparam = {product: id}
 
 

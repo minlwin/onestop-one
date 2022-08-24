@@ -13,8 +13,8 @@ export class ConversationService extends AbstractService{
     return this.http.get<any[]>(this.baseApi, {params: form})
   }
 
-  findById(id:number) {
-    return this.http.get<any>(`${this.baseApi}/${id}`)
+  findById(product:number, sender:number) {
+    return this.http.get<any>(`${this.baseApi}/${product}/${sender}`)
   }
 
   create(form:any) {

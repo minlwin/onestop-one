@@ -52,6 +52,7 @@ import { AppImagePipe } from './pipes/app-image.pipe';
     DateToDurationPipe,
     NoItemsComponent,
     MemberSideMenuComponent,
+    ProductImageComponent,
     AppImagePipe,
   ]
 })

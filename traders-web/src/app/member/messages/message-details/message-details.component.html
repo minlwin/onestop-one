@@ -1,1 +1,17 @@
-<p>message-details works!</p>
+<h3><i class="bi-chat-dots"></i> Messages for {{dto.product}}</h3>
+<div class="row mt-3">
+
+  <div class="col-auto">
+    <div *ngFor="let item of dto.photos" class="img-thumbnail mb-2" (click)="setCurrentImage(item)" >
+      <app-product-image [image]="item" [height]="90"></app-product-image>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="img-thumbnail">
+      <app-product-image [image]="currentImage" [height]="480" ></app-product-image>
+    </div>
+  </div>
+
+  <div class="col-5"></div>
+</div>
