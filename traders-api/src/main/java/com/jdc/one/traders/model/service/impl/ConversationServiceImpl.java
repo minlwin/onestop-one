@@ -3,8 +3,6 @@ package com.jdc.one.traders.model.service.impl;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -80,7 +78,13 @@ public class ConversationServiceImpl implements ConversationService{
 	public ConversationVO findById(ConversationPk id) {
 		return conversationRepo.findById(id)
 				.map(ConversationVO::new)
-				.orElseThrow(EntityNotFoundException::new);
+				.orElse(dummy(id));
+	}
+	
+	private ConversationVO dummy(ConversationPk id) {
+		var sender = accountRepo.findById(id.getSenderId()).orElseThrow();
+		var product = productRepo.findById(id.getProudctId()).orElseThrow();
+		return ConversationVO.getInstance(sender, product);
 	}
 	
 	@Override
