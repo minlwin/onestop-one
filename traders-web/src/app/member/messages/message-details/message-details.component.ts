@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { SecurityContext } from 'src/app/services/security/sercurity-context';
 import { FullScreen } from '../../member-layout';
@@ -20,7 +20,8 @@ export class MessageDetailsComponent extends FullScreen {
   constructor(
     route:ActivatedRoute,
     builder:FormBuilder,
-    context:SecurityContext,
+    private router:Router,
+    private context:SecurityContext,
     private service:ConversationService
   ) {
 
@@ -46,6 +47,13 @@ export class MessageDetailsComponent extends FullScreen {
     })
   }
 
+  get ownProduct() {
+    return this.dto.sellerId == this.context.security?.id
+  }
+
+  purchase() {
+    this.router.navigate(['/member', 'sale', 'details'], {queryParams: {product: this.dto.productId}})
+  }
 
   sendMessage() {
     if(this.form.valid) {

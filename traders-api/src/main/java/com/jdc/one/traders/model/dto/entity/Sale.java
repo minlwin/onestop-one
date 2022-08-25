@@ -2,22 +2,26 @@ package com.jdc.one.traders.model.dto.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CollectionTable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "sale")
+@EntityListeners(AuditingEntityListener.class)
 public class Sale implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -34,10 +38,9 @@ public class Sale implements Serializable{
 	@ManyToOne
 	private Address shipping;
 	
-	@ElementCollection
-	@CollectionTable(name = "sale_remark")
-	private List<String> remarks;
-
+	@OneToMany(mappedBy = "sale", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+	private List<SaleConversation> conversation;
+	
 	@Column(name = "order_date")
 	private LocalDateTime orderDate;
 	@Column(name = "paid_date")
@@ -49,9 +52,26 @@ public class Sale implements Serializable{
 	
 	@LastModifiedDate
 	private LocalDateTime updateDate;
+	
+	public Sale() {
+		conversation = new ArrayList<>();
+	}
 
 	public enum Status {
 		Order, Paid, Shipped, Finish, Cancel
+	}
+	
+	public void addConversation(SaleConversation data) {
+		data.setSale(this);
+		conversation.add(data);
+	}
+
+	public List<SaleConversation> getConversation() {
+		return conversation;
+	}
+
+	public void setConversation(List<SaleConversation> conversation) {
+		this.conversation = conversation;
 	}
 
 	public long getId() {
@@ -124,14 +144,6 @@ public class Sale implements Serializable{
 
 	public void setCloseDate(LocalDateTime closeDate) {
 		this.closeDate = closeDate;
-	}
-
-	public List<String> getRemarks() {
-		return remarks;
-	}
-
-	public void setRemarks(List<String> remarks) {
-		this.remarks = remarks;
 	}
 
 	public LocalDateTime getUpdateDate() {

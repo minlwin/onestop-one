@@ -1,8 +1,25 @@
 <h3><i class="bi-cart"></i> My {{type == 'sale' ? 'Sales' : 'Purchases'}}</h3>
 
 <form class="my-4 row" [formGroup]="form">
+  <div class="col-auto">
+    <select formControlName="status" class="form-select">
+      <option value="">All Status</option>
+      <option *ngFor="let item of statuses" [value]="item">{{item}}</option>
+    </select>
+  </div>
 
+  <div class="col-auto">
+    <input formControlName="keyword" type="text" class="form-control" placeholder="Search Keyword">
+  </div>
+
+  <div class="col">
+    <button class="btn btn-outline-info" (click)="search()">
+      <i class="bi-search"></i> Search
+    </button>
+  </div>
 </form>
+
+<app-no-items message="There is no {{type == 'sale' ? 'sales' : 'purchases'}}."></app-no-items>
 
 <table *ngIf="list.length > 0" class="table table-hover">
   <thead>

@@ -1,5 +1,5 @@
 import { SecurityContext } from 'src/app/services/security/sercurity-context';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LeftSideBar } from 'src/app/member/member-layout';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -18,7 +18,8 @@ export class SaleListComponent extends LeftSideBar {
     route:ActivatedRoute,
     context:SecurityContext,
     builder:FormBuilder,
-    private service:SaleService
+    private service:SaleService,
+    private router:Router
   ) {
     super()
     this.form = builder.group({
@@ -43,7 +44,7 @@ export class SaleListComponent extends LeftSideBar {
   }
 
   get statuses() {
-    return Object.values(Status)
+    return Object.values(Status).filter(a => typeof a != 'number')
   }
 
   search() {
@@ -51,7 +52,7 @@ export class SaleListComponent extends LeftSideBar {
   }
 
   showDetails(id:number) {
-
+    this.router.navigate(['/member', 'sale', 'details'], {queryParams: {id: id}})
   }
 
 }

@@ -10,7 +10,7 @@ export class ProductSerivce extends AbstractService {
   }
 
   findById(id:number) {
-    return this.http.get<any[]>(`${this.baseApi}/${id}`)
+    return this.http.get<any>(`${this.baseApi}/${id}`)
   }
 
   search(form:any) {

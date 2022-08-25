@@ -52,8 +52,12 @@
         <div class="mt-4">
           <form [formGroup]="form">
             <textarea formControlName="message" cols="30" rows="2" class="form-control mb-2"></textarea>
-            <button [class.disabled]="!form.valid" (click)="sendMessage()" class="btn btn-outline-info">
+            <button [class.disabled]="!form.valid" (click)="sendMessage()" class="btn btn-outline-info me-2">
               <i class="bi-send"></i> Send Message
+            </button>
+
+            <button *ngIf="!ownProduct" class="btn btn-outline-info" (click)="purchase()">
+              <i class="bi-cart-plus"></i> Purchase
             </button>
           </form>
         </div>

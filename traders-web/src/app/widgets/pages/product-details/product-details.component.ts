@@ -49,15 +49,16 @@ export class ProductDetailsComponent extends LeftSideBar{
   }
 
   purchase(id:number) {
+    let routeInfo = ['/member', 'sale', 'details']
+    let queryparam = {product: id}
 
-    let routeInfo = ['/member', 'purchase', id]
 
     if(this.securityContext.security) {
-      this.router.navigate(routeInfo)
+      this.router.navigate(routeInfo, {queryParams: queryparam})
     } else {
-      this.router.navigate(['/public', 'signin'], {queryParams: {target: routeInfo}})
+      this.router.navigate(['/public', 'signin'],
+        {queryParams: {route: JSON.stringify(routeInfo), query : JSON.stringify(queryparam)}})
     }
-
   }
 
   askQuestion(id:number) {
@@ -71,7 +72,6 @@ export class ProductDetailsComponent extends LeftSideBar{
       this.router.navigate(['/public', 'signin'],
         {queryParams: {route: JSON.stringify(routeInfo), query : JSON.stringify(queryparam)}})
     }
-
   }
 
   showDetails(product:number, sender:number) {

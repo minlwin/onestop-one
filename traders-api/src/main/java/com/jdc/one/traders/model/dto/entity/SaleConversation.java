@@ -16,26 +16,27 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "sale_payment")
+@Table(name = "sale_conversation")
 @EntityListeners(AuditingEntityListener.class)
-public class SalePayment implements Serializable{
+public class SaleConversation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(generator = "sale_payment_seq")
-	@SequenceGenerator(name = "sale_payment_seq")
+	@GeneratedValue(generator = "sale_conversation_seq")
+	@SequenceGenerator(name = "sale_conversation_seq")
 	private long id;
+
 	@ManyToOne(optional = false)
 	private Sale sale;
-	@ManyToOne
-	private BankingInfo banking;
-	private int amount;
-	@Column(name = "photo")
-	private String screenShot;
+	@ManyToOne(optional = false)
+	private Account sender;
+
+	@Column(nullable = false)
+	private String message;
 	@CreatedDate
-	@Column(name = "paid_at")
-	private LocalDateTime paidAt;
+	@Column(name = "send_date")
+	private LocalDateTime sendDate;
 
 	public long getId() {
 		return id;
@@ -53,36 +54,28 @@ public class SalePayment implements Serializable{
 		this.sale = sale;
 	}
 
-	public BankingInfo getBanking() {
-		return banking;
+	public Account getSender() {
+		return sender;
 	}
 
-	public void setBanking(BankingInfo banking) {
-		this.banking = banking;
+	public void setSender(Account sender) {
+		this.sender = sender;
 	}
 
-	public int getAmount() {
-		return amount;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	public String getScreenShot() {
-		return screenShot;
+	public LocalDateTime getSendDate() {
+		return sendDate;
 	}
 
-	public void setScreenShot(String screenShot) {
-		this.screenShot = screenShot;
-	}
-
-	public LocalDateTime getPaidAt() {
-		return paidAt;
-	}
-
-	public void setPaidAt(LocalDateTime paidAt) {
-		this.paidAt = paidAt;
+	public void setSendDate(LocalDateTime sendDate) {
+		this.sendDate = sendDate;
 	}
 
 }

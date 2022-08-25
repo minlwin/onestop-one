@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AbstractService } from './abstract.service';
 
 export enum Status {
-  Order, Paid, Shipped, Finish, Cancel
+  Order, Shipped, Finish, Cancel
 }
 
 @Injectable({providedIn: 'root'})
@@ -15,5 +15,9 @@ export  class SaleService extends AbstractService {
 
   search(form:any) {
     return this.http.get<any[]>(this.baseApi, {params: form})
+  }
+
+  findById(id:number) {
+    return this.http.get<any>(`${this.baseApi}/${id}`)
   }
 }
