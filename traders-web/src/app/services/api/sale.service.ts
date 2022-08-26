@@ -20,4 +20,8 @@ export  class SaleService extends AbstractService {
   findById(id:number) {
     return this.http.get<any>(`${this.baseApi}/${id}`)
   }
+
+  order(form:any) {
+    return this.http.post<any>(this.baseApi, form)
+  }
 }

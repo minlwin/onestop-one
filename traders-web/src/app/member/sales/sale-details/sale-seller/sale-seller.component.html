@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="mb-3 d-flex justify-content-between align-items-end">
+      <span>
+        <i class="bi-bank"></i> Banking Information
+      </span>
+      <span class="dim-text">
+        <i class="bi-person"></i> {{profile?.name || ''}}
+      </span>
+    </h5>
+
+    <div *ngIf="bankings.length == 0">
+      <div *ngIf="sellerView">
+        <!-- Banking Info Form -->
+      </div>
+
+      <div class="alert alert-info" *ngIf="!sellerView">
+        <i class="bi-info-lg"></i> Banking Information will be updated soon!
+      </div>
+
+    </div>
+
+    <!-- Banking Info List -->
+    <table *ngIf="bankings.length > 0" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Banking</th>
+          <th>Account No</th>
+          <th>Account Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of bankings">
+          <td>{{item.type}}</td>
+          <td>{{item.accountNumber}}</td>
+          <td>{{item.accountName}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

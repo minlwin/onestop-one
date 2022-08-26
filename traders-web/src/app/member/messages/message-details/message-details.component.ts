@@ -82,6 +82,4 @@ export class MessageDetailsComponent extends FullScreen {
       this.currentImage = result.photos[0]
     }
   }
-
-
 }

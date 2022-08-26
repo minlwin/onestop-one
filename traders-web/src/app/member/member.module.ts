@@ -21,6 +21,10 @@ import { MessageListComponent } from './messages/message-list/message-list.compo
 import { MessageDetailsComponent } from './messages/message-details/message-details.component';
 import { SaleListComponent } from './sales/sale-list/sale-list.component';
 import { SaleDetailsComponent } from './sales/sale-details/sale-details.component';
+import { SaleBuyerComponent } from './sales/sale-details/sale-buyer/sale-buyer.component';
+import { SaleSellerComponent } from './sales/sale-details/sale-seller/sale-seller.component';
+import { SaleProductComponent } from './sales/sale-details/sale-product/sale-product.component';
+import { SaleMessageComponent } from './sales/sale-details/sale-message/sale-message.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,10 @@ import { SaleDetailsComponent } from './sales/sale-details/sale-details.componen
     MessageDetailsComponent,
     SaleListComponent,
     SaleDetailsComponent,
+    SaleBuyerComponent,
+    SaleSellerComponent,
+    SaleProductComponent,
+    SaleMessageComponent,
   ],
   imports: [
     CommonModule,

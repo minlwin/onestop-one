@@ -16,7 +16,6 @@ import com.jdc.one.traders.model.dto.input.ConversationMessageDto;
 import com.jdc.one.traders.model.dto.output.ConversationSummary;
 import com.jdc.one.traders.model.dto.output.ConversationVO;
 import com.jdc.one.traders.model.repo.AccountRepo;
-import com.jdc.one.traders.model.repo.ConversationMessageRepo;
 import com.jdc.one.traders.model.repo.ConversationRepo;
 import com.jdc.one.traders.model.repo.ProductRepo;
 import com.jdc.one.traders.model.service.ConversationService;
@@ -26,8 +25,6 @@ public class ConversationServiceImpl implements ConversationService{
 	
 	@Autowired
 	private ConversationRepo conversationRepo;
-	@Autowired
-	private ConversationMessageRepo messageRepo;
 	@Autowired
 	private AccountRepo accountRepo;
 	@Autowired
@@ -104,8 +101,7 @@ public class ConversationServiceImpl implements ConversationService{
 		var message = new ConversationMessage();
 		message.setMessage(dto.message());
 		message.setSpeaker(accountRepo.getReferenceById(dto.messageSenderId()));
-		message.setConversation(conversation);
-		messageRepo.save(message);
+		conversation.addMessage(message);
 	}
 
 }

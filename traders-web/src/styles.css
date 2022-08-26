@@ -24,3 +24,8 @@ body {
   font-size: 10px;
   color: gray;
 }
+
+.form-label {
+  font-size: 11px !important;
+  color: gray;
+}

@@ -1,0 +1,102 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="mb-3 d-flex justify-content-between align-items-end">
+      <span>
+        <i class="bi-truck"></i> Shipping Address
+      </span>
+
+      <span class="dim-text">
+        <i class="bi-person-fill"></i> {{profile?.name || ''}}
+      </span>
+    </h5>
+
+    <div class="alert alert-info" *ngIf="!selectedAddress">
+      <i class="bi-info-lg"></i> Please add Shipping Address to take order!
+    </div>
+
+    <div *ngIf="selectedAddress" class="row g-2 mb-4">
+      <div class="col-12">
+        <label class="form-label">Name</label>
+        <span class="form-control">{{selectedAddress.name}}</span>
+      </div>
+      <div class="col-6">
+        <label class="form-label">Division</label>
+        <span class="form-control">{{selectedAddress.divisionName}}</span>
+      </div>
+      <div class="col-6">
+        <label class="form-label">Township</label>
+        <span class="form-control">{{selectedAddress.townshipName}}</span>
+      </div>
+      <div class="col-12">
+        <label class="form-label">Address</label>
+        <span class="form-control">{{selectedAddress.address}}</span>
+      </div>
+    </div>
+
+    <div *ngIf="buyerView" class="row g-2">
+
+      <div class="col-auto" [class.d-none]="hideSelectAddress" >
+        <select #addressSelect (change)="changeAddress(addressSelect.value)" class="form-select">
+          <option *ngFor="let item of addressList" [value]="item.id">{{item.name}}</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <button class="btn btn-outline-info" (click)="addNewAddressOpen()">
+          <i class="bi-plus-lg"></i> Add Address
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="shippingModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5><i class="bi-truck"></i> Shipping Address</h5>
+      </div>
+
+      <div [formGroup]="form" class="modal-body row gt-2">
+
+        <div class="col-12">
+          <label class="form-label">Name</label>
+          <input formControlName="name" type="text" class="form-control" placeholder="Enter Name">
+        </div>
+
+        <div class="col-6">
+          <label class="form-label">Division</label>
+          <select formControlName="division" #divisionSelect class="form-select" (change)="changeDivision(divisionSelect.value)" >
+            <option value="">Select Division</option>
+            <option *ngFor="let item of divisions" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label">Township</label>
+          <select formControlName="township" class="form-select">
+            <option value="">Select Township</option>
+            <option *ngFor="let item of townships" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Address</label>
+          <input formControlName="address" type="text" class="form-control" placeholder="Enter Address">
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline-info" (click)="modalDialog.hide()">
+          <i class="bi-x-lg"></i> Close
+        </button>
+        <button class="btn btn-outline-danger" (click)="saveAddress()" [class.disabled]="!form.valid">
+          <i class="bi-save"></i> Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

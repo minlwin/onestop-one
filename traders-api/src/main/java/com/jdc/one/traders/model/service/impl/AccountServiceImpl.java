@@ -24,6 +24,7 @@ import com.jdc.one.traders.model.dto.input.BankingDto;
 import com.jdc.one.traders.model.dto.input.ChangePasswordDto;
 import com.jdc.one.traders.model.dto.input.SignInDto;
 import com.jdc.one.traders.model.dto.input.SignUpDto;
+import com.jdc.one.traders.model.dto.output.AddressVO;
 import com.jdc.one.traders.model.dto.output.LoginResultDto;
 import com.jdc.one.traders.model.dto.output.LoginUserDto;
 import com.jdc.one.traders.model.dto.output.SellerDto;
@@ -32,6 +33,7 @@ import com.jdc.one.traders.model.dto.output.TopSellerDto;
 import com.jdc.one.traders.model.repo.AccountRepo;
 import com.jdc.one.traders.model.repo.AddressRepo;
 import com.jdc.one.traders.model.repo.BankingInfoRepo;
+import com.jdc.one.traders.model.repo.ProfileRepo;
 import com.jdc.one.traders.model.repo.TownshipRepo;
 import com.jdc.one.traders.model.service.AccountSecurity;
 import com.jdc.one.traders.model.service.AccountService;
@@ -46,6 +48,9 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 
 	@Autowired
 	private AccountRepo accountRepo;
+	
+	@Autowired
+	private ProfileRepo profileRepo;
 
 	@Autowired
 	private TownshipRepo townshipRepo;
@@ -192,6 +197,47 @@ public class AccountServiceImpl implements AccountSecurity, AccountService, Prof
 	@Override
 	public SellerDto findToSellerById(int id) {
 		return accountRepo.findById(id).map(SellerDto::from).orElseThrow(EntityNotFoundException::new);
+	}
+
+	@Override
+	@Transactional
+	public void addBanking(int id, BankingDto dto) {
+		accountRepo.findById(id).ifPresent(account -> {
+			var profile = account.getProfile();
+			
+			if(null == profile) {
+				profile = new Profile();
+				profile.setAccount(account);
+				account.setProfile(profile);
+			}
+			
+			profile.addBankingInfo(dto.getEntity());
+		});
+	}
+
+	@Override
+	@Transactional
+	public AddressVO addAddress(int id, AddressDto dto) {
+		return accountRepo.findById(id).map(account -> {
+			var profile = account.getProfile();
+			
+			if(null == profile) {
+				profile = new Profile();
+				profile.setAccount(account);
+				account.setProfile(profile);
+				accountRepo.flush();
+				profile = profileRepo.save(profile);
+			}
+			
+			var address = getAddress(dto);
+			address.setProfile(profile);
+			return addressRepo.save(address);
+		}).map(AddressVO::from).orElseThrow();
+	}
+
+	@Override
+	public AddressVO findAddressById(int id) {
+		return addressRepo.findById(id).map(AddressVO::from).orElseThrow();
 	}
 
 }

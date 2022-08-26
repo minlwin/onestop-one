@@ -24,5 +24,15 @@ export class ProfileService extends AbstractService {
     return this.http.put<any>(`${this.baseApi}/image/${this.context.security?.id}`, form)
   }
 
+  addAddress(id:number, form:any) {
+    return this.http.post<any>(`${this.baseApi}/address/${id}`, form)
+  }
 
+  findAddressById(id:number) {
+    return this.http.get<any>(`${this.baseApi}/address/${id}`)
+  }
+
+  addBanking(id:number, form:any) {
+    return this.http.post<any>(`${this.baseApi}/banking/${id}`, form)
+  }
 }

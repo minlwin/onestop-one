@@ -136,9 +136,9 @@ public class SaleServiceImpl implements SaleService{
 			break;
 		}
 		
-		if(StringUtils.hasLength(dto.remark())) {
+		if(StringUtils.hasLength(dto.message())) {
 			var conversation = new SaleConversation();
-			conversation.setMessage(dto.remark());
+			conversation.setMessage(dto.message());
 			conversation.setSender(accountRepo.getReferenceById(dto.updateUser()));
 			sale.addConversation(conversation);
 		}

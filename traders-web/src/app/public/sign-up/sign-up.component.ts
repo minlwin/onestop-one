@@ -24,7 +24,7 @@ export class SignUpComponent implements OnInit {
     this.form = builder.group({
       name: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.minLength(8)]]
+      password: ["", [Validators.required, Validators.minLength(6)]]
     })
 
     route.queryParams.subscribe(params => {

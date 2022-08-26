@@ -2,8 +2,12 @@ package com.jdc.one.traders.model.dto.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -34,9 +38,18 @@ public class SaleConversation implements Serializable {
 
 	@Column(nullable = false)
 	private String message;
+	
+	@ElementCollection
+	@CollectionTable(name = "sale_images")
+	private List<String> images;
+	
 	@CreatedDate
 	@Column(name = "send_date")
 	private LocalDateTime sendDate;
+	
+	public SaleConversation() {
+		images = new ArrayList<>();
+	}
 
 	public long getId() {
 		return id;
@@ -76,6 +89,14 @@ public class SaleConversation implements Serializable {
 
 	public void setSendDate(LocalDateTime sendDate) {
 		this.sendDate = sendDate;
+	}
+
+	public List<String> getImages() {
+		return images;
+	}
+
+	public void setImages(List<String> images) {
+		this.images = images;
 	}
 
 }

@@ -1,9 +1,52 @@
-<h3>
+<h3 class="mb-3">
   <i class="bi-cart-check"></i> Order Information
 </h3>
 
-<!-- Product Information -->
+<div class="row">
 
-<!-- Seller Information -->
+  <!-- Product Information -->
+  <div class="col">
+    <app-sale-product></app-sale-product>
+  </div>
 
-<!-- Buyer Information -->
+  <div class="col">
+    <!-- Seller Information -->
+    <div class="mb-3">
+      <app-sale-seller></app-sale-seller>
+    </div>
+
+    <!-- Buyer Information -->
+    <div class="mb-3">
+      <app-sale-buyer></app-sale-buyer>
+    </div>
+
+    <!-- Sale Messages -->
+    <div *ngIf="!state.preorderState" class="mb-3">
+      <app-sale-message></app-sale-message>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button *ngIf="state.preorderState && state.orderForm?.valid" (click)="state.sendOrder()"  class="btn btn-outline-success me-2">
+        <i class="bi-send"></i> Send Order
+      </button>
+
+      <button *ngIf="state.buyerView && !state.preorderState" class="btn btn-outline-primary me-2">
+        <i class="bi-wallet"></i> Paid
+      </button>
+      <button *ngIf="state.sellerView" class="btn btn-outline-primary me-2">
+        <i class="bi-truck"></i> Dilivered
+      </button>
+      <button *ngIf="!state.preorderState" class="btn btn-outline-danger me-2">
+        <i class="bi-x-lg"></i> Cancel Order
+      </button>
+      <button *ngIf="state.sellerView" class="btn btn-outline-success me-2">
+        <i class="bi-check-lg"></i> Done
+      </button>
+    </div>
+
+  </div>
+
+
+</div>
+
+
