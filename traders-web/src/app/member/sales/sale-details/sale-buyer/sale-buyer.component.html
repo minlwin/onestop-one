@@ -14,22 +14,14 @@
       <i class="bi-info-lg"></i> Please add Shipping Address to take order!
     </div>
 
-    <div *ngIf="selectedAddress" class="row g-2 mb-4">
-      <div class="col-12">
+    <div *ngIf="selectedAddress" class="row mb-4">
+      <div class="col-auto">
         <label class="form-label">Name</label>
-        <span class="form-control">{{selectedAddress.name}}</span>
+        <span class="d-block">{{selectedAddress.name}}</span>
       </div>
-      <div class="col-6">
-        <label class="form-label">Division</label>
-        <span class="form-control">{{selectedAddress.divisionName}}</span>
-      </div>
-      <div class="col-6">
-        <label class="form-label">Township</label>
-        <span class="form-control">{{selectedAddress.townshipName}}</span>
-      </div>
-      <div class="col-12">
+      <div class="col">
         <label class="form-label">Address</label>
-        <span class="form-control">{{selectedAddress.address}}</span>
+        <span class="d-block">{{selectedAddress.address}}, {{selectedAddress.townshipName}}, {{selectedAddress.divisionName}}</span>
       </div>
     </div>
 

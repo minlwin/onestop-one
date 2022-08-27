@@ -25,6 +25,7 @@ import { SaleBuyerComponent } from './sales/sale-details/sale-buyer/sale-buyer.c
 import { SaleSellerComponent } from './sales/sale-details/sale-seller/sale-seller.component';
 import { SaleProductComponent } from './sales/sale-details/sale-product/sale-product.component';
 import { SaleMessageComponent } from './sales/sale-details/sale-message/sale-message.component';
+import { SaleStatusComponent } from './sales/sale-details/sale-status/sale-status.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SaleMessageComponent } from './sales/sale-details/sale-message/sale-mes
     SaleSellerComponent,
     SaleProductComponent,
     SaleMessageComponent,
+    SaleStatusComponent,
   ],
   imports: [
     CommonModule,

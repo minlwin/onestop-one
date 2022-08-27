@@ -30,6 +30,14 @@ export class SaleListComponent extends LeftSideBar {
     })
 
     route.params.subscribe(params => {
+
+      this.form.patchValue({
+        seller: '',
+        buyer: '',
+        status: '',
+        keyword: ''
+      })
+
       if(params['type']) {
         this.type = params['type']
       }

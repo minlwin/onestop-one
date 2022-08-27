@@ -1,0 +1,26 @@
+<div class="card" *ngIf="state.status">
+  <div class="card-body">
+    <h5 class="mb-3">
+      <i class="bi-info-lg"></i> Order Status
+    </h5>
+
+    <div class="row">
+      <div class="col">
+        <span class="d-block">Order</span>
+        <span class="form-label">{{state.status.orderDate | date : 'yyyy-MM-dd HH:mm'}}</span>
+      </div>
+      <div class="col" *ngIf="state.status.paidDate">
+        <span class="d-block">Order</span>
+        <span class="form-label">{{state.status.paidDate | date : 'yyyy-MM-dd HH:mm'}}</span>
+      </div>
+      <div class="col" *ngIf="state.status.shippedDate">
+        <span class="d-block">Order</span>
+        <span class="form-label">{{state.status.shippedDate | date : 'yyyy-MM-dd HH:mm'}}</span>
+      </div>
+      <div class="col" *ngIf="state.status.closeDate">
+        <span class="d-block">{{state.status.status}}</span>
+        <span class="form-label">{{state.status.closeDate | date : 'yyyy-MM-dd HH:mm'}}</span>
+      </div>
+    </div>
+  </div>
+</div>

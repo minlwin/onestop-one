@@ -12,6 +12,25 @@
     <div *ngIf="bankings.length == 0">
       <div *ngIf="sellerView">
         <!-- Banking Info Form -->
+        <form [formGroup]="form" class="row g-2">
+          <div class="col">
+            <label class="form-label">Banking</label>
+            <input formControlName="type" type="text" placeholder="Enter Bank Name" class="form-control">
+          </div>
+          <div class="col">
+            <label class="form-label">Account No.</label>
+            <input formControlName="accountNumber" placeholder="Enter Account Number" type="text" class="form-control">
+          </div>
+          <div class="col">
+            <label class="form-label">Account Name</label>
+            <input formControlName="accountName" type="text" placeholder="Enter Account Name" class="form-control">
+          </div>
+          <div class="col-auto inline-btn-wrapper">
+            <button [class.disabled]="!form.valid" (click)="saveBankingInfo()" class="btn btn-outline-info">
+              <i class="bi-save"></i> Save
+            </button>
+          </div>
+        </form>
       </div>
 
       <div class="alert alert-info" *ngIf="!sellerView">

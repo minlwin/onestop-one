@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaleMessageComponent implements OnInit {
 
+  messages:any[] = []
+
   constructor() { }
 
   ngOnInit(): void {

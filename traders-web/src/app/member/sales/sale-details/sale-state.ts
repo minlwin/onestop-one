@@ -16,7 +16,7 @@ export class SaleState {
   selectedShippingAddress:any
 
   orderForm:FormGroup
-  bankInfoForm:FormGroup
+  status:any
 
   constructor(
     builder:FormBuilder,
@@ -31,24 +31,6 @@ export class SaleState {
         shipping: ['', [Validators.required, Validators.min(1)]]
       })
 
-      this.bankInfoForm = builder.group({
-        id: 0,
-        type: ['', Validators.required],
-        accountName: ['', Validators.required],
-        accountNumber: ['', Validators.required],
-        deleted: false
-      })
-
-  }
-
-  clearBankingForm() {
-    this.bankInfoForm?.patchValue({
-      id: 0,
-      type: '',
-      accountName: '',
-      accountNumber: '',
-      deleted : false
-    })
   }
 
   get sellerView() {
@@ -71,16 +53,22 @@ export class SaleState {
 
   initViewBySale(sale:any) {
 
-    this.saleId = sale.id
+    const {id, product, buyerId, buyerName, shippingAddress, ...saleStatus} = sale
 
-    this.initProduct(sale.product)
+    // Sale ID
+    this.saleId = id
+
+    // Product
+    this.initProduct(product)
 
     // Buyer from sale info
-    this.profService.findById(sale.buyerId).subscribe(result => {
+    this.profService.findById(buyerId).subscribe(result => {
       this.initBuyer(result)
     })
-
-    this.selectedShippingAddress = sale.shippingAddress
+    // Shipping Address
+    this.selectedShippingAddress = shippingAddress
+    // Sale Status
+    this.status = saleStatus
   }
 
   initViewByProductId(id:number) {
@@ -128,14 +116,6 @@ export class SaleState {
 
   initSeller(result:any) {
     this.seller = result
-  }
-
-
-  addBankingInfo() {
-    if(this.bankInfoForm?.valid) {
-      this.profService.addBanking(this.seller.id, this.bankInfoForm?.value)
-        .subscribe(result => this.initSeller(result))
-    }
   }
 
   sendOrder() {

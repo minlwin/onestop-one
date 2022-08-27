@@ -11,11 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jdc.one.traders.model.dto.entity.Sale;
-import com.jdc.one.traders.model.dto.entity.SaleConversation;
 import com.jdc.one.traders.model.dto.entity.Sale.Status;
-import com.jdc.one.traders.model.dto.input.PaidInputDto;
 import com.jdc.one.traders.model.dto.input.SaleInputDto;
-import com.jdc.one.traders.model.dto.input.SaleStatusInputDto;
 import com.jdc.one.traders.model.dto.output.SaleSummary;
 import com.jdc.one.traders.model.dto.output.SaleVO;
 import com.jdc.one.traders.model.repo.AccountRepo;
@@ -66,7 +63,7 @@ public class SaleServiceImpl implements SaleService{
 		spec = spec.and(statusWhere);
 
 		// seller
-		var sellerWhere = buyer
+		var sellerWhere = seller
 				.filter(id -> StringUtils.hasLength(id))
 				.map(Integer::parseInt)
 				.filter(id -> id > 0)
@@ -112,44 +109,5 @@ public class SaleServiceImpl implements SaleService{
 		return findById(sale.getId());
 	}
 
-	@Override
-	@Transactional
-	public SaleVO updateStatus(long id, SaleStatusInputDto dto) {
-		var sale = saleRepo.getReferenceById(id);
-		sale.setStatus(dto.status());
-		
-		switch(dto.status()) {
-		case Paid:
-			sale.setPaidDate(LocalDateTime.now());
-			break;
-		case Shipped:
-			sale.setShippedDate(LocalDateTime.now());
-			break;
-		case Cancel:
-			sale.setCloseDate(LocalDateTime.now());
-			break;
-		case Finish:
-			sale.setCloseDate(LocalDateTime.now());
-			sale.getProduct().setSoldOut(true);
-			break;
-		default:
-			break;
-		}
-		
-		if(StringUtils.hasLength(dto.message())) {
-			var conversation = new SaleConversation();
-			conversation.setMessage(dto.message());
-			conversation.setSender(accountRepo.getReferenceById(dto.updateUser()));
-			sale.addConversation(conversation);
-		}
-		return findById(id);
-	}
-
-	@Override
-	@Transactional
-	public SaleVO paid(PaidInputDto dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

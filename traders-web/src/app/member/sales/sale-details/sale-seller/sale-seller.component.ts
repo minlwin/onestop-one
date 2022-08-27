@@ -1,4 +1,6 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
+import { ProfileService } from 'src/app/services/api/profile.service';
 import { SaleState } from '../sale-state';
 
 @Component({
@@ -9,11 +11,24 @@ import { SaleState } from '../sale-state';
 })
 export class SaleSellerComponent {
 
+  form:FormGroup
+
+  constructor(
+    builder:FormBuilder,
+    private state:SaleState,
+    private profService:ProfileService) {
+    this.form = builder.group({
+      id: 0,
+      type: ['', Validators.required],
+      accountName: ['', Validators.required],
+      accountNumber: ['', Validators.required],
+      deleted: false
+    })
+  }
+
   get profile() {
     return this.state.seller
   }
-
-  constructor(private state:SaleState) { }
 
   get sellerView() {
     return this.state.sellerView
@@ -23,4 +38,25 @@ export class SaleSellerComponent {
     const list:any[] = this.profile?.bankingInfo || []
     return list.filter(a => !a.deleted) || []
   }
+
+  saveBankingInfo() {
+    if(this.form?.valid) {
+      this.profService.addBanking(this.profile.id, this.form?.value)
+        .subscribe(result => {
+          this.state.initSeller(result)
+          this.clearForm()
+        })
+    }
+  }
+
+  clearForm() {
+    this.form.patchValue({
+      id: 0,
+      type: '',
+      accountName: '',
+      accountNumber: '',
+      deleted : false
+    })
+  }
+
 }

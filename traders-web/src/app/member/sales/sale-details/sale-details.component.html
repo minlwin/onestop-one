@@ -20,6 +20,11 @@
       <app-sale-buyer></app-sale-buyer>
     </div>
 
+    <!-- Sale Status -->
+    <div class="mb-3">
+      <app-sale-status></app-sale-status>
+    </div>
+
     <!-- Sale Messages -->
     <div *ngIf="!state.preorderState" class="mb-3">
       <app-sale-message></app-sale-message>
@@ -28,6 +33,10 @@
     <div class="d-flex justify-content-end">
       <button *ngIf="state.preorderState && state.orderForm?.valid" (click)="state.sendOrder()"  class="btn btn-outline-success me-2">
         <i class="bi-send"></i> Send Order
+      </button>
+
+      <button *ngIf="!state.preorderState" class="btn btn-outline-primary me-2">
+        <i class="bi-chat"></i> Message
       </button>
 
       <button *ngIf="state.buyerView && !state.preorderState" class="btn btn-outline-primary me-2">
