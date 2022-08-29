@@ -103,6 +103,7 @@ export class SaleBuyerComponent implements OnInit{
       this.profService.addAddress(this.state.buyer.id, addressData)
         .subscribe(result => {
           this.state.setShippingAddress(result)
+          this.modalDialog.hide()
         })
     }
   }
