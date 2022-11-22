@@ -1,0 +1,10 @@
+6	Kayin State	ကရင်ပြည်နယ်	South	Hpa-an	true
+6	Magway Region	မကွေးတိုင်းဒေသကြီး	Central	Magwe	true
+6	Mandalay Region	မန္တလေးတိုင်းဒေသကြီး	Central	Mandalay	true
+6	Mon State	မွန်ပြည်နယ်	South	Mawlamyine	true
+6	Naypyidaw Union Territory	နေပြည်တော် ပြည်ထောင်စုနယ်မြေ	Central	Naypyidaw	true
+6	Rakhine State	ရခိုင်ပြည်နယ်	West	Sittwe	true
+6	Sagaing Region	စစ်ကိုင်းတိုင်းဒေသကြီး	North	Monywa	false
+6	Shan State	ရှမ်းပြည်နယ်	East	Taunggyi	false
+6	Tanintharyi Region	တနင်္သာရီတိုင်းဒေသကြီး	South	Dawei	false
+6	Yangon Region	ရန်ကုန်တိုင်းဒေသကြီး	Lower	Yangon	false
