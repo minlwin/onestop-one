@@ -2,6 +2,8 @@ package com.jdc.onestop.directory.model.dto.form;
 
 import javax.validation.constraints.NotBlank;
 
+import com.jdc.onestop.directory.model.entity.State;
+
 public record StateForm(
 		@NotBlank(message = "Please enter State name.")
 		String name,
@@ -13,5 +15,9 @@ public record StateForm(
 		String capital,
 		boolean deleted		
 		) {
+
+	public State entity() {
+		return new State(name, burmeseName, capital, region, deleted);
+	}
 
 }

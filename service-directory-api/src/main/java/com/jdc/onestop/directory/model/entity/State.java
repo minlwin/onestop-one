@@ -29,6 +29,18 @@ public class State implements Serializable {
 
 	private boolean deleted;
 
+	public State() {
+	}
+
+	public State(String name, String burmeseName, String capital, String region, boolean deleted) {
+		super();
+		this.name = name;
+		this.burmeseName = burmeseName;
+		this.capital = capital;
+		this.region = region;
+		this.deleted = deleted;
+	}
+
 	public boolean isDeleted() {
 		return deleted;
 	}

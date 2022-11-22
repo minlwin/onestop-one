@@ -19,6 +19,11 @@ public class ServiceDirectoryAppException extends RuntimeException{
 				.map(FieldError::getDefaultMessage).toList();
 	}
 	
+	public ServiceDirectoryAppException(String message) {
+		type = ErrorType.Business;
+		messages = List.of(message);
+	}
+	
 	public ServiceDirectoryAppException(ErrorType type, List<String> messages) {
 		super();
 		this.type = type;
