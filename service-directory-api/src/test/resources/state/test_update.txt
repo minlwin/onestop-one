@@ -1,0 +1,5 @@
+1	Kayin State	ကရင်ပြည်နယ်	South	Hpa-an	false
+2	Magway Region	မကွေးတိုင်းဒေသကြီး	Central	Magwe	false
+3	Mandalay Region	မန္တလေးတိုင်းဒေသကြီး	Central	Mandalay	false
+4	Mon State	မွန်ပြည်နယ်	South	Mawlamyine	false
+5	Naypyidaw Union Territory	နေပြည်တော် ပြည်ထောင်စုနယ်မြေ	Central	Naypyidaw	false

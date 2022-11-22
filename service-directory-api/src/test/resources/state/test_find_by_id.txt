@@ -1,0 +1,5 @@
+1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Lower	Pathein	true
+2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Lower	Bago	false
+3	Chin State	ချင်းပြည်နယ်	West	Hakha	false
+4	Kachin State	ကချင်ပြည်နယ်	North	Myitkyina	false
+5	Kayah State	ကယားပြည်နယ်	East	Loikaw	true
