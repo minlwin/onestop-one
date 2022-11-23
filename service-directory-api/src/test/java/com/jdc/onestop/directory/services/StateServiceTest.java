@@ -1,16 +1,22 @@
 package com.jdc.onestop.directory.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
+import com.jdc.onestop.directory.model.dto.ErrorResult.ErrorType;
 import com.jdc.onestop.directory.model.dto.form.StateForm;
 import com.jdc.onestop.directory.model.service.StateService;
 
@@ -19,6 +25,7 @@ import com.jdc.onestop.directory.model.service.StateService;
 	"/initialize.sql",
 	"/state/data.sql"
 })
+@TestMethodOrder(MethodOrderer.DisplayName.class)
 public class StateServiceTest {
 
 	@Autowired
@@ -44,7 +51,6 @@ public class StateServiceTest {
 		
 	}
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvFileSource(resources = "/state/test_update.txt", delimiter = '\t')
 	void test_update(int id, String name, String burmeseName, String region, String capital, boolean deleted) {
@@ -63,8 +69,23 @@ public class StateServiceTest {
 		assertEquals(capital, result.capital());
 		assertEquals(deleted, result.deleted());
 	}
+	
+	@ParameterizedTest
+	@CsvFileSource(resources = "/state/test_update_no_data.txt", delimiter = '\t')
+	void test_update_no_data(int id, String name, String burmeseName, String region, String capital, boolean deleted) {
+		// Prepare Form
+		var form = new StateForm(name, burmeseName, region, capital, deleted);
+		
+		var exception = assertThrows(ServiceDirectoryAppException.class, () -> service.save(id, form));
+		
+		assertEquals(ErrorType.Business, exception.getType());
+		
+		var messages = exception.getMessages();
 
-	@Disabled
+		assertEquals(1, messages.size());
+		assertEquals("There is no state with id %d.".formatted(id), messages.get(0));
+	}
+
 	@ParameterizedTest
 	@CsvFileSource(resources = "/state/test_find_by_id.txt", delimiter = '\t')
 	void test_find_by_id(int id, String name, String burmeseName, String region, String capital, boolean deleted) {
@@ -79,9 +100,31 @@ public class StateServiceTest {
 		assertEquals(capital, result.capital());
 		assertEquals(deleted, result.deleted());
 	}
-
-	@Disabled
+	
 	@ParameterizedTest
+	@ValueSource(ints = {6, 0, 10})
+	void test_find_by_id_not_found(int id) {
+		
+		var exception = assertThrows(ServiceDirectoryAppException.class, () -> service.findById(id));
+		
+		assertEquals(ErrorType.Business, exception.getType());
+		
+		var messages = exception.getMessages();
+
+		assertEquals(1, messages.size());
+		assertEquals("There is no state with id %d.".formatted(id), messages.get(0));
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {
+			",,,5",
+			"Lower,,,2",
+			"Lower,Bago,,1",
+			"Lower,pathein,,1",
+			"Lower,patheins,,0",
+			",ပဲခူးတိုင်း,,1",
+			"Lower,ပဲခူးတိုင်း,false,1",
+	})
 	void test_search(String region, String keyword, Boolean deleted, int size) {
 		
 		var result = service.search(Optional.ofNullable(region), Optional.ofNullable(keyword), Optional.ofNullable(deleted));

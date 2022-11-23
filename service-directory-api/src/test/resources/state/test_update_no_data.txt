@@ -1,0 +1,3 @@
+0	Kayin State	ကရင်ပြည်နယ်	South	Hpa-an	false
+6	Magway Region	မကွေးတိုင်းဒေသကြီး	Central	Magwe	false
+10	Mandalay Region	မန္တလေးတိုင်းဒေသကြီး	Central	Mandalay	false
