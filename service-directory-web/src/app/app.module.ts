@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LocationsComponent } from './pages/locations/locations.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { ServicesComponent } from './pages/services/services.component';
+import { ServiceSearchBarComponent } from './pages/services/service-search-bar/service-search-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LocationsComponent,
-    SignInComponent
+    SignInComponent,
+    ServicesComponent,
+    ServiceSearchBarComponent
   ],
   imports: [
     BrowserModule,
