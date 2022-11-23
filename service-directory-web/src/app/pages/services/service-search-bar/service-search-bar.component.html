@@ -1,9 +1,9 @@
 <div class="card">
-  <form class="card-body">
+  <form [formGroup]="form" class="card-body">
     <!-- Service Type -->
     <div class="mb-3">
       <label class="form-label">Type</label>
-      <select class="form-select">
+      <select formControlName="type" class="form-select">
         <option value="">Search Type</option>
       </select>
     </div>
@@ -11,15 +11,16 @@
     <!-- Region -->
     <div class="mb-3">
       <label class="form-label">Region</label>
-      <select class="form-select">
+      <select formControlName="region" class="form-select">
         <option value="">Search Region</option>
+        <option *ngFor="let item of regions" [value]="item">{{item}}</option>
       </select>
     </div>
 
     <!-- State -->
     <div class="mb-3">
       <label class="form-label">State</label>
-      <select class="form-select">
+      <select formControlName="state" class="form-select">
         <option value="">Search State</option>
       </select>
     </div>
@@ -27,24 +28,25 @@
     <!-- Keyword -->
     <div class="mb-3">
       <label class="form-label">Keyword</label>
-      <input type="text" placeholder="Search Keyword" class="form-control">
+      <input formControlName="keyword" type="text" placeholder="Search Keyword" class="form-control">
     </div>
+
     <!-- Deleted -->
     <div class="mb-3 d-flex">
-      <input type="checkbox" class="form-check form-check-inline" id="deleted">
-      <label for="deleted" class="form-check-label">Deleted</label>
+      <input formControlName="deleted" type="checkbox" class="form-check form-check-inline" id="deleted">
+      <label for="deleted" class="form-check-label" >{{deletedLabel}}</label>
     </div>
 
     <div>
       <!-- Search Button -->
-      <button class="btn btn-primary d-block w-100 mb-2">
+      <button (click)="search()" class="btn btn-primary d-block w-100 mb-2">
         <i class="bi bi-search"></i> Search
       </button>
 
       <!-- Add New Service -->
-      <button class="btn btn-danger d-block w-100">
+      <a [routerLink]="['/service-edit']" class="btn btn-danger d-block w-100">
         <i class="bi bi-plus-lg"></i> Add New
-      </button>
+      </a>
     </div>
   </form>
 </div>

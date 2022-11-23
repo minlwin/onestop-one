@@ -8,6 +8,8 @@ import { LocationsComponent } from './pages/locations/locations.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { ServiceSearchBarComponent } from './pages/services/service-search-bar/service-search-bar.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ServiceEditComponent } from './pages/services/service-edit/service-edit.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,13 @@ import { ServiceSearchBarComponent } from './pages/services/service-search-bar/s
     LocationsComponent,
     SignInComponent,
     ServicesComponent,
-    ServiceSearchBarComponent
+    ServiceSearchBarComponent,
+    ServiceEditComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
