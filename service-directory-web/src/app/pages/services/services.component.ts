@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
 })
 export class ServicesComponent {
 
+
+  search(form:any) {
+    console.log(form)
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { regionsConstant } from 'src/app/services';
 
@@ -13,6 +13,9 @@ export class ServiceSearchBarComponent {
   form:FormGroup
   deletedLabel = 'Valid'
   regions = regionsConstant
+
+  @Output("onSearch")
+  emitter = new EventEmitter<any>
 
   constructor(builder:FormBuilder) {
     this.form = builder.group({
@@ -33,6 +36,7 @@ export class ServiceSearchBarComponent {
   }
 
   search() {
+    this.emitter.emit(this.form.value)
   }
 
   changeRegion(region:any) {

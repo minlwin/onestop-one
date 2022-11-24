@@ -1,0 +1,15 @@
+insert into state (name, burmese_name, region, capital, deleted) values ('Ayeyarwady Region', 'ဧရာဝတီတိုင်းဒေသကြီး', 'Lower', 'Pathein',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Bago Region', 'ပဲခူးတိုင်းဒေသကြီး', 'Lower', 'Bago',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Chin State', 'ချင်းပြည်နယ်', 'West', 'Hakha',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Kachin State', 'ကချင်ပြည်နယ်', 'North', 'Myitkyina',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Kayah State', 'ကယားပြည်နယ်', 'East', 'Loikaw',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Kayin State', 'ကရင်ပြည်နယ်', 'South', 'Hpa-an',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Magway Region', 'မကွေးတိုင်းဒေသကြီး', 'Central', 'Magwe',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Mandalay Region', 'မန္တလေးတိုင်းဒေသကြီး', 'Central', 'Mandalay',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Mon State', 'မွန်ပြည်နယ်', 'South', 'Mawlamyine',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Naypyidaw Union Territory', 'နေပြည်တော် ပြည်ထောင်စုနယ်မြေ', 'Central', 'Naypyidaw',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Rakhine State', 'ရခိုင်ပြည်နယ်', 'West', 'Sittwe',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Sagaing Region', 'စစ်ကိုင်းတိုင်းဒေသကြီး', 'North', 'Monywa',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Shan State', 'ရှမ်းပြည်နယ်', 'East', 'Taunggyi',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Tanintharyi Region', 'တနင်္သာရီတိုင်းဒေသကြီး', 'South', 'Dawei',false);
+insert into state (name, burmese_name, region, capital, deleted) values ('Yangon Region', 'ရန်ကုန်တိုင်းဒေသကြီး', 'Lower', 'Yangon',false);
