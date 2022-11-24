@@ -1,0 +1,2 @@
+0	5	Kayah State	ကယားပြည်နယ်	Demoso	ဒီမောဆိုး	true
+11	5	Kayah State	ကယားပြည်နယ်	Loikaw	လွိုင်ကော်	false

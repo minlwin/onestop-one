@@ -1,0 +1,5 @@
+2	4	Kachin State	ကချင်ပြည်နယ်	Mohnyin	မိုးညှင်း	false
+4	4	Kachin State	ကချင်ပြည်နယ်	Myitkyina	မြစ်ကြီးနား	false
+5	5	Kayah State	ကယားပြည်နယ်	Bawlakhe	ဘောလခဲ	true
+6	5	Kayah State	ကယားပြည်နယ်	Demoso	ဒီမောဆိုး	true
+10	5	Kayah State	ကယားပြည်နယ်	Loikaw	လွိုင်ကော်	false

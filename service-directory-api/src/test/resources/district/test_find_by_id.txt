@@ -1,0 +1,10 @@
+1	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Hinthada	ဟင်္သတ	true
+2	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Kyonpyaw	ကျုံပျော်	true
+3	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Labutta	လပွတ္တာ	false
+4	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Ma-ubin	မအူပင်	false
+5	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Bago	ပဲခူး	true
+6	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Taungoo	တောင်ငူ	false
+7	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Pyay	ပြည်	false
+8	3	Chin State	ချင်းပြည်နယ်	Falam	ဖလန်း	false
+9	3	Chin State	ချင်းပြည်နယ်	Hakha	ဟားခါး	false
+10	4	Kachin State	ကချင်ပြည်နယ်	Bhamo	ဗမော်	false

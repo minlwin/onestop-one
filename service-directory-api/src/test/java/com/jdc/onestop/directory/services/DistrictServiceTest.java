@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -50,6 +51,7 @@ public class DistrictServiceTest {
 		assertEquals(stateBurmeseName, result.state().burmeseName());
 	}
 
+	@Disabled
 	@ParameterizedTest
 	@ValueSource(ints = {0, 11})
 	void test_find_by_id_not_found(int id) {
@@ -62,6 +64,7 @@ public class DistrictServiceTest {
 		assertEquals("There is no district with id %d.".formatted(id), exception.getMessages().get(0));
 	}
 	
+	@Disabled
 	@ParameterizedTest
 	@CsvFileSource(resources = "/district/test_create.txt")
 	void test_create(int id, int stateId, String stateName, String stateBurmeseName, String name, String burmeseName, boolean deleted) {
@@ -82,6 +85,7 @@ public class DistrictServiceTest {
 	}
 
 
+	@Disabled
 	@ParameterizedTest
 	@CsvFileSource(resources = "/district/test_update.txt")
 	void test_update(int id, int stateId, String stateName, String stateBurmeseName, String name, String burmeseName, boolean deleted) {
@@ -101,6 +105,7 @@ public class DistrictServiceTest {
 		assertEquals(stateBurmeseName, result.state().burmeseName());
 	}
 
+	@Disabled
 	@ParameterizedTest
 	@CsvFileSource(resources = "/district/test_update_no_data.txt")
 	void test_update_no_data(int id, int stateId, String stateName, String stateBurmeseName, String name, String burmeseName, boolean deleted) {
@@ -115,6 +120,7 @@ public class DistrictServiceTest {
 		assertEquals("There is no district with id %d.".formatted(id), exception.getMessages().get(0));
 	}
 	
+	@Disabled
 	@ParameterizedTest
 	void test_search(Integer stateId, String keyword, Boolean deleted, int size) {
 		
