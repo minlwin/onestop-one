@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { regionsConstant } from 'src/app/services';
+import { StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: 'app-service-search',
@@ -14,8 +15,14 @@ export class ServiceSearchBarComponent {
   deletedLabel = 'Valid'
   regions = regionsConstant
 
+  @Input()
+  states:any[] = []
+
   @Output("onSearch")
   emitter = new EventEmitter<any>
+
+  @Output("onChangeRegion")
+  regionChange = new EventEmitter<string>
 
   constructor(builder:FormBuilder) {
     this.form = builder.group({
@@ -31,7 +38,7 @@ export class ServiceSearchBarComponent {
     })
 
     this.form.get('region')?.valueChanges.subscribe(value => {
-      this.changeRegion(value)
+      this.regionChange.emit(value)
     })
   }
 
@@ -39,7 +46,4 @@ export class ServiceSearchBarComponent {
     this.emitter.emit(this.form.value)
   }
 
-  changeRegion(region:any) {
-
-  }
 }

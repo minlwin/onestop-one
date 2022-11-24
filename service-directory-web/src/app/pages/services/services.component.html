@@ -36,7 +36,9 @@
 
   <div class="col-3">
     <!-- Search Bar -->
-    <app-service-search (onSearch)="search($event)"></app-service-search>
+    <app-service-search [states]="states"
+      (onChangeRegion)="loadStateData($event)"
+      (onSearch)="search($event)"></app-service-search>
   </div>
 
 </div>
