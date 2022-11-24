@@ -1,0 +1,18 @@
+<h5>Menu One with Sub Menus</h5>
+
+<div class="row mt-4">
+  <div class="col-3">
+    <div class="list-group">
+      <a [routerLink]="['one']" routerLinkActive="active"  class="list-group-item">
+        Sub Menu One
+      </a>
+      <a [routerLink]="['two']" routerLinkActive="active"  class="list-group-item">
+        Sub Menu Two
+      </a>
+    </div>
+  </div>
+
+  <div class="col">
+    <router-outlet></router-outlet>
+  </div>
+</div>

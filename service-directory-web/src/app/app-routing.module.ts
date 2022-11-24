@@ -8,8 +8,13 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'service', component: ServicesComponent},
-  {path: 'service-edit', component: ServiceEditComponent},
+  {path: 'service',
+    children: [
+      {path: 'list', component: ServicesComponent},
+      {path: 'edit', component: ServiceEditComponent},
+      {path: '', redirectTo: '/service/list', pathMatch: 'full'}
+    ]
+  },
   {path: 'location', component: LocationsComponent},
   {path: 'signin', component: SignInComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'}

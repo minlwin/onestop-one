@@ -1,5 +1,5 @@
 {
-  "name": "angular-works",
+  "name": "angular-work",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -23,7 +23,8 @@
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
-    "@angular/cli": "~15.0.0",
+    "@angular-devkit/build-angular": "^15.0.1",
+    "@angular/cli": "~15.0.1",
     "@angular/compiler-cli": "^15.0.0",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
