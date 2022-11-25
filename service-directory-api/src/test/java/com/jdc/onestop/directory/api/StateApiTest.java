@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -38,7 +37,6 @@ public class StateApiTest {
 	@Autowired
 	private TestRestTemplate template;
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvFileSource(resources = "/state/test_find_by_id.txt", delimiter = '\t')
 	void test_find_by_id(int id, String name, String burmeseName, String region, String capital, boolean deleted) {
@@ -65,7 +63,6 @@ public class StateApiTest {
 	}
 	
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvFileSource(resources = "/state/test_search.txt")
 	void test_search(String region, String keyword, Boolean deleted, int size) {
@@ -90,7 +87,6 @@ public class StateApiTest {
 
 	}	
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvFileSource(resources = "/state/test_create.txt", delimiter = '\t')
 	void test_create(int id, String name, String burmeseName, String region, String capital, boolean deleted) {
@@ -111,7 +107,6 @@ public class StateApiTest {
 		
 	}
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvFileSource(resources = "/state/test_update.txt", delimiter = '\t')
 	void test_update(int id, String name, String burmeseName, String region, String capital, boolean deleted) {
@@ -130,7 +125,6 @@ public class StateApiTest {
 		assertEquals(deleted, result.deleted());
 
 	}	
-	
 	
 	private String url() {
 		return "http://localhost:%d/state".formatted(port);
