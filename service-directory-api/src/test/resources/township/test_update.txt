@@ -1,0 +1,6 @@
+1	6	Taungoo	တောင်ငူ	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Kyaukkyi	ကျောက်ကြီးမြို့နယ်	false
+2	6	Taungoo	တောင်ငူ	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Oktwin	အုတ်တွင်းမြို့နယ်	true
+3	6	Taungoo	တောင်ငူ	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Pyu	ဖြူးမြို့နယ်	false
+4	7	Pyay	ပြည်	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Pandaung	ပန်းတောင်းမြို့နယ်	true
+5	7	Pyay	ပြည်	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Paukkaung	ပေါက်ခေါင်းမြို့နယ်	false
+6	7	Pyay	ပြည်	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Paungde	ပေါင်းတည်မြို့နယ်	false

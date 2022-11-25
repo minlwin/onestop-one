@@ -1,0 +1,11 @@
+1	1	Hinthada	ဟင်္သတ	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Hinthada	ဟင်္သတမြို့နယ်	false
+2	1	Hinthada	ဟင်္သတ	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Lemyethna	လေးမျက်နှာမြို့နယ်	true
+3	1	Hinthada	ဟင်္သတ	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Zalun	ဇလွန်မြို့နယ်	false
+4	2	Kyonpyaw	ကျုံပျော်	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Kyaunggon	ကျောင်းကုန်းမြို့နယ်	false
+5	2	Kyonpyaw	ကျုံပျော်	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Kyonpyaw	ကျုံပျော်မြို့နယ်	true
+6	3	Labutta	လပွတ္တာ	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Mawlamyinegyun	မော်လမြိုင်ကျွန်းမြို့နယ်	false
+7	4	Ma-ubin	မအူပင်	1	Ayeyarwady Region	ဧရာဝတီတိုင်းဒေသကြီး	Danubyu	ဓနုဖြူမြို့နယ်	false
+8	5	Bago	ပဲခူး	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Bago	ပဲခူးမြို့နယ်	false
+9	6	Taungoo	တောင်ငူ	2	Bago Region	ပဲခူးတိုင်းဒေသကြီး	Taungoo	တောင်ငူမြို့နယ်	false
+10	8	Falam	ဖလန်း	3	Chin State	ချင်းပြည်နယ်	Tiddim	တီးတိန်မြို့နယ်	false
+11	9	Hakha	ဟားခါး	3	Chin State	ချင်းပြည်နယ်	Htantlang	ထန်းတလန်မြို့နယ်	false

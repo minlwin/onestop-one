@@ -26,6 +26,17 @@ public class Township implements Serializable {
 
 	@ManyToOne(optional = false)
 	private District district;
+	
+	public Township() {
+	}
+	
+	public Township(String name, String burmeseName, District district, boolean deleted) {
+		super();
+		this.name = name;
+		this.burmeseName = burmeseName;
+		this.district = district;
+		this.deleted = deleted;
+	}
 
 	private boolean deleted;
 

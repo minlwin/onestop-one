@@ -8,8 +8,8 @@ import java.util.Optional;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -27,10 +27,11 @@ import com.jdc.onestop.directory.model.service.TownshipService;
 })
 public class TownshipServiceTest {
 
+	@Autowired
 	private TownshipService service;
 	
 	@ParameterizedTest
-	@CsvFileSource(resources = "/township/test_find_by_id.txt")
+	@CsvFileSource(resources = "/township/test_find_by_id.txt", delimiter = '\t')
 	void test_find_by_id(int id, int districtId, String districtName, String districtBurmese, int stateId, String stateName, String stateBurmese, String name, String burmese, boolean deleted) {
 		var result = service.findById(id);
 		
@@ -64,10 +65,10 @@ public class TownshipServiceTest {
 	}
 	
 	@ParameterizedTest
-	@CsvFileSource(resources = "/township/test_create.txt")
+	@CsvFileSource(resources = "/township/test_create.txt", delimiter = '\t')
 	void test_create(int id, int districtId, String districtName, String districtBurmese, int stateId, String stateName, String stateBurmese, String name, String burmese, boolean deleted) {
 		
-		var form = new TownshipForm(name, burmese, id, deleted);
+		var form = new TownshipForm(name, burmese, districtId, deleted);
 		
 		var result = service.create(form);
 		
@@ -91,9 +92,9 @@ public class TownshipServiceTest {
 	}
 	
 	@ParameterizedTest
-	@CsvFileSource(resources = "/township/test_update.txt")
+	@CsvFileSource(resources = "/township/test_update.txt", delimiter = '\t')
 	void test_update(int id, int districtId, String districtName, String districtBurmese, int stateId, String stateName, String stateBurmese, String name, String burmese, boolean deleted) {
-		var form = new TownshipForm(name, burmese, id, deleted);
+		var form = new TownshipForm(name, burmese, districtId, deleted);
 		
 		var result = service.update(id, form);
 		
@@ -117,7 +118,7 @@ public class TownshipServiceTest {
 	}
 	
 	@ParameterizedTest
-	@CsvFileSource(resources = "/township/test_update_no_data.txt")
+	@CsvFileSource(resources = "/township/test_update_no_data.txt", delimiter = '\t')
 	void test_update_no_data(int id, int districtId, String name, String burmese, boolean deleted) {
 		
 		var form = new TownshipForm(name, burmese, id, deleted);
@@ -131,9 +132,7 @@ public class TownshipServiceTest {
 	}
 	
 	@ParameterizedTest
-	@CsvSource({
-		
-	})
+	@CsvFileSource(resources = "/township/test_search.txt", delimiter = '\t')
 	void test_search(Integer district, String keyword, Boolean deleted, int size) {
 		var result = service.search(Optional.ofNullable(district), Optional.ofNullable(keyword), Optional.ofNullable(deleted));
 		assertEquals(size, result.size());
