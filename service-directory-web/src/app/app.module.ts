@@ -12,6 +12,8 @@ import { ServiceSearchBarComponent } from './pages/services/service-search-bar/s
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceEditComponent } from './pages/services/service-edit/service-edit.component';
 import { StateSearchComponent } from './pages/locations/state-search/state-search.component';
+import { StateDetailsComponent } from './pages/locations/state-details/state-details.component';
+import { StateInfoComponent } from './pages/locations/state-details/state-info/state-info.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { StateSearchComponent } from './pages/locations/state-search/state-searc
     ServicesComponent,
     ServiceSearchBarComponent,
     ServiceEditComponent,
-    StateSearchComponent
+    StateSearchComponent,
+    StateDetailsComponent,
+    StateInfoComponent
   ],
   imports: [
     BrowserModule,

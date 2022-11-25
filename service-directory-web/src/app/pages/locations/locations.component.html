@@ -24,7 +24,7 @@
           <td>{{item.burmeseName}}</td>
           <td>{{item.capital}}</td>
           <td>
-            <a class="btn-link">
+            <a class="btn-link" [routerLink]="['../', 'state-details']" [queryParams]="{id: item.id}" routerLinkActive="active" >
               <i class="bi bi-send"></i>
             </a>
           </td>

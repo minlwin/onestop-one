@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { regionsConstant } from 'src/app/services';
 
@@ -8,7 +8,7 @@ import { regionsConstant } from 'src/app/services';
   styles: [
   ]
 })
-export class StateSearchComponent {
+export class StateSearchComponent implements OnInit{
 
   form:FormGroup
   regions = regionsConstant
@@ -22,6 +22,10 @@ export class StateSearchComponent {
       keyword: '',
       deleted: false
     })
+  }
+
+  ngOnInit(): void {
+    this.search()
   }
 
   search() {
