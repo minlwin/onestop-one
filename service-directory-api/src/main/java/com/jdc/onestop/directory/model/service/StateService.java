@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
 import com.jdc.onestop.directory.model.dto.StateDto;
@@ -23,7 +24,9 @@ public class StateService {
 
 	@Transactional(readOnly = true)
 	public List<StateDto> search(Optional<String> region, Optional<String> keyword, Optional<Boolean> deleted) {
-		return repo.findAll(regionSpec(region).and(deletedSpec(deleted)).and(keywordSpec(keyword)))
+		return repo.findAll(regionSpec(region.filter(StringUtils::hasLength))
+				.and(deletedSpec(deleted))
+				.and(keywordSpec(keyword.filter(StringUtils::hasLength))))
 				.stream().map(StateDto::from).toList();
 	}
 	

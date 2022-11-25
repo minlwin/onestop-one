@@ -11,6 +11,7 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ServiceSearchBarComponent } from './pages/services/service-search-bar/service-search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceEditComponent } from './pages/services/service-edit/service-edit.component';
+import { StateSearchComponent } from './pages/locations/state-search/state-search.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ServiceEditComponent } from './pages/services/service-edit/service-edit
     SignInComponent,
     ServicesComponent,
     ServiceSearchBarComponent,
-    ServiceEditComponent
+    ServiceEditComponent,
+    StateSearchComponent
   ],
   imports: [
     BrowserModule,

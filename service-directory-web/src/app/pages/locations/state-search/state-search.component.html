@@ -1,0 +1,40 @@
+<div class="card">
+  <form [formGroup]="form" class="card-body">
+
+    <!-- Region -->
+    <div class="mb-3">
+      <label class="form-label">Region</label>
+      <select formControlName="region" class="form-select">
+        <option value="">All Region</option>
+        <option *ngFor="let item of regions" [value]="item">{{item}}</option>
+      </select>
+    </div>
+
+    <!-- Keyword -->
+    <div class="mb-3">
+      <label class="form-label">Keyword</label>
+      <input formControlName="keyword" type="text" placeholder="Search Keyword" class="form-control">
+    </div>
+
+    <!-- Deleted -->
+    <div class="mb-3 d-flex">
+      <input type="checkbox" formControlName="deleted" id="deleted" class="form-check form-check-inline">
+      <label for="deleted">{{form.get('deleted')?.value ? 'Deleted' : 'Valid'}} Data</label>
+    </div>
+
+    <div>
+      <button (click)="search()" class="btn btn-primary d-block w-100 mb-2">
+        <i class="bi bi-search"></i> Search
+      </button>
+
+      <button (click)="addNew()" class="btn btn-danger d-block w-100 mb-2">
+        <i class="bi bi-plus-lg"></i> Add New
+      </button>
+
+      <button (click)="upload()" class="btn btn-success d-block w-100">
+        <i class="bi bi-upload"></i> Upload Data
+      </button>
+    </div>
+
+  </form>
+</div>
