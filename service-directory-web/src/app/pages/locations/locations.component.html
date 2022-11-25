@@ -35,6 +35,12 @@
 
   <!-- Search Box -->
   <div class="col-3">
-    <app-state-search (onSearch)="search($event)"></app-state-search>
+    <app-state-search
+      (onSearch)="search($event)"
+      (onAddNew)="addNewState($event)"
+      ></app-state-search>
   </div>
+
 </div>
+
+<app-state-edit (onSave)="save($event)"></app-state-edit>

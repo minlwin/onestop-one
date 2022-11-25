@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-state-info',
@@ -10,4 +10,11 @@ export class StateInfoComponent {
 
   @Input()
   data:any
+
+  @Output()
+  onEdit = new EventEmitter<boolean>
+
+  edit() {
+    this.onEdit.emit(true)
+  }
 }

@@ -3,7 +3,7 @@
 
 <!-- State Information -->
 <div class="mb-4">
-  <app-state-info [data]="targetState"></app-state-info>
+  <app-state-info [data]="targetState" (onEdit)="edit($event)"></app-state-info>
 </div>
 
 <h5><i class="bi bi-list"></i> District of {{targetState.name}}</h5>
@@ -44,4 +44,6 @@
 
   </div>
 </div>
+
+<app-state-edit (onSave)="save($event)"></app-state-edit>
 

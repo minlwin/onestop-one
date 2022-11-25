@@ -1,0 +1,77 @@
+<div class="modal fade" id="stateEditModal" tabindex="-1">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+
+      <div class="modal-header justify-content-start">
+        <i class="bi bi-pencil me-2"></i> Edit State
+      </div>
+
+      <form [formGroup]="form" class="modal-body">
+
+        <!-- Region -->
+        <div class="mb-3">
+          <label class="form-label">Region</label>
+          <div class="input-group">
+            <select formControlName="region" class="form-select">
+              <option value="">Select Region</option>
+              <option *ngFor="let item of regions" [value]="item">{{item}}</option>
+            </select>
+            <span class="input-group-text">
+              <i class="bi" [class.bi-check]="form.get('region')?.valid" [class.bi-x]="!form.get('region')?.valid"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Name -->
+        <div class="mb-3">
+          <label class="form-label">State Name</label>
+          <div class="input-group">
+            <input formControlName="name" type="text" placeholder="Enter State Name" class="form-control">
+            <span class="input-group-text">
+              <i class="bi" [class.bi-check]="form.get('name')?.valid" [class.bi-x]="!form.get('name')?.valid"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Burmese Name -->
+        <div class="mb-3">
+          <label class="form-label">Burmese Name</label>
+          <div class="input-group">
+            <input formControlName="burmeseName" type="text" placeholder="Enter Burmese Name" class="form-control">
+            <span class="input-group-text">
+              <i class="bi" [class.bi-check]="form.get('burmeseName')?.valid" [class.bi-x]="!form.get('burmeseName')?.valid"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Capital -->
+        <div class="mb-3">
+          <label class="form-label">Capital of State</label>
+          <div class="input-group">
+            <input formControlName="capital" type="text" placeholder="Enter Capital of State" class="form-control">
+            <span class="input-group-text">
+              <i class="bi" [class.bi-check]="form.get('capital')?.valid" [class.bi-x]="!form.get('capital')?.valid"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Deleted -->
+        <div class="d-flex">
+          <input formControlName="deleted" type="checkbox" id="deleted" class="form-check form-check-inline">
+          <label for="deleted" class="form-check-label">Deleted Data</label>
+        </div>
+
+      </form>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="bi bi-x-lg"></i> Close
+        </button>
+
+        <button [class.disabled]="!form.valid" class="btn btn-primary">
+          <i class="bi bi-save"></i> Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,22 +1,46 @@
-import { Component } from '@angular/core';
-import { tap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StateService } from 'src/app/services/state.service';
+
+declare var bootstrap:any
 
 @Component({
   templateUrl: './locations.component.html',
   styles: [
   ]
 })
-export class LocationsComponent {
+export class LocationsComponent implements OnInit{
 
   list:any[] = []
 
-  constructor(private stateApi:StateService) {
+  stateEditModal:any
 
+  constructor(private stateApi:StateService, private router:Router) {
+  }
+
+  ngOnInit(): void {
+    this.stateEditModal = new bootstrap.Modal('#stateEditModal',
+      {backdrop: false})
   }
 
   search(form:any) {
     this.stateApi.search(form)
       .subscribe(result => this.list = result)
+  }
+
+  addNewState(event:boolean) {
+    if(event) {
+      this.stateEditModal.show()
+    }
+  }
+
+  editState() {
+
+  }
+
+  save(stateForm:any) {
+    this.stateApi.save(stateForm).subscribe(result => {
+      this.router.navigate(['/location', 'state-details'], {queryParams: {id: result.id}})
+    })
   }
 }

@@ -16,6 +16,9 @@ export class StateSearchComponent implements OnInit{
   @Output()
   onSearch = new EventEmitter<any>
 
+  @Output()
+  onAddNew = new EventEmitter<boolean>
+
   constructor(builder:FormBuilder) {
     this.form = builder.group({
       region: '',
@@ -33,7 +36,7 @@ export class StateSearchComponent implements OnInit{
   }
 
   addNew() {
-
+    this.onAddNew.emit(true)
   }
 
   upload() {

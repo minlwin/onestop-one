@@ -25,10 +25,10 @@ export class StateService {
   }
 
   private create(param:any) {
-    return this.http.post(API, param)
+    return this.http.post<any>(API, param)
   }
 
   private update(id:any, param:any) {
-    return this.http.put(`${API}/${id}`, param)
+    return this.http.put<any>(`${API}/${id}`, param)
   }
 }
