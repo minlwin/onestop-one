@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,7 +33,7 @@ public class DistrictServiceTest {
 	private DistrictService service;
 	
 	@ParameterizedTest
-	@CsvFileSource(resources = "/district/find_by_id_test.txt")
+	@CsvFileSource(resources = "/district/test_find_by_id.txt", delimiter = '\t')
 	void test_find_by_id(int id, int stateId, String stateName, String stateBurmeseName, String name, String burmeseName, boolean deleted) {
 		
 		var result = service.findById(id);
@@ -51,7 +50,6 @@ public class DistrictServiceTest {
 		assertEquals(stateBurmeseName, result.state().burmeseName());
 	}
 
-	@Disabled
 	@ParameterizedTest
 	@ValueSource(ints = {0, 11})
 	void test_find_by_id_not_found(int id) {
@@ -64,11 +62,10 @@ public class DistrictServiceTest {
 		assertEquals("There is no district with id %d.".formatted(id), exception.getMessages().get(0));
 	}
 	
-	@Disabled
 	@ParameterizedTest
-	@CsvFileSource(resources = "/district/test_create.txt")
+	@CsvFileSource(resources = "/district/test_create.txt", delimiter = '\t')
 	void test_create(int id, int stateId, String stateName, String stateBurmeseName, String name, String burmeseName, boolean deleted) {
-		var form = new DistrictForm(name, burmeseName, stateBurmeseName, deleted);
+		var form = new DistrictForm(name, burmeseName, stateId, deleted);
 		
 		var result = service.create(form);
 		
@@ -85,11 +82,10 @@ public class DistrictServiceTest {
 	}
 
 
-	@Disabled
 	@ParameterizedTest
-	@CsvFileSource(resources = "/district/test_update.txt")
+	@CsvFileSource(resources = "/district/test_update.txt", delimiter = '\t')
 	void test_update(int id, int stateId, String stateName, String stateBurmeseName, String name, String burmeseName, boolean deleted) {
-		var form = new DistrictForm(name, burmeseName, stateBurmeseName, deleted);
+		var form = new DistrictForm(name, burmeseName, stateId, deleted);
 		
 		var result = service.update(id, form);
 		
@@ -105,11 +101,10 @@ public class DistrictServiceTest {
 		assertEquals(stateBurmeseName, result.state().burmeseName());
 	}
 
-	@Disabled
 	@ParameterizedTest
-	@CsvFileSource(resources = "/district/test_update_no_data.txt")
+	@CsvFileSource(resources = "/district/test_update_no_data.txt", delimiter = '\t')
 	void test_update_no_data(int id, int stateId, String stateName, String stateBurmeseName, String name, String burmeseName, boolean deleted) {
-		var form = new DistrictForm(name, burmeseName, stateBurmeseName, deleted);
+		var form = new DistrictForm(name, burmeseName, stateId, deleted);
 		
 		var exception = assertThrows(ServiceDirectoryAppException.class, 
 				() -> service.update(id, form));
@@ -120,8 +115,8 @@ public class DistrictServiceTest {
 		assertEquals("There is no district with id %d.".formatted(id), exception.getMessages().get(0));
 	}
 	
-	@Disabled
 	@ParameterizedTest
+	@CsvFileSource(resources = "/district/test_search.txt")
 	void test_search(Integer stateId, String keyword, Boolean deleted, int size) {
 		
 		var result = service.search(

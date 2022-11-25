@@ -28,6 +28,17 @@ public class District implements Serializable {
 	private String burmeseName;
 
 	private boolean deleted;
+	
+	public District() {
+	}
+	
+	public District(State state, String name, String burmeseName, boolean deleted) {
+		super();
+		this.state = state;
+		this.name = name;
+		this.burmeseName = burmeseName;
+		this.deleted = deleted;
+	}
 
 	public boolean isDeleted() {
 		return deleted;

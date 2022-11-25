@@ -1,0 +1,9 @@
+,,,10
+1,,,4
+5,,,0
+1,,true,2
+3,,true,0
+1,hinthada,true,1
+1,hin,true,1
+1,ဟ,true,1
+1,အ,true,0
