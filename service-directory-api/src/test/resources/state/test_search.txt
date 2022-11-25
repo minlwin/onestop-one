@@ -1,0 +1,7 @@
+,,,5
+Lower,,,2
+Lower,Bago,,1
+Lower,pathein,,1
+Lower,patheins,,0
+,ပဲခူးတိုင်း,,1
+Lower,ပဲခူးတိုင်း,false,1

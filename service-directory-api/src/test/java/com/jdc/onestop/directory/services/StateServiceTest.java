@@ -9,7 +9,6 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -116,15 +115,7 @@ public class StateServiceTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {
-			",,,5",
-			"Lower,,,2",
-			"Lower,Bago,,1",
-			"Lower,pathein,,1",
-			"Lower,patheins,,0",
-			",ပဲခူးတိုင်း,,1",
-			"Lower,ပဲခူးတိုင်း,false,1",
-	})
+	@CsvFileSource(resources = "/state/test_search.txt")
 	void test_search(String region, String keyword, Boolean deleted, int size) {
 		
 		var result = service.search(Optional.ofNullable(region), Optional.ofNullable(keyword), Optional.ofNullable(deleted));
