@@ -3,10 +3,10 @@
 
 <!-- State Information -->
 <div class="mb-4">
-  <app-state-info></app-state-info>
+  <app-state-info [data]="targetState"></app-state-info>
 </div>
 
-<h5>District of state</h5>
+<h5><i class="bi bi-list"></i> District of {{targetState.name}}</h5>
 
 <div class="row">
   <!-- Districts of State -->
