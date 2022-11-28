@@ -16,6 +16,8 @@ import { StateDetailsComponent } from './pages/locations/state-details/state-det
 import { StateInfoComponent } from './pages/locations/state-details/state-info/state-info.component';
 import { StateEditComponent } from './pages/locations/state-edit/state-edit.component';
 import { NoDataComponent } from './widgets/no-data/no-data.component';
+import { DestrictEditComponent } from './pages/locations/state-details/destrict-edit/destrict-edit.component';
+import { DistrictDetailsComponent } from './pages/locations/state-details/district-details/district-details.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { NoDataComponent } from './widgets/no-data/no-data.component';
     StateDetailsComponent,
     StateInfoComponent,
     StateEditComponent,
-    NoDataComponent
+    NoDataComponent,
+    DestrictEditComponent,
+    DistrictDetailsComponent
   ],
   imports: [
     BrowserModule,

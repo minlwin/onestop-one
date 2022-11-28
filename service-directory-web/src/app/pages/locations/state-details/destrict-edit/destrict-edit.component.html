@@ -1,0 +1,50 @@
+<div class="modal fade" id="districtEditModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header justify-content-start">
+        <i class="bi bi-pencil me-2"></i> {{form.get('id')?.value == 0 ? 'Add New' : 'Edit'}} District for {{stateName ? stateName : 'State'}}
+      </div>
+
+      <form [formGroup]="form" class="modal-body">
+
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <div class="input-group">
+            <input formControlName="name" type="text" class="form-control" placeholder="Enter District Name">
+            <span class="input-group-text">
+              <i class="bi" [class.bi-x]="!form.get('name')?.valid" [class.bi-check]="form.get('name')?.valid"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Burmese Name</label>
+          <div class="input-group">
+            <input formControlName="burmeseName" type="text" class="form-control" placeholder="Enter Burmese Name">
+            <span class="input-group-text">
+              <i class="bi" [class.bi-x]="!form.get('burmeseName')?.valid" [class.bi-check]="form.get('burmeseName')?.valid"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="d-flex">
+          <input formControlName="deleted" type="checkbox" id="distDeleted" class="form-check form-check-inline">
+          <label for="distDeleted" class="form-check-label">Deleted</label>
+        </div>
+
+      </form>
+
+      <div class="modal-footer">
+
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="bi bi-x-lg"></i> Close
+        </button>
+
+        <button class="btn btn-primary" [class.disabled]="!form.valid" (click)="save()">
+          <i class="bi bi-save"></i> Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
