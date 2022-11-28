@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between">
+    <span>
+      <i class="bi bi-pin-map"></i> District Information
+    </span>
+
+    <a (click)="onEdit.emit(data)" class="btn-link">
+      <i class="bi bi-pencil"></i>
+    </a>
+  </div>
+
+  <div class="card-body row">
+
+    <!-- State -->
+    <div class="col">
+      <label class="form-label">State Name</label>
+      <div class="input-group">
+        <span class="form-control">{{data?.state?.name}}</span>
+        <a [routerLink]="['/location', 'state-details']" [queryParams]="{id: data?.id}"  class="input-group-text">
+          <i class="bi bi-send"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- District Name -->
+    <div class="col">
+      <label class="form-label">District Name</label>
+      <span class="form-control">{{data?.name}}</span>
+    </div>
+
+    <!-- Burmese Name -->
+    <div class="col">
+      <label class="form-label">Burmese Name</label>
+      <span class="form-control">{{data?.burmeseName}}</span>
+    </div>
+
+    <!-- Status -->
+    <div class="col">
+      <label class="form-label">Status</label>
+      <span class="form-control">{{data?.deleted ? 'Deleted' : 'Valid'}}</span>
+    </div>
+
+  </div>
+</div>

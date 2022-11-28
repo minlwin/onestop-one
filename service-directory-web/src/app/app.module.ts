@@ -20,6 +20,8 @@ import { DestrictEditComponent } from './widgets/destrict-edit/destrict-edit.com
 import { DistrictDetailsComponent } from './pages/locations/district-details/district-details.component';
 import { StateListComponent } from './widgets/state-list/state-list.component';
 import { DistrictListComponent } from './widgets/district-list/district-list.component';
+import { DistrictInfoComponent } from './widgets/district-info/district-info.component';
+import { TownshipListComponent } from './widgets/township-list/township-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { DistrictListComponent } from './widgets/district-list/district-list.com
     DestrictEditComponent,
     DistrictDetailsComponent,
     StateListComponent,
-    DistrictListComponent
+    DistrictListComponent,
+    DistrictInfoComponent,
+    TownshipListComponent
   ],
   imports: [
     BrowserModule,

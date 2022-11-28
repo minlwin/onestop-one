@@ -50,8 +50,8 @@ public class DistrictApi {
 		return service.create(form);
 	}
 	
-	@PutMapping
-	DistrictDto update(int id, DistrictForm form, BindingResult result) {
+	@PutMapping("{id}")
+	DistrictDto update(@PathVariable int id, @RequestBody DistrictForm form, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			throw new ServiceDirectoryAppException(result.getFieldErrors());
