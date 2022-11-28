@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
 import com.jdc.onestop.directory.model.dto.StateDto;
 import com.jdc.onestop.directory.model.dto.form.StateForm;
+import com.jdc.onestop.directory.model.service.FileParserService;
 import com.jdc.onestop.directory.model.service.StateService;
 
 @RestController
@@ -26,6 +28,9 @@ public class StateApi {
 	
 	@Autowired
 	private StateService service;
+	
+	@Autowired
+	private FileParserService parserService;
 	
 	@GetMapping
 	List<StateDto> search(
@@ -60,5 +65,10 @@ public class StateApi {
 		}
 		
 		return service.save(id, form);
+	}
+	
+	@PostMapping("upload")
+	List<StateDto> upload(@RequestParam MultipartFile file) {
+		return service.upload(parserService.parse(file));
 	}
 }

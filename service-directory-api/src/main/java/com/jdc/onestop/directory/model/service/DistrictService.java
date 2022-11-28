@@ -3,6 +3,8 @@ package com.jdc.onestop.directory.model.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -25,12 +27,12 @@ public class DistrictService {
 	@Autowired
 	private DistrictRepo districtRepo;
 
-	public DistrictDto create(DistrictForm form) {
+	public DistrictDto create(@Valid DistrictForm form) {
 		var entity = form.entity(stateRepo::getReferenceById);
 		return DistrictDto.from(districtRepo.save(entity));
 	}
 
-	public DistrictDto update(int id, DistrictForm form) {
+	public DistrictDto update(int id, @Valid DistrictForm form) {
 		return districtRepo.findById(id)
 				.map(entity -> {
 					entity.setName(form.name());
@@ -41,6 +43,15 @@ public class DistrictService {
 				})
 				.map(DistrictDto::from)
 				.orElseThrow(() -> new ServiceDirectoryAppException("There is no district with id %d.".formatted(id)));
+	}
+
+	public List<DistrictDto> upload(int state, List<String> lines) {
+		
+		for(var line : lines) {
+			create(DistrictForm.of(state, line));
+		}
+		
+		return search(Optional.of(state), Optional.empty(), Optional.empty());
 	}
 
 	@Transactional(readOnly = true)

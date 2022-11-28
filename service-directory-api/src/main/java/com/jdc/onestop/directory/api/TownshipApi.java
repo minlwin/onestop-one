@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
 import com.jdc.onestop.directory.model.dto.TownshipDto;
 import com.jdc.onestop.directory.model.dto.form.TownshipForm;
+import com.jdc.onestop.directory.model.service.FileParserService;
 import com.jdc.onestop.directory.model.service.TownshipService;
 
 @RestController
@@ -25,6 +27,9 @@ public class TownshipApi {
 	
 	@Autowired
 	private TownshipService service;
+	
+	@Autowired
+	private FileParserService parserService;
 
 	@GetMapping
 	List<TownshipDto> search(
@@ -56,5 +61,10 @@ public class TownshipApi {
 		}
 
 		return service.update(id, form);
+	}
+	
+	@PostMapping("upload/{district}")
+	List<TownshipDto> upload(@PathVariable int district, @RequestParam MultipartFile file) {
+		return service.upload(district, parserService.parse(file));
 	}
 }

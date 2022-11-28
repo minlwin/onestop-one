@@ -3,6 +3,8 @@ package com.jdc.onestop.directory.model.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -36,12 +38,21 @@ public class StateService {
 				.orElseThrow(() -> new ServiceDirectoryAppException("There is no state with id %d.".formatted(id)));
 	}
 	
-	public StateDto create(StateForm form) {
+	public List<StateDto> upload(List<String> lines) {
+		
+		for(var line : lines) {
+			create(StateForm.of(line));
+		}
+		
+		return search(Optional.empty(), Optional.empty(), Optional.empty());
+	}
+
+	public StateDto create(@Valid StateForm form) {
 		var entity = repo.save(form.entity());
 		return StateDto.from(entity);
 	}
 
-	public StateDto save(int id, StateForm form) {
+	public StateDto save(int id, @Valid StateForm form) {
 		return repo.findById(id)
 				.map(entity -> {
 					entity.setName(form.name());
@@ -75,5 +86,6 @@ public class StateService {
 		return deleted.isEmpty() ? Specification.where(null) : 
 			((root, query, cb) -> cb.equal(root.get("deleted"), deleted.get()));
 	}
+
 
 }
