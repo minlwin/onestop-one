@@ -15,6 +15,7 @@ import { StateSearchComponent } from './pages/locations/state-search/state-searc
 import { StateDetailsComponent } from './pages/locations/state-details/state-details.component';
 import { StateInfoComponent } from './pages/locations/state-details/state-info/state-info.component';
 import { StateEditComponent } from './pages/locations/state-edit/state-edit.component';
+import { NoDataComponent } from './widgets/no-data/no-data.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { StateEditComponent } from './pages/locations/state-edit/state-edit.comp
     StateSearchComponent,
     StateDetailsComponent,
     StateInfoComponent,
-    StateEditComponent
+    StateEditComponent,
+    NoDataComponent
   ],
   imports: [
     BrowserModule,

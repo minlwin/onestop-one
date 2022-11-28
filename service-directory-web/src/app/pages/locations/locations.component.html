@@ -4,7 +4,10 @@
 <div class="row">
   <!-- State Table -->
   <div class="col">
-    <table class="table table-striped table-hover">
+
+    <app-no-data *ngIf="list.length == 0" dataName="State Data"></app-no-data>
+
+    <table *ngIf="list.length > 0" class="table table-striped table-hover">
       <thead>
         <tr>
           <th>Id</th>
@@ -43,4 +46,4 @@
 
 </div>
 
-<app-state-edit (onSave)="save($event)"></app-state-edit>
+<app-state-edit [data]="targetState" (onSave)="save($event)"></app-state-edit>

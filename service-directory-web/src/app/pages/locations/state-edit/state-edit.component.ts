@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { regionsConstant } from 'src/app/services';
 
@@ -16,6 +16,14 @@ export class StateEditComponent {
   @Output()
   onSave = new EventEmitter<any>
 
+  @Input()
+  set data(data:any) {
+    this.initForm()
+    if(data?.id > 0) {
+      this.form.patchValue(data)
+    }
+  }
+
   constructor(builder:FormBuilder) {
     this.form = builder.group({
       id: 0,
@@ -31,5 +39,16 @@ export class StateEditComponent {
     if(this.form.valid) {
       this.onSave.emit(this.form.value)
     }
+  }
+
+  initForm() {
+    this.form.patchValue({
+      id: 0,
+      name: '',
+      burmeseName: '',
+      region: '',
+      capital: '',
+      deleted: ''
+    })
   }
 }

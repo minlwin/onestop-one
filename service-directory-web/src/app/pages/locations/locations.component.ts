@@ -13,6 +13,8 @@ export class LocationsComponent implements OnInit{
 
   list:any[] = []
 
+  targetState:any
+
   stateEditModal:any
 
   constructor(private stateApi:StateService, private router:Router) {
@@ -30,6 +32,7 @@ export class LocationsComponent implements OnInit{
 
   addNewState(event:boolean) {
     if(event) {
+      this.targetState = {id: 0}
       this.stateEditModal.show()
     }
   }

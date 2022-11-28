@@ -15,6 +15,8 @@ export class StateDetailsComponent implements OnInit{
 
   editModal:any
 
+  districts:any[] = []
+
   constructor(route:ActivatedRoute, private stateApi:StateService) {
     route.queryParamMap.subscribe(params => {
       const id = params.get('id')
@@ -33,6 +35,9 @@ export class StateDetailsComponent implements OnInit{
   }
 
   save(form:any) {
-    this.stateApi.save(form).subscribe(result => this.targetState = result)
+    this.stateApi.save(form).subscribe(result => {
+      this.targetState = result
+      this.editModal.hide()
+    })
   }
 }
