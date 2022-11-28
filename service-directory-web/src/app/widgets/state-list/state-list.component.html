@@ -1,0 +1,29 @@
+<app-no-data *ngIf="list.length == 0" dataName="State Data"></app-no-data>
+
+<table *ngIf="list.length > 0" class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Region</th>
+      <th>State</th>
+      <th>Burmese Name</th>
+      <th>Capital</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of list">
+      <td>{{item.id}}</td>
+      <td>{{item.region}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.burmeseName}}</td>
+      <td>{{item.capital}}</td>
+      <td>
+        <a class="btn-link" [routerLink]="['../', 'state-details']" [queryParams]="{id: item.id}" routerLinkActive="active" >
+          <i class="bi bi-send"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -37,10 +37,6 @@ export class LocationsComponent implements OnInit{
     }
   }
 
-  editState() {
-
-  }
-
   save(stateForm:any) {
     this.stateApi.save(stateForm).subscribe(result => {
       this.router.navigate(['/location', 'state-details'], {queryParams: {id: result.id}})

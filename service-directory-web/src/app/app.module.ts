@@ -11,13 +11,15 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ServiceSearchBarComponent } from './pages/services/service-search-bar/service-search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceEditComponent } from './pages/services/service-edit/service-edit.component';
-import { StateSearchComponent } from './pages/locations/state-search/state-search.component';
+import { StateSearchComponent } from './widgets/state-search/state-search.component';
 import { StateDetailsComponent } from './pages/locations/state-details/state-details.component';
-import { StateInfoComponent } from './pages/locations/state-details/state-info/state-info.component';
-import { StateEditComponent } from './pages/locations/state-edit/state-edit.component';
+import { StateInfoComponent } from './widgets/state-info/state-info.component';
+import { StateEditComponent } from './widgets/state-edit/state-edit.component';
 import { NoDataComponent } from './widgets/no-data/no-data.component';
-import { DestrictEditComponent } from './pages/locations/state-details/destrict-edit/destrict-edit.component';
-import { DistrictDetailsComponent } from './pages/locations/state-details/district-details/district-details.component';
+import { DestrictEditComponent } from './widgets/destrict-edit/destrict-edit.component';
+import { DistrictDetailsComponent } from './pages/locations/district-details/district-details.component';
+import { StateListComponent } from './widgets/state-list/state-list.component';
+import { DistrictListComponent } from './widgets/district-list/district-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { DistrictDetailsComponent } from './pages/locations/state-details/distri
     StateEditComponent,
     NoDataComponent,
     DestrictEditComponent,
-    DistrictDetailsComponent
+    DistrictDetailsComponent,
+    StateListComponent,
+    DistrictListComponent
   ],
   imports: [
     BrowserModule,
