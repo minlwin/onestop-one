@@ -1,9 +1,10 @@
 package com.jdc.onestop.directory.model.dto.form;
 
-import javax.validation.constraints.NotBlank;
 
 import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
 import com.jdc.onestop.directory.model.entity.State;
+
+import jakarta.validation.constraints.NotBlank;
 
 public record StateForm(
 		@NotBlank(message = "Please enter State name.")

@@ -3,8 +3,6 @@ package com.jdc.onestop.directory.model.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -16,6 +14,8 @@ import com.jdc.onestop.directory.model.dto.StateDto;
 import com.jdc.onestop.directory.model.dto.form.StateForm;
 import com.jdc.onestop.directory.model.entity.State;
 import com.jdc.onestop.directory.model.repo.StateRepo;
+
+import jakarta.validation.Valid;
 
 @Service
 @Transactional

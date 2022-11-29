@@ -24,6 +24,12 @@ export class DistrictService {
     return id == 0 ? this.create(params) : this.update(id, params)
   }
 
+  upload(state:number, file:any) {
+    const formData = new FormData
+    formData.append('file', file, file.name)
+    return this.http.post<any[]>(`${API}/upload/${state}`, formData)
+  }
+
   private create(params:any) {
     return this.http.post<any>(API, params)
   }

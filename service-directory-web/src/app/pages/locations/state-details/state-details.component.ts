@@ -63,4 +63,12 @@ export class StateDetailsComponent implements OnInit{
       this.router.navigate(['/location', 'district-details'], {queryParams: {id: result.id}})
     })
   }
+
+  upload(files:FileList) {
+    if(files.length > 0) {
+      this.districtApi.upload(this.targetState.id, files[0]).subscribe(result => {
+        this.districts = result
+      })
+    }
+  }
 }

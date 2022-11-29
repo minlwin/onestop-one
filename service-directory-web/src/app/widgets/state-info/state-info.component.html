@@ -10,14 +10,14 @@
   <div class="card-body">
     <div class="row">
       <!-- Name -->
-      <div class="col">
+      <div class="col-3">
         <label class="form-label">State Name</label>
         <span class="form-control">
           {{data?.name}}
         </span>
       </div>
       <!-- Burmese -->
-      <div class="col">
+      <div class="col-3">
         <label class="form-label">Burmese Name</label>
         <span class="form-control">
           {{data?.burmeseName}}
@@ -32,9 +32,17 @@
       </div>
       <!-- Capital -->
       <div class="col">
-        <label class="form-label">State Name</label>
+        <label class="form-label">Capital</label>
         <span class="form-control">
           {{data?.capital}}
+        </span>
+      </div>
+
+      <!-- Capital -->
+      <div class="col">
+        <label class="form-label">Status</label>
+        <span class="form-control">
+          {{data?.deleted ? 'Deleted' : 'Valid'}}
         </span>
       </div>
 

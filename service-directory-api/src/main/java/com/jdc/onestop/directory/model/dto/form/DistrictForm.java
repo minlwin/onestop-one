@@ -2,17 +2,17 @@ package com.jdc.onestop.directory.model.dto.form;
 
 import java.util.function.Function;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-
 import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
 import com.jdc.onestop.directory.model.entity.District;
 import com.jdc.onestop.directory.model.entity.State;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public record DistrictForm(
-		@NotEmpty(message = "Please enter burmese name.")
+		@NotBlank(message = "Please enter burmese name.")
 		String name,
-		@NotEmpty(message = "Please enter burmese name.")
+		@NotBlank(message = "Please enter burmese name.")
 		String burmeseName,
 		@Min(value = 1, message = "Please select state.")
 		int stateId,

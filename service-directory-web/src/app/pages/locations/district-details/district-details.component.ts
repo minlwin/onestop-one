@@ -76,6 +76,14 @@ export class DistrictDetailsComponent implements OnInit{
     })
   }
 
+  uploadTownship(files:FileList) {
+    if(files.length > 0) {
+      this.townshipApi.upload(this.targetDistrict.id ,files[0]).subscribe(result => {
+        this.townships = result
+      })
+    }
+  }
+
   private loadTownship() {
     this.townshipApi.search({district: this.targetDistrict.id})
       .subscribe(result => this.townships =result)

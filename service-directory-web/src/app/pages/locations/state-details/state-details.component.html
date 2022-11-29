@@ -25,8 +25,13 @@
         </button>
 
         <!-- Upload District Button -->
-        <button class="btn btn-success d-block w-100">
+        <button (click)="districtUploadFile.click()" class="btn btn-success d-block w-100 mb-2">
           <i class="bi bi-upload"></i> Upload Districts
+        </button>
+
+        <!-- Upload Township Button -->
+        <button (click)="districtUploadFile.click()" class="btn btn-primary d-block w-100">
+          <i class="bi bi-upload"></i> Upload Townships
         </button>
 
       </div>
@@ -40,3 +45,7 @@
 <app-destrict-edit (onSave)="saveDistrict($event)"
   [data]="targetDistrict"
   [stateName]="targetState?.name" ></app-destrict-edit>
+
+<form action="#" class="d-none">
+  <input type="file" #districtUploadFile (change)="upload(districtUploadFile.files!)" >
+</form>

@@ -1,7 +1,5 @@
 package com.jdc.onestop.directory.api.advices;
 
-import javax.validation.ConstraintViolationException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -10,6 +8,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
 import com.jdc.onestop.directory.model.dto.ErrorResult;
 import com.jdc.onestop.directory.model.dto.ErrorResult.ErrorType;
+
+import jakarta.validation.ConstraintViolationException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
