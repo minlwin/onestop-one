@@ -24,6 +24,12 @@ export class StateService {
     return id == 0 ? this.create(param) : this.update(id, param)
   }
 
+  upload(file:any) {
+    const formData = new FormData
+    formData.append('file', file, file.name)
+    return this.http.post<any[]>(`${API}/upload`, formData)
+  }
+
   private create(param:any) {
     return this.http.post<any>(API, param)
   }

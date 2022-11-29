@@ -22,6 +22,7 @@ import { StateListComponent } from './widgets/state-list/state-list.component';
 import { DistrictListComponent } from './widgets/district-list/district-list.component';
 import { DistrictInfoComponent } from './widgets/district-info/district-info.component';
 import { TownshipListComponent } from './widgets/township-list/township-list.component';
+import { TownshipEditComponent } from './widgets/township-edit/township-edit.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TownshipListComponent } from './widgets/township-list/township-list.com
     StateListComponent,
     DistrictListComponent,
     DistrictInfoComponent,
-    TownshipListComponent
+    TownshipListComponent,
+    TownshipEditComponent
   ],
   imports: [
     BrowserModule,

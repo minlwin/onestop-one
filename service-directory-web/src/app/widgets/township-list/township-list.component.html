@@ -17,8 +17,8 @@
       <td>{{item.burmeseName}}</td>
       <td>{{item.deleted ? 'Deleted' : 'Valid'}}</td>
       <td>
-        <a href="#" class="btn-link">
-          <i class="bi bi-send"></i>
+        <a (click)="edit(item)" class="btn-link">
+          <i class="bi bi-pencil"></i>
         </a>
       </td>
     </tr>

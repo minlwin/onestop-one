@@ -11,14 +11,14 @@
 <div class="row">
   <!-- Townships of District -->
   <div class="col">
-    <app-township-list [list]="townships"></app-township-list>
+    <app-township-list [list]="townships" (onEdit)="editTownship($event)"></app-township-list>
   </div>
 
   <!-- Controls Pannel -->
   <div class="col-3">
     <div class="card">
       <div class="card-body">
-        <button class="btn btn-danger d-block w-100 mb-2">
+        <button (click)="editTownship(null)" class="btn btn-danger d-block w-100 mb-2">
           <i class="bi bi-plus-lg"></i> Add Township
         </button>
 
@@ -33,3 +33,6 @@
 <!-- District Edit Dialog -->
 <app-destrict-edit (onSave)="saveDistrict($event)"
   [data]="editData" [stateName]="targetDistrict?.state?.name"></app-destrict-edit>
+
+<app-township-edit (onSave)="saveTownship($event)"
+  [data]="targetTownship" [districtName]="targetDistrict?.name"></app-township-edit>

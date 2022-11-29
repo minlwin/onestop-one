@@ -19,6 +19,9 @@ export class StateSearchComponent implements OnInit{
   @Output()
   onAddNew = new EventEmitter<boolean>
 
+  @Output()
+  onUpload = new EventEmitter<any>
+
   constructor(builder:FormBuilder) {
     this.form = builder.group({
       region: '',
@@ -39,7 +42,9 @@ export class StateSearchComponent implements OnInit{
     this.onAddNew.emit(true)
   }
 
-  upload() {
-
+  upload(files:FileList) {
+    if(files.length > 0) {
+      this.onUpload.emit(files[0])
+    }
   }
 }

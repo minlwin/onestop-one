@@ -38,7 +38,7 @@ public class TownshipService {
 					entity.setName(form.name());
 					entity.setBurmeseName(form.burmeseName());
 					entity.setDeleted(form.deleted());
-					entity.setDistrict(districtRepo.getReferenceById(form.distictId()));
+					entity.setDistrict(districtRepo.getReferenceById(form.districtId()));
 					return entity;
 				})
 				.map(TownshipDto::from)

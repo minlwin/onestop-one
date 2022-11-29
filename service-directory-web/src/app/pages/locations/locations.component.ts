@@ -42,4 +42,12 @@ export class LocationsComponent implements OnInit{
       this.router.navigate(['/location', 'state-details'], {queryParams: {id: result.id}})
     })
   }
+
+  upload(file:any) {
+    if(file) {
+      this.stateApi.upload(file).subscribe(result => {
+        this.list = result
+      })
+    }
+  }
 }
