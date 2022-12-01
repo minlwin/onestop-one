@@ -20,7 +20,7 @@ public record DistrictForm(
 		) {
 
 	public District entity(Function<Integer, State> stateFinder) {
-		return new District(stateFinder.apply(stateId), name, burmeseName, deleted);
+		return District.forInsert(stateFinder.apply(stateId), name, burmeseName, deleted);
 	}
 
 	public static DistrictForm of(int state, String line) {

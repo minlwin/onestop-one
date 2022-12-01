@@ -20,7 +20,7 @@ public record TownshipForm(
 		) {
 
 	public Township entity(Function<Integer, District> function) {
-		return new Township(name, burmeseName, function.apply(districtId), deleted);
+		return Township.forInsert(name, burmeseName, function.apply(districtId), deleted);
 	}
 
 	public static TownshipForm of(int district, String line) {

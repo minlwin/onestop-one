@@ -68,4 +68,9 @@ public class TownshipApi {
 	List<TownshipDto> upload(@PathVariable int district, @RequestParam MultipartFile file) {
 		return service.upload(district, parserService.parse(file));
 	}
+	
+	@PostMapping("upload/state/{state}")
+	List<TownshipDto> uploadToState(@PathVariable int state, @RequestParam MultipartFile file) {
+		return service.uploadToState(state, parserService.parse(file));
+	}
 }

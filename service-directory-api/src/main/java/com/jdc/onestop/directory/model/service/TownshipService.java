@@ -1,7 +1,9 @@
 package com.jdc.onestop.directory.model.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -12,8 +14,10 @@ import org.springframework.util.StringUtils;
 import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
 import com.jdc.onestop.directory.model.dto.TownshipDto;
 import com.jdc.onestop.directory.model.dto.form.TownshipForm;
+import com.jdc.onestop.directory.model.entity.District;
 import com.jdc.onestop.directory.model.entity.Township;
 import com.jdc.onestop.directory.model.repo.DistrictRepo;
+import com.jdc.onestop.directory.model.repo.StateRepo;
 import com.jdc.onestop.directory.model.repo.TownshipRepo;
 
 import jakarta.validation.Valid;
@@ -26,6 +30,9 @@ public class TownshipService {
 	private TownshipRepo townshipRepo;
 	@Autowired
 	private DistrictRepo districtRepo;
+	
+	@Autowired
+	private StateRepo stateRepo;
 
 	public TownshipDto create(@Valid TownshipForm form) {
 		var entity = form.entity(districtRepo::getReferenceById);
@@ -88,4 +95,47 @@ public class TownshipService {
 			(root, query, cb) -> cb.equal(root.get("deleted"), deleted.get());
 	}
 
+	public List<TownshipDto> uploadToState(int stateId, List<String> lines) {
+		
+		// disName, disBurmese, tshName, tshBurmese
+		Map<DistrictDto, List<String[]>> map = lines.stream()
+			// String[]
+			.map(line -> line.split("\t"))
+			// Map<DistrictDto, List<String[]>>
+			.collect(Collectors.groupingBy(array -> new DistrictDto(array[0], array[1])));
+		
+		// get state
+		var state = stateRepo.getReferenceById(stateId);
+		
+		for(var dto : map.keySet()) {
+			// Find District by name and stateId
+			var district = districtRepo.findOneByNameAndStateId(dto.disName, stateId)
+					.orElse(District.forFileUplaod(state, dto.disName()));
+			
+			// Update Burmese Name
+			district.setBurmeseName(dto.disBurmese());
+			district = districtRepo.save(district);
+			
+			var townships = map.get(dto);
+			for(var array : townships) {
+				
+				var townshipName = array[2];
+				
+				var township = townshipRepo.findOneByDistrictIdAndName(district.getId(), townshipName)
+						.orElse(Township.forFileUpload(district, townshipName));
+				township.setBurmeseName(array[3]);
+				townshipRepo.save(township);
+			}
+		}
+		
+		// township.district.state.id
+		return townshipRepo
+				.findByDistrictStateId(stateId)
+				.stream().map(TownshipDto::from).toList();
+	}
+	
+	private static record DistrictDto(String disName, String disBurmese) {}
+	
 }
+
+

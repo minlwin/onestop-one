@@ -30,7 +30,22 @@ public class Township implements Serializable {
 	public Township() {
 	}
 	
-	public Township(String name, String burmeseName, District district, boolean deleted) {
+	public static Township forFileUpload(District district, String name) {
+		return new Township(name, district);
+	}
+	
+	private Township(String name, District district) {
+		super();
+		this.name = name;
+		this.district = district;
+		this.deleted = false;
+	}
+	
+	public static Township forInsert(String name, String burmeseName, District district, boolean deleted) {
+		return new Township(name, burmeseName, district, deleted);
+	}
+	
+	private Township(String name, String burmeseName, District district, boolean deleted) {
 		super();
 		this.name = name;
 		this.burmeseName = burmeseName;

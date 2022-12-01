@@ -28,11 +28,26 @@ public class District implements Serializable {
 	private String burmeseName;
 
 	private boolean deleted;
-	
+
 	public District() {
 	}
-	
-	public District(State state, String name, String burmeseName, boolean deleted) {
+
+	public static District forFileUplaod(State state, String name) {
+		return new District(state, name);
+	}
+
+	private District(State state, String name) {
+		super();
+		this.state = state;
+		this.name = name;
+		this.deleted = false;
+	}
+
+	public static District forInsert(State state, String name, String burmeseName, boolean deleted) {
+		return new District(state, name, burmeseName, deleted);
+	}
+
+	private District(State state, String name, String burmeseName, boolean deleted) {
 		super();
 		this.state = state;
 		this.name = name;
