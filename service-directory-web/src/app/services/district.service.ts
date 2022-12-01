@@ -27,7 +27,7 @@ export class DistrictService {
   upload(state:number, file:any) {
     const formData = new FormData
     formData.append('file', file, file.name)
-    return this.http.post<any[]>(`${API}/upload/${state}`, formData)
+    return this.http.post<any>(`${API}/upload/${state}`, formData)
   }
 
   private create(params:any) {
