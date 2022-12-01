@@ -134,7 +134,7 @@ public class TownshipServiceTest {
 	@ParameterizedTest
 	@CsvFileSource(resources = "/township/test_search.txt", delimiter = '\t')
 	void test_search(Integer district, String keyword, Boolean deleted, int size) {
-		var result = service.search(Optional.ofNullable(district), Optional.ofNullable(keyword), Optional.ofNullable(deleted));
+		var result = service.search(Optional.ofNullable(district), Optional.empty(), Optional.ofNullable(keyword), Optional.ofNullable(deleted));
 		assertEquals(size, result.size());
 	}
 	

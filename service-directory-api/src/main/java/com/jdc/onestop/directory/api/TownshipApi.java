@@ -34,10 +34,11 @@ public class TownshipApi {
 
 	@GetMapping
 	List<TownshipDto> search(
+			@RequestParam Optional<Integer> state,
 			@RequestParam Optional<Integer> district,
 			@RequestParam Optional<String> keyword,
 			@RequestParam Optional<Boolean> deleted) {
-		return service.search(district, keyword, deleted);
+		return service.search(state, district, keyword, deleted);
 	}
 	
 	@GetMapping("{id}")

@@ -58,7 +58,7 @@ public class TownshipService {
 			create(TownshipForm.of(district, line));
 		}
 		
-		return search(Optional.of(district), Optional.empty(), Optional.empty());
+		return search(Optional.of(district), Optional.empty(), Optional.empty(), Optional.empty());
 	}
 
 	@Transactional(readOnly = true)
@@ -69,9 +69,10 @@ public class TownshipService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<TownshipDto> search(Optional<Integer> district, Optional<String> keyword, Optional<Boolean> deleted) {
+	public List<TownshipDto> search(Optional<Integer> state, Optional<Integer> district, Optional<String> keyword, Optional<Boolean> deleted) {
 		return townshipRepo.findAll(
 					districtSpec(district.filter(a -> a > 0))
+					.and(stateSpec(state.filter(a -> a > 0)))
 					.and(deletedSpec(deleted))
 					.and(keywordSpec(keyword.filter(StringUtils::hasLength)))
 				).stream().map(TownshipDto::from).toList();
@@ -80,6 +81,11 @@ public class TownshipService {
 	private Specification<Township> districtSpec(Optional<Integer> district) {
 		return district.isEmpty() ? Specification.where(null) : 
 			(root, query, cb) -> cb.equal(root.get("district").get("id"), district.get());
+	}
+
+	private Specification<Township> stateSpec(Optional<Integer> state) {
+		return state.isEmpty() ? Specification.where(null) : 
+			(root, query, cb) -> cb.equal(root.get("district").get("state").get("id"), state.get());
 	}
 
 	private Specification<Township> keywordSpec(Optional<String> keyword) {

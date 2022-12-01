@@ -6,12 +6,19 @@
   <app-state-info [data]="targetState" (onEdit)="edit($event)"></app-state-info>
 </div>
 
-<h5><i class="bi bi-list"></i> District of {{targetState?.name}}</h5>
+<div class="nav nav-pills">
+  <a [routerLink]="['district']" routerLinkActive="active" [queryParams]="{id: targetState.id}" class="nav-link">
+    Districts
+  </a>
+  <a [routerLink]="['township']" routerLinkActive="active" [queryParams]="{id: targetState.id}" class="nav-link">
+    Townships
+  </a>
+</div>
 
-<div class="row">
+<div class="row mt-2">
   <!-- Districts of State -->
   <div class="col">
-    <app-district-list [list]="districts"></app-district-list>
+    <router-outlet></router-outlet>
   </div>
 
   <div class="col-3">

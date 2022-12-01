@@ -7,6 +7,8 @@ import { StateDetailsComponent } from './pages/locations/state-details/state-det
 import { ServiceEditComponent } from './pages/services/service-edit/service-edit.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { StateDistrictComponent } from './pages/locations/state-details/state-district/state-district.component';
+import { StateTownshipComponent } from './pages/locations/state-details/state-township/state-township.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -20,7 +22,13 @@ const routes: Routes = [
   {path: 'location',
     children: [
       {path: 'states', component: LocationsComponent},
-      {path: 'state-details', component: StateDetailsComponent},
+      {path: 'state-details', component: StateDetailsComponent,
+        children: [
+          {path: 'district', component: StateDistrictComponent},
+          {path: 'township', component: StateTownshipComponent},
+          {path: '', redirectTo: 'district', pathMatch: 'full'}
+        ]
+      },
       {path: 'district-details', component: DistrictDetailsComponent},
       {path: '', redirectTo: '/location/states', pathMatch: 'full'}
     ]

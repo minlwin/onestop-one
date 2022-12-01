@@ -11,18 +11,21 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ServiceSearchBarComponent } from './pages/services/service-search-bar/service-search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceEditComponent } from './pages/services/service-edit/service-edit.component';
-import { StateSearchComponent } from './widgets/state-search/state-search.component';
+import { StateSearchComponent } from './utils/widgets/state-search/state-search.component';
 import { StateDetailsComponent } from './pages/locations/state-details/state-details.component';
-import { StateInfoComponent } from './widgets/state-info/state-info.component';
-import { StateEditComponent } from './widgets/state-edit/state-edit.component';
-import { NoDataComponent } from './widgets/no-data/no-data.component';
-import { DestrictEditComponent } from './widgets/destrict-edit/destrict-edit.component';
+import { StateInfoComponent } from './utils/widgets/state-info/state-info.component';
+import { StateEditComponent } from './utils/widgets/state-edit/state-edit.component';
+import { NoDataComponent } from './utils/widgets/no-data/no-data.component';
+import { DestrictEditComponent } from './utils/widgets/destrict-edit/destrict-edit.component';
 import { DistrictDetailsComponent } from './pages/locations/district-details/district-details.component';
-import { StateListComponent } from './widgets/state-list/state-list.component';
-import { DistrictListComponent } from './widgets/district-list/district-list.component';
-import { DistrictInfoComponent } from './widgets/district-info/district-info.component';
-import { TownshipListComponent } from './widgets/township-list/township-list.component';
-import { TownshipEditComponent } from './widgets/township-edit/township-edit.component';
+import { StateListComponent } from './utils/widgets/state-list/state-list.component';
+import { DistrictListComponent } from './utils/widgets/district-list/district-list.component';
+import { DistrictInfoComponent } from './utils/widgets/district-info/district-info.component';
+import { TownshipListComponent } from './utils/widgets/township-list/township-list.component';
+import { TownshipEditComponent } from './utils/widgets/township-edit/township-edit.component';
+import { StateDistrictComponent } from './pages/locations/state-details/state-district/state-district.component';
+import { StateTownshipComponent } from './pages/locations/state-details/state-township/state-township.component';
+import { StatusPipe } from './utils/pipes/status.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { TownshipEditComponent } from './widgets/township-edit/township-edit.com
     DistrictListComponent,
     DistrictInfoComponent,
     TownshipListComponent,
-    TownshipEditComponent
+    TownshipEditComponent,
+    StateDistrictComponent,
+    StateTownshipComponent,
+    StatusPipe
   ],
   imports: [
     BrowserModule,
