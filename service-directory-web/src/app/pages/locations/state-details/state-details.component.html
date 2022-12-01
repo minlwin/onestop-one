@@ -7,10 +7,10 @@
 </div>
 
 <div class="nav nav-pills">
-  <a [routerLink]="['district']" routerLinkActive="active" [queryParams]="{id: targetState.id}" class="nav-link">
+  <a [routerLink]="['district']" routerLinkActive="active" [queryParams]="{id: targetState?.id}" class="nav-link">
     Districts
   </a>
-  <a [routerLink]="['township']" routerLinkActive="active" [queryParams]="{id: targetState.id}" class="nav-link">
+  <a [routerLink]="['township']" routerLinkActive="active" [queryParams]="{id: targetState?.id}" class="nav-link">
     Townships
   </a>
 </div>
@@ -37,7 +37,7 @@
         </button>
 
         <!-- Upload Township Button -->
-        <button (click)="districtUploadFile.click()" class="btn btn-primary d-block w-100">
+        <button (click)="townshipUploadFile.click()" class="btn btn-primary d-block w-100">
           <i class="bi bi-upload"></i> Upload Townships
         </button>
 
@@ -54,5 +54,6 @@
   [stateName]="targetState?.name" ></app-destrict-edit>
 
 <form action="#" class="d-none">
-  <input type="file" #districtUploadFile (change)="upload(districtUploadFile.files!)" >
+  <input type="file" #districtUploadFile (change)="uploadDistrict(districtUploadFile.files!)" >
+  <input type="file" #townshipUploadFile (change)="uploadTownship(townshipUploadFile.files!)" >
 </form>

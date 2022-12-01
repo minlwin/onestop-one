@@ -33,7 +33,7 @@ export class TownshipService {
   uploadForState(state:number, file:any) {
     const formData = new FormData
     formData.append('file', file, file.name)
-    return this.http.post<any[]>(`${API}/upload/state/${state}`, formData)
+    return this.http.post<any>(`${API}/upload/state/${state}`, formData)
   }
 
   private create(form:any) {

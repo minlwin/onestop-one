@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 
 import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
 import com.jdc.onestop.directory.model.dto.TownshipDto;
+import com.jdc.onestop.directory.model.dto.UploadResult;
 import com.jdc.onestop.directory.model.dto.form.TownshipForm;
 import com.jdc.onestop.directory.model.entity.District;
 import com.jdc.onestop.directory.model.entity.Township;
@@ -101,7 +102,7 @@ public class TownshipService {
 			(root, query, cb) -> cb.equal(root.get("deleted"), deleted.get());
 	}
 
-	public List<TownshipDto> uploadToState(int stateId, List<String> lines) {
+	public UploadResult uploadToState(int stateId, List<String> lines) {
 		
 		// disName, disBurmese, tshName, tshBurmese
 		Map<DistrictDto, List<String[]>> map = lines.stream()
@@ -135,9 +136,7 @@ public class TownshipService {
 		}
 		
 		// township.district.state.id
-		return townshipRepo
-				.findByDistrictStateId(stateId)
-				.stream().map(TownshipDto::from).toList();
+		return new UploadResult(true, "%d townships has been uploaded for %s.".formatted(lines.size(), state.getName()));
 	}
 	
 	private static record DistrictDto(String disName, String disBurmese) {}

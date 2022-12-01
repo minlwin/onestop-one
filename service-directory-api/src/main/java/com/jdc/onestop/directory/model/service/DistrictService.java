@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
 import com.jdc.onestop.directory.model.dto.DistrictDto;
+import com.jdc.onestop.directory.model.dto.UploadResult;
 import com.jdc.onestop.directory.model.dto.form.DistrictForm;
 import com.jdc.onestop.directory.model.entity.District;
 import com.jdc.onestop.directory.model.repo.DistrictRepo;
@@ -45,13 +46,14 @@ public class DistrictService {
 				.orElseThrow(() -> new ServiceDirectoryAppException("There is no district with id %d.".formatted(id)));
 	}
 
-	public List<DistrictDto> upload(int state, List<String> lines) {
+	public UploadResult upload(int state, List<String> lines) {
 		
 		for(var line : lines) {
 			create(DistrictForm.of(state, line));
 		}
 		
-		return search(Optional.of(state), Optional.empty(), Optional.empty());
+		return new UploadResult(true, "%d districts has been uploaded for %s.".formatted(
+				lines.size(), stateRepo.getReferenceById(state).getName()));
 	}
 
 	@Transactional(readOnly = true)

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jdc.onestop.directory.model.ServiceDirectoryAppException;
 import com.jdc.onestop.directory.model.dto.DistrictDto;
+import com.jdc.onestop.directory.model.dto.UploadResult;
 import com.jdc.onestop.directory.model.dto.form.DistrictForm;
 import com.jdc.onestop.directory.model.service.DistrictService;
 import com.jdc.onestop.directory.model.service.FileParserService;
@@ -66,7 +67,7 @@ public class DistrictApi {
 	}
 	
 	@PostMapping("upload/{state}")
-	List<DistrictDto> upload(@PathVariable int state, @RequestParam MultipartFile file) {
+	UploadResult upload(@PathVariable int state, @RequestParam MultipartFile file) {
 		return service.upload(state, parserService.parse(file));
 	}
 }
