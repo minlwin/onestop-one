@@ -23,7 +23,7 @@ import com.jdc.onestop.directory.model.service.FileParserService;
 import com.jdc.onestop.directory.model.service.StateService;
 
 @RestController
-@RequestMapping("state")
+@RequestMapping("location/state")
 public class StateApi {
 	
 	@Autowired

@@ -24,7 +24,7 @@ import com.jdc.onestop.directory.model.service.FileParserService;
 import com.jdc.onestop.directory.model.service.TownshipService;
 
 @RestController
-@RequestMapping("township")
+@RequestMapping("location/township")
 public class TownshipApi {
 	
 	@Autowired

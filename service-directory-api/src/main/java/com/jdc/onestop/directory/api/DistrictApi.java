@@ -24,7 +24,7 @@ import com.jdc.onestop.directory.model.service.DistrictService;
 import com.jdc.onestop.directory.model.service.FileParserService;
 
 @RestController
-@RequestMapping("district")
+@RequestMapping("location/district")
 public class DistrictApi {
 	
 	@Autowired
