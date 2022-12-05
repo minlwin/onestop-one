@@ -1,0 +1,54 @@
+<form [formGroup]="form" class="row mb-3">
+  <div class="col-3">
+    <label class="form-label">
+      Level
+    </label>
+    <select formControlName="level" class="form-select">
+      <option value="">All Level</option>
+      <option *ngFor="let item of levels" [value]="item">{{item}}</option>
+    </select>
+  </div>
+
+  <div class="col-3">
+    <label class="form-label">Name</label>
+    <input formControlName="name" type="text" placeholder="Search Name" class="form-control">
+  </div>
+
+  <div class="col btn-wrapper">
+    <button (click)="search()" class="btn btn-primary">
+      <i class="bi bi-search"></i> Search
+    </button>
+  </div>
+</form>
+
+<table *ngIf="list.length > 0" class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Level</th>
+      <th>Duration</th>
+      <th>Fees</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of list" class="align-middle">
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.level}}</td>
+      <td>{{item.duration}}</td>
+      <td>{{item.fees}}</td>
+      <td>
+        <a [routerLink]="['/course-edit']" [queryParams]="{id: item.id}"  class="btn-link">
+          <i class="bi bi-pencil"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="list.length == 0" class="alert alert-info">
+  There is no data.
+</div>
