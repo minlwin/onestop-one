@@ -1,0 +1,6 @@
+<h4>Attributes Binding</h4>
+
+<input #slider (change)="0" [value]="value" [min]="min" [max]="max" type="range"
+  [attr.aria-value-now]="value" >
+
+<h6>{{slider.value}}</h6>

@@ -1,0 +1,34 @@
+<div class="navbar navbar-dark bg-primary navbar-expand">
+
+  <div class="container">
+
+    <span class="navbar-brand">
+      <i class="bi bi-link"></i> Data Binding
+    </span>
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a [routerLink]="['/inter']" routerLinkActive="active" class="nav-link">Interpolation</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" routerLinkActive="active" data-bs-toggle="dropdown">One Way</a>
+        <ul class="dropdown-menu">
+          <li><a [routerLink]="['/one', 'prop']" routerLinkActive="active"  class="dropdown-item">Properties Binding</a></li>
+          <li><a [routerLink]="['/one', 'attr']" routerLinkActive="active"  class="dropdown-item">Attributes Binding</a></li>
+          <li><a [routerLink]="['/one', 'class']" routerLinkActive="active"  class="dropdown-item">Class Binding</a></li>
+          <li><a [routerLink]="['/one', 'style']" routerLinkActive="active"  class="dropdown-item">Style Binding</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/event']" routerLinkActive="active"  class="nav-link">Event Binding</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/two']" routerLinkActive="active"  class="nav-link">Two Way</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="container pt-3">
+  <router-outlet></router-outlet>
+</div>

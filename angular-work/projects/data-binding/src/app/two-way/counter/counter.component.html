@@ -1,0 +1,14 @@
+<h4>Custom Twoway Databinding Component</h4>
+
+<div class="w-50 d-flex justify-content-around mt-4">
+
+  <button (click)="count = count - 1; countChange.emit(count)" class="btn btn-outline-danger">
+    <i class="bi bi-dash-lg"></i> Count Down
+  </button>
+
+  <h3>{{count}}</h3>
+
+  <button (click)="count = count + 1; countChange.emit(count)" class="btn btn-outline-danger">
+    <i class="bi bi-plus-lg"></i> Count Up
+  </button>
+</div>

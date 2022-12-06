@@ -1,0 +1,30 @@
+<h4>Properties and Event Binding</h4>
+
+<div class="row">
+  <div class="col-6">
+    <input type="text" #inputOnly (input)="value = inputOnly.value; formData = inputOnly.value" class="form-control mb-3">
+
+    <input type="text" #inOut [value]="value" (input)="value = inOut.value" class="form-control">
+
+    <div class="mt-4">
+      {{value}}
+    </div>
+  </div>
+</div>
+
+<h4 class="mt-4">Using Form Moudle</h4>
+
+<form>
+  <input name="somName" type="text" [(ngModel)]="formData" class="form-control">
+  <div class="mt-4">
+    {{formData}}
+  </div>
+</form>
+
+<div class="mt-4">
+  <app-counter [(count)]="counterValue"></app-counter>
+</div>
+
+<input type="range" #ranger min="0" max="20" [value]="counterValue" (input)="counterValue = ranger.value"  >
+
+<h5>{{counterValue}}</h5>

@@ -1,0 +1,33 @@
+<h4>Text Interpolation</h4>
+
+<div class="row">
+  <div class="col">
+    <label class="form-label">Enter Test</label>
+    <input #inputText type="text" (input)="0" placeholder="Enter Test" class="form-control">
+  </div>
+  <div class="col d-flex flex-column justify-content-end pb-2">
+    {{inputText.value ? inputText.value : 'There is no Input Value'}}
+  </div>
+</div>
+
+<h6 class="mt-5">Interpolation in Attribute Values</h6>
+
+<div class="row">
+
+  <div class="col">
+    <label class="form-label">Select Color</label>
+    <select #colorSelect class="form-select" (change)="0">
+      <option value="info">Info</option>
+      <option value="primary">Primary</option>
+      <option value="danger">Danger</option>
+      <option value="success">Success</option>
+    </select>
+  </div>
+
+  <div class="col">
+    <div class="alert alert-{{colorSelect.value}}">
+      <h3>Alert Dialog</h3>
+    </div>
+  </div>
+
+</div>
