@@ -1,0 +1,46 @@
+<h4>Dynamic Form Array</h4>
+
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-header">Dynamic Form</div>
+      <form [formGroup]="form" class="card-body">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input formControlName="name" type="text" class="form-control" placeholder="Enter Name">
+        </div>
+
+        <div formArrayName="subjects">
+          <label class="form-label">Subjects</label>
+          <div class="mb-2 row" *ngFor="let item of subjects.controls; index as i">
+            <div class="col">
+              <input [formControlName]="i" type="text" placeholder="Enter Subject Name" class="form-control">
+            </div>
+            <div class="col-auto">
+              <button (click)="removeSubject(i)" class="btn btn-outline-danger">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="card-footer">
+        <button (click)="addNewSubject()" class="btn btn-outline-primary">
+          <i class="bi bi-plus-lg"></i> Add Subject
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <div class="card-header">Form Value</div>
+      <div class="card-body">
+        <pre>{{form.value | json}}</pre>
+      </div>
+    </div>
+  </div>
+</div>

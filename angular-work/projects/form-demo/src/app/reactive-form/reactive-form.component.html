@@ -1,1 +1,71 @@
-<p>reactive-form works!</p>
+<h4>Reactive Form</h4>
+
+<div class="card">
+  <div class="card-header">Reactive Form Demo</div>
+  <form [formGroup]="form" class="card-body">
+
+    <div class="row">
+      <div class="col-4">
+        <label class="form-label">Name</label>
+        <input type="text" formControlName="name" placeholder="Enter Name" class="form-control">
+      </div>
+
+      <div class="col">
+        <div class="row" formGroupName="contact">
+          <div class="col">
+            <label class="form-label">Phone</label>
+            <input formControlName="phone" type="tel" class="form-control" placeholder="Enter Phone Number">
+          </div>
+
+          <div class="col">
+            <label class="form-label">Email</label>
+            <input formControlName="email" type="email" class="form-control" placeholder="Enter Email Address">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-4 d-flex" formArrayName="subjects">
+        <div *ngFor="let item of subjects.controls; index as i" class="me-4 form-check align-self-center">
+          <input type="checkbox" [formControlName]="i" class="form-check-input" >
+          <label class="form-check-label">{{subjectList[i]}}</label>
+        </div>
+      </div>
+
+      <div class="col">
+        <button (click)="save()" [class.disabled]="!form.valid" class="btn btn-outline-primary">
+          <i class="bi bi-save"></i> Save
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<!-- Table -->
+<table *ngIf="list.length > 0" class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Subjects</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of list">
+      <td>{{item.name}}</td>
+      <td>{{item.contact.phone}}</td>
+      <td>{{item.contact.email}}</td>
+      <td>{{item.subjects | subjects}}</td>
+      <td>
+        <a (click)="edit(item)" class="btn-link">
+          <i class="bi bi-pencil"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
