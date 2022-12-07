@@ -1,0 +1,85 @@
+<h4>Template Driven Form</h4>
+
+<div class="card">
+  <div class="card-header">Form</div>
+  <div class="card-body">
+    <form #target="ngForm" (ngSubmit)="save(target)">
+
+      <div class="row">
+        <div class="col-4">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input [(ngModel)]="studentModel.employeeName" name="employeeName"
+              #nameInput="ngModel" required type="text" class="form-control" placeholder="Enter Name">
+            <div *ngIf="!nameInput.valid && (nameInput.touched || nameInput.dirty)" class="text-secondary">
+              Name Error
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <section ngModelGroup="contact" class="row" >
+            <div class="col">
+              <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" [(ngModel)]="studentModel.contact.phone" name="phone" class="form-control"
+                  placeholder="Enter Phone Number" >
+              </div>
+            </div>
+            <div class="col">
+              <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input type="email" [(ngModel)]="studentModel.contact.email" name="email" class="form-control"
+                  placeholder="Enter Email Address">
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+      <div class="row align-middle">
+        <div ngModelGroup="subjects" class="d-flex col-4">
+          <div *ngFor="let item of subjectList, index as i" class="form-check me-4 align-self-center">
+            <input type="checkbox" [(ngModel)]="studentModel.subjects[i]" [name]="'' + i" class="form-check-input me-2" [value]="item" [id]="item" >
+            <label [for]="item" class="form-check-label">{{item}}</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Save
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+  <!-- Table -->
+  <table *ngIf="list.length > 0" class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Subjects</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td>{{item.employeeName}}</td>
+        <td>{{item.contact.phone}}</td>
+        <td>{{item.contact.email}}</td>
+        <td>{{item.subjects}}</td>
+        <td>
+          <a (click)="edit(item)" class="btn-link">
+            <i class="bi bi-pencil"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>

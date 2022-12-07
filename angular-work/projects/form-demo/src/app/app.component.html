@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand bg-light shadow">
+
+  <div class="container">
+    <span class="navbar-brand">
+      <i class="bi bi-house"></i> Angular Forms
+    </span>
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a [routerLink]="['/template']" routerLinkActive="active"  class="nav-link">
+          Template Form
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a [routerLink]="['/reactive']" routerLinkActive="active" class="nav-link">
+          Reactive Form
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container pt-3">
+  <router-outlet></router-outlet>
+</div>
