@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-header">Child Component</div>
+  <form class="card-body">
+    <div class="mb-3">
+      <label class="form-label">Value</label>
+      <input #input type="text" class="form-control" placeholder="Enter Value">
+    </div>
+
+    <button (click)="emitter.emit(input.value); input.value = ''" class="btn btn-primary">Send</button>
+  </form>
+</div>
+

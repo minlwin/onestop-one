@@ -1,0 +1,27 @@
+<div class="container pt-4">
+
+  <h3>Output Demo</h3>
+
+  <div class="row">
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header">Parent</div>
+        <div class="card-body">
+          <div class="list-group list-group-flush">
+            <span *ngFor="let item of list">{{item}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <app-child-input #child [subject]="subject" ></app-child-input>
+
+      <div class="mt-4">
+        <button (click)="child.list.push('Parent to Child')" class="btn btn-primary me-2">Local Variable</button>
+        <button class="btn btn-danger" (click)="childInput?.list?.push('From View Child')">Add From Component</button>
+      </div>
+    </div>
+  </div>
+</div>

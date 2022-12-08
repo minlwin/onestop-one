@@ -1,0 +1,32 @@
+<h4>Using @Input() Decorator</h4>
+
+<div class="row">
+
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header">Parent Value</div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let item of list; index as i"
+            (click)="targetIndex = i"
+            [class.active]="i == targetIndex"
+            class="d-flex justify-content-between list-group-item">
+            <span>{{item.name}}</span>
+            <span class="badge bg-info text-dark">{{item.duration}} Months</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <div class="card-header">Child Value</div>
+      <div class="card-body">
+        <!-- Child Data -->
+        <app-input-child [data]="childData"></app-input-child>
+      </div>
+    </div>
+  </div>
+
+</div>
