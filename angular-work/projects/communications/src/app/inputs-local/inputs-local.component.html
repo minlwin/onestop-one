@@ -1,0 +1,20 @@
+<h4>Access child from Parent Template</h4>
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">Parent</div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Input from Parent</label>
+                    <input type="text" #inputValue class="form-control" placeholder="Enter Text">
+                </div>
+                <button (click)="child.list.push(inputValue.value); inputValue.value = ''" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <app-input-local-child #child></app-input-local-child>
+    </div>
+</div>
