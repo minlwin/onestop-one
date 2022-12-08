@@ -2,13 +2,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-output-child',
+  selector: 'app-child',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './output-child.component.html',
+  templateUrl: './child.component.html',
 })
-export class OutputChildComponent {
+export class ChildComponent {
 
-  @Output() emitter = new EventEmitter<string>
-
+  @Output()
+  emitter = new EventEmitter<string>
 }

@@ -13,5 +13,7 @@ export class UsingOutputsComponent {
 
   list:string[] = []
 
-
+  load(data:any) {
+    this.list.push(data)
+  }
 }

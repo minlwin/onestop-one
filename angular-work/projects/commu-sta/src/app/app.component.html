@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand bg-light shadow">
+  <div class="container">
+    <span class="navbar-brand">Standalone Communication</span>
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a [routerLink]="['/outs']" routerLinkActive="active" class="nav-link">Event Emitter</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container pt-4">
+  <router-outlet></router-outlet>
+</div>

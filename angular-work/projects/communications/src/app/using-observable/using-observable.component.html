@@ -1,0 +1,18 @@
+<h4>Using Observables</h4>
+
+<div class="row">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header">Parent</div>
+            <div class="card-body">
+                <div *ngFor="let item of list" class="list-group list-group-flush">
+                    <span class="list-group-item">{{item}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <app-observable-child [emitter]="subject" ></app-observable-child>
+    </div>
+</div>

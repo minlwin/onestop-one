@@ -7,21 +7,9 @@ import { Subject } from 'rxjs';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './observable-child.component.html',
-  styles: [
-  ]
 })
 export class ObservableChildComponent {
 
-  subject = new Subject<string>
-
   @Input()
-  set listener(subscriber:FunctionStringCallback) {
-    this.subject.subscribe(subscriber)
-  }
-
-  add(value:string) {
-    if(value) {
-      this.subject.next(value)
-    }
-  }
+  emitter?:Subject<string>
 }
