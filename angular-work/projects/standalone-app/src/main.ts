@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, Route } from '@angular/router';
 import { AppComponent } from './app/app.component';
@@ -15,7 +17,8 @@ bootstrapApplication(
   AppComponent,
   {
     providers: [
-      provideRouter(ROUTES)
+      importProvidersFrom(HttpClientModule),
+      provideRouter(ROUTES),
     ]
   }
 )

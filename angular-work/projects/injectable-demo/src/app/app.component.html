@@ -1,0 +1,18 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand">
+  <div class="container">
+    <span class="navbar-brand">Dependency Injection</span>
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a [routerLink]="['/parent']" routerLinkActive="active"  class="nav-link">Root Module</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/inventory']" routerLinkActive="active"  class="nav-link">Lazy Loading Module</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container pt-4">
+  <router-outlet></router-outlet>
+</div>

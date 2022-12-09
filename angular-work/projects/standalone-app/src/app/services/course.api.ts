@@ -4,7 +4,7 @@ import { Course } from "./model";
 
 const API = 'http://localhost:8080/course'
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CourseApi {
 
   constructor(private http:HttpClient) {}

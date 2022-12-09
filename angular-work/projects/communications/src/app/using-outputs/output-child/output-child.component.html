@@ -6,7 +6,7 @@
       <input #inputValue type="text" class="form-control" placeholder="Enter Value">
     </div>
 
-    <button (click)="emitter.emit(inputValue.value); inputValue.value = ''" class="btn btn-primary">Send</button>
+    <button type="button" (click)="emitter.emit(inputValue.value); inputValue.value = ''" class="btn btn-primary">Send</button>
   </form>
 </div>
 

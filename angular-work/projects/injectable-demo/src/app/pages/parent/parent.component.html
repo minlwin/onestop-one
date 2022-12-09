@@ -1,0 +1,10 @@
+<h4>{{title ? title : 'Provide in Root Module'}}</h4>
+
+<message-edit></message-edit>
+
+<ul class="list-group">
+    <li class="list-group-item active">Messages from Parent</li>
+    <li class="list-group-item" *ngFor="let item of messageHolder.list" >
+        {{item}}
+    </li>
+</ul>

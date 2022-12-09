@@ -10,12 +10,8 @@ import { CourseApi } from './services/course.api';
   standalone: true,
   imports: [
     CommonModule,
-    HttpClientModule,
     RouterModule
   ],
-  providers: [
-    CourseApi
-  ]
 })
 export class AppComponent {
   title = 'standalone-app';
