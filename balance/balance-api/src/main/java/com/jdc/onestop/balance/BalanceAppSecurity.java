@@ -8,11 +8,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -27,30 +24,17 @@ public class BalanceAppSecurity {
 	@Bean
 	SecurityFilterChain http(HttpSecurity http) throws Exception {
 		
-		http.csrf().and().cors().disable();
+		return http.csrf().disable().cors().and()
+				.authorizeHttpRequests()
+				.requestMatchers("/security/**").permitAll()
+				.requestMatchers("/account/**").hasAuthority("Admin")
+				.requestMatchers(HttpMethod.POST ,"/category/**").hasAuthority("Admin")
+				.requestMatchers(HttpMethod.PUT ,"/category/**").hasAuthority("Admin")
+				.anyRequest().authenticated()
+				.and()
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().build();
 		
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		
-		http.authorizeHttpRequests()
-			.requestMatchers("/security/**").permitAll()
-			.requestMatchers(HttpMethod.POST, "/category/**").hasAnyAuthority("Admin")
-			.requestMatchers(HttpMethod.PUT, "/category/**").hasAnyAuthority("Admin")
-			.requestMatchers("/account/**").hasAnyAuthority("Admin")
-			.anyRequest().authenticated();
-			
-		
-		return http.build();
-	}
-	
-	@Bean
-	UserDetailsService adminUserDetailsService(PasswordEncoder encoder) {
-		return new InMemoryUserDetailsManager(
-				User.builder()
-					.username("admin@gmail.com")
-					.password(encoder.encode("admin"))
-					.authorities("Admin")
-					.build()
-				);
 	}
 	
 	@Bean

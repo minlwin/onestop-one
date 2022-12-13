@@ -13,20 +13,14 @@ import com.jdc.onestop.balance.model.BalanceAppValidationException;
 @Component
 public class BindingResultAdvice {
 
-	@Pointcut("args(..,org.springframework.validation.BindingResult)")
-	void validationMethod() {}
+	@Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
+	public void restControllerMethods() {}
 		
-	@Pointcut("within(com.jdc..api.*)")
-	void apiClasses() {}
-	
-	@Before(argNames = "result", 
-			value = "apiClasses() && validationMethod() && args(result)")
-	void checkBindingResult(BindingResult result) {
+	@Before(value = "restControllerMethods() && args(..,result)", argNames = "result")
+	public void check(BindingResult result) {
 		if(result.hasErrors()) {
-			throw new BalanceAppValidationException(
-					result.getFieldErrors()
-					.stream().map(FieldError::getDefaultMessage)
-					.toList());
+			throw new BalanceAppValidationException(result.getFieldErrors().stream()
+					.map(FieldError::getDefaultMessage).toList());
 		}
 	}
 }

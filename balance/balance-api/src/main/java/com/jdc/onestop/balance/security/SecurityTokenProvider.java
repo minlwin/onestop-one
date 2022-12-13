@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.util.StringUtils;
 
 import com.jdc.onestop.balance.security.meta.SecurityComponent;
 
@@ -55,21 +56,22 @@ public class SecurityTokenProvider {
 	public Optional<Authentication> authenticate(String jwtToken) {
 		
 		try {
-			var parser = Jwts.parserBuilder()
-					.requireIssuer(issuer).setSigningKey(key).build();
-			
-			var jws = parser.parseClaimsJws(jwtToken);
-			var username = jws.getBody().getSubject();
-			var authorities = AuthorityUtils
-					.commaSeparatedStringToAuthorityList(jws.getBody()
-							.get("role").toString());
-			
-			return Optional.of(new UsernamePasswordAuthenticationToken(username, null, authorities));
-
+			if(StringUtils.hasLength(jwtToken)) {
+				var parser = Jwts.parserBuilder()
+						.requireIssuer(issuer).setSigningKey(key).build();
+				
+				var jws = parser.parseClaimsJws(jwtToken);
+				var username = jws.getBody().getSubject();
+				var authorities = AuthorityUtils
+						.commaSeparatedStringToAuthorityList(jws.getBody()
+								.get("role").toString());
+				
+				return Optional.of(new UsernamePasswordAuthenticationToken(username, null, authorities));
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			return Optional.empty();
+			// Skip Token Error
 		}
+		return Optional.empty();
 	}
 
 }

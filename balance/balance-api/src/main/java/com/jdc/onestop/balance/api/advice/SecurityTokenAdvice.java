@@ -9,12 +9,12 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import com.jdc.onestop.balance.security.SecurityTokenProvider;
 
-@Service
+@RestControllerAdvice
 public class SecurityTokenAdvice implements ResponseBodyAdvice<Object>{
 
 	@Autowired

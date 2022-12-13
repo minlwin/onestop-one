@@ -12,13 +12,14 @@ import com.jdc.onestop.balance.security.meta.SecurityComponent;
 
 @SecurityComponent
 @Transactional(readOnly = true)
-public class MemberDetailsService implements UserDetailsService{
+public class BalanceAppUserDetailsService implements UserDetailsService{
 
 	@Autowired
 	private AccountRepo accountRepo;
-	
+		
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
 		return accountRepo.findOneByEmail(username)
 				.map(account -> User.builder()
 						.username(username)
