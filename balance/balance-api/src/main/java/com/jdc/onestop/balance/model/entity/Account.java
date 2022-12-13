@@ -26,8 +26,19 @@ public class Account implements Serializable{
 	@Column(nullable = false)
 	private String password;
 	private String phone;
-	private boolean approved;
 	private boolean denied;
+	
+	public Account() {
+	}
+	
+	public Account(String name, String email, String phone, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
+		this.role = Role.Member;
+	}
 
 	public int getId() {
 		return id;
@@ -75,14 +86,6 @@ public class Account implements Serializable{
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	public boolean isApproved() {
-		return approved;
-	}
-
-	public void setApproved(boolean approved) {
-		this.approved = approved;
 	}
 
 	public boolean isDenied() {
