@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import com.jdc.onestop.balance.model.BalanceAppValidationException;
 
@@ -22,7 +23,10 @@ public class BindingResultAdvice {
 			value = "apiClasses() && validationMethod() && args(result)")
 	void checkBindingResult(BindingResult result) {
 		if(result.hasErrors()) {
-			throw new BalanceAppValidationException(result.getFieldErrors());
+			throw new BalanceAppValidationException(
+					result.getFieldErrors()
+					.stream().map(FieldError::getDefaultMessage)
+					.toList());
 		}
 	}
 }

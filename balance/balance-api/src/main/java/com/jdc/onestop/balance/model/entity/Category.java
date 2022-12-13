@@ -21,6 +21,15 @@ public class Category implements Serializable{
 	@Column(nullable = false, unique = true)
 	private String name;
 
+	public Category() {
+	}
+	
+	public Category(Type type, String name) {
+		super();
+		this.type = type;
+		this.name = name;
+	}
+
 	public enum Type {
 		Credit, Debit
 	}
