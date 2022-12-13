@@ -37,7 +37,7 @@ public class AdminUserInitializer {
 	@EventListener(classes = ContextRefreshedEvent.class)
 	void initialize() {
 		if(repo.count() == 0) {
-			var account = new Account(adminName, adminMail, adminName, encoder.encode(adminPass));
+			var account = new Account(adminName, adminMail, adminPhone, encoder.encode(adminPass));
 			account.setRole(Role.Admin);
 			repo.save(account);
 		}
