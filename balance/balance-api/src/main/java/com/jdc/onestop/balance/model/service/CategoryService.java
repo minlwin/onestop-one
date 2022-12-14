@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -77,7 +78,7 @@ public class CategoryService {
 
 	@Transactional(readOnly = true)
 	public List<CategoryDto> search(Optional<Type> type, Optional<String> keyword) {
-		return repo.findAll(withType(type).and(withName(keyword)))
+		return repo.findAll(withType(type).and(withName(keyword.filter(StringUtils::hasLength))))
 				.stream().map(CategoryDto::from).toList();
 	}
 	

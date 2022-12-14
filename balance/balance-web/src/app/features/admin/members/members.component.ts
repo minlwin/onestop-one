@@ -21,14 +21,13 @@ export class MembersComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    if(this.list.length == 0) {
-      this.messages.push('There is no data.')
-    }
+    this.search()
   }
 
   search() {
     this.service.search(this.form.value).subscribe(result => {
       this.list = []
+      this.messages = []
       if(result.success) {
         this.list = result.data
         if(this.list.length == 0) {

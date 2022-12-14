@@ -6,13 +6,15 @@ import { AdminComponent } from './admin.component';
 import { MembersComponent } from './members/members.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MemberDetailsComponent } from './members/member-details/member-details.component';
 
 
 @NgModule({
   declarations: [
     AdminComponent,
     MembersComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    MemberDetailsComponent
   ],
   imports: [
     CommonModule,

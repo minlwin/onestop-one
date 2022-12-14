@@ -1,0 +1,32 @@
+<h3>
+    <i class="bi bi-person"></i> Member Details
+</h3>
+
+<div class="w-50">
+    <div class="mb-3">
+        <span class="d-block mb-1">Member Name</span>
+        <span class="form-control">{{dto?.name || ''}}</span>
+    </div>
+    <div class="mb-3">
+        <span class="d-block mb-1">Role</span>
+        <span class="form-control">{{dto?.role || ''}}</span>
+    </div>
+    <div class="mb-3">
+        <span class="d-block mb-1">Email</span>
+        <span class="form-control">{{dto?.email || ''}}</span>
+    </div>
+    <div class="mb-3">
+        <span class="d-block mb-1">Phone</span>
+        <span class="form-control">{{dto?.phone || ''}}</span>
+    </div>
+
+    <div>
+        <button (click)="changeRole()" class="btn btn-outline-primary me-2">
+            <i class="bi bi-shield"></i> Make {{dto?.role == 'Admin' ? 'Member' : 'Admin'}}
+        </button>
+
+        <button (click)="changeStatus()" class="btn btn-outline-danger">
+            <i class="bi bi-lock"></i> {{dto?.denied ? 'Allowed' : 'Denied'}}
+        </button>
+    </div>
+</div>

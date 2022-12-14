@@ -5,9 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.jdc.onestop.balance.model.BalanceAppBusinessException;
 import com.jdc.onestop.balance.model.dto.AccountDto;
@@ -79,8 +82,10 @@ public class AccountService {
 
 	@Transactional(readOnly = true)
 	public List<AccountDto> search(Optional<Role> role, Optional<String> keyword) {
-		return repo.findAll(withRole(role).and(withName(keyword)))
-				.stream().map(AccountDto::from).toList();
+		return repo.findAll(withRole(role).and(withName(keyword.filter(StringUtils::hasLength))))
+				.stream()
+				.filter(a -> !a.getEmail().equals(SecurityContextHolder.getContext().getAuthentication().getName()))
+				.map(AccountDto::from).toList();
 	}
 	
 	private Specification<Account> withRole(Optional<Role> role) {

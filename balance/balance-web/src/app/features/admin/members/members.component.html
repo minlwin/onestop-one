@@ -29,3 +29,31 @@
         <li *ngFor="let item of messages">{{item}}</li>
     </ul>
 </div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let item of list">
+            <td>{{item.name}}</td>
+            <td>{{item.role}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.denied ? 'Denied' : 'Allowed'}}</td>
+            <td>
+                <a [routerLink]="['/admin', 'members', 'details']" routerLinkActive="active" [queryParams]="{id: item.id}" class="btn-link">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
