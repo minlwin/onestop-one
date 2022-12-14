@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SecurityService } from 'src/app/shared/services/security.service';
 
 @Component({
   templateUrl: './signup.component.html',
@@ -9,8 +11,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SignupComponent {
 
   form:FormGroup
+  messages:string[] = []
 
-  constructor(builder:FormBuilder) {
+  constructor(builder:FormBuilder,
+    private service:SecurityService,
+    private router:Router
+    ) {
     this.form = builder.group({
       name: ['', Validators.required],
       phone: ['', Validators.required],
@@ -20,7 +26,16 @@ export class SignupComponent {
 
   signUp() {
     if(this.form.valid) {
-
+      this.service.signUp(this.form.value).subscribe(result => {
+        if(result.success) {
+          this.messages = []
+          this.router.navigate(['/signin'], {queryParams: {
+            message: `Please sign in with passcode ${result.data}.`
+          }})
+        } else {
+          this.messages = result.data
+        }
+      })
     }
   }
 

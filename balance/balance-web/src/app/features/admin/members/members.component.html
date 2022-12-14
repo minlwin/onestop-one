@@ -1,0 +1,31 @@
+<h3>
+    <i class="bi bi-people me-2"></i> Members Management
+</h3>
+
+<form [formGroup]="form" class="row mb-4">
+    <div class="col-3">
+        <label class="form-label">Role</label>
+        <select formControlName="role" class="form-select">
+            <option value="">All Roles</option>
+            <option value="Admin">Admin</option>
+            <option value="Member">Member</option>
+        </select>
+    </div>
+
+    <div class="col-3">
+        <label class="form-label">Member Name</label>
+        <input formControlName="keyword" type="text" placeholder="Search Member Name" class="form-control">
+    </div>
+
+    <div class="col btn-wrapper">
+        <button (click)="search()" class="btn btn-outline-primary">
+            <i class="bi bi-search"></i> Search
+        </button>
+    </div>
+</form>
+
+<div class="alert alert-info" *ngIf="messages.length > 0">
+    <ul>
+        <li *ngFor="let item of messages">{{item}}</li>
+    </ul>
+</div>

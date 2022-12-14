@@ -5,6 +5,12 @@
         </h5>
         <div class="card-body">
             <form [formGroup]="form">
+                <div *ngIf="messages.length > 0" class="alert alert-info">
+                    <ul>
+                        <li *ngFor="let item of messages">{{item}}</li>
+                    </ul>
+                </div>
+
                 <div class="mb-3">
                     <label class="form-label">Email Address</label>
                     <input formControlName="email" type="email" placeholder="Enter Email Address" [class.border-danger]="isInvalid('email')" class="form-control">
@@ -16,7 +22,7 @@
                 </div>
 
                 <div>
-                    <button [class.disabled]="!form.valid" class="btn btn-outline-primary me-2">
+                    <button (click)="signIn()" [class.disabled]="!form.valid" class="btn btn-outline-primary me-2">
                         <i class="bi bi-person-check"></i> Sign In
                     </button>
 

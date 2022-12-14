@@ -16,6 +16,7 @@ public class BalanceAppWeb implements WebMvcConfigurer{
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
+			.allowedOrigins("*")
 			.allowedMethods("*")
 			.exposedHeaders(tokenName)
 			.allowedHeaders(tokenName);

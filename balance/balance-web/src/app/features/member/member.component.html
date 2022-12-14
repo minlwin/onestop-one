@@ -1,1 +1,52 @@
-<p>member works!</p>
+<nav class="navbar navbar-expand bg-info shadow">
+    <div class="container">
+        <span class="navbar-brand">
+            <i class="bi bi-pie-chart"></i> Balances
+        </span>
+
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="bi bi-house"></i> Home
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="bi bi-arrow-up-circle"></i> Credit
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="bi bi-arrow-down-circle"></i> Debit
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" >
+                    <i class="bi bi-person"></i> {{userName}}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a href="" class="dropdown-item">
+                            <i class="bi bi-person-circle"></i> Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="dropdown-item">
+                            <i class="bi bi-key"></i> Change Password
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a (click)="signOut()" class="dropdown-item">
+                            <i class="bi bi-lock"></i> Sign Out
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</nav>
