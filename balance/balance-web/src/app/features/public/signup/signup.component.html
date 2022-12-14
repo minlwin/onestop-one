@@ -1,0 +1,35 @@
+<div class="container d-flex justify-content-center h-100">
+    <div class="card w-50 align-self-center">
+        <h5 class="card-header">
+            <i class="bi bi-person-plus"></i> Sign Up Member
+        </h5>
+        <div class="card-body">
+            <form [formGroup]="form">
+                <div class="mb-3">
+                    <label class="form-label">Member Name</label>
+                    <input formControlName="name" [class.border-danger]="isInvalid('name')" type="text" placeholder="Enter Your Name" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phone Number</label>
+                    <input formControlName="phone" [class.border-danger]="isInvalid('phone')" type="tel" placeholder="Enter Phone Number" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input formControlName="email" [class.border-danger]="isInvalid('email')" type="email" placeholder="Enter Email Address" class="form-control">
+                </div>
+
+                <div>
+                    <button class="btn btn-outline-primary me-2">
+                        <i class="bi bi-person-plus"></i> Sign Up
+                    </button>
+
+                    <a href="#" class="btn btn-outline-success">
+                        <i class="bi bi-person-check"></i> Sign In
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

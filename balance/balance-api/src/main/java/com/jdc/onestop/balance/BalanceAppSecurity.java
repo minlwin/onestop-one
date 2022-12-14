@@ -1,5 +1,6 @@
 package com.jdc.onestop.balance;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,10 +12,16 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.jdc.onestop.balance.security.SecurityTokenFilter;
 
 @Configuration
 @EnableWebSecurity
 public class BalanceAppSecurity {
+	
+	@Autowired
+	private SecurityTokenFilter securityTokenFilter;
 	
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -32,6 +39,7 @@ public class BalanceAppSecurity {
 				.requestMatchers(HttpMethod.PUT ,"/category/**").hasAuthority("Admin")
 				.anyRequest().authenticated()
 				.and()
+				.addFilterBefore(securityTokenFilter, UsernamePasswordAuthenticationFilter.class)
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().build();
 		

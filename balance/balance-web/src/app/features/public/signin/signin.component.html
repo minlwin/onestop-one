@@ -1,0 +1,30 @@
+<div class="container d-flex justify-content-center h-100">
+    <div class="card w-50 align-self-center">
+        <h5 class="card-header">
+            <i class="bi bi-person-check"></i> Member Sign In
+        </h5>
+        <div class="card-body">
+            <form [formGroup]="form">
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input formControlName="email" type="email" placeholder="Enter Email Address" [class.border-danger]="isInvalid('email')" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input formControlName="password" type="password" placeholder="Enter Password" [class.border-danger]="isInvalid('password')" class="form-control">
+                </div>
+
+                <div>
+                    <button [class.disabled]="!form.valid" class="btn btn-outline-primary me-2">
+                        <i class="bi bi-person-check"></i> Sign In
+                    </button>
+
+                    <a [routerLink]="['/signup']" class="btn btn-outline-success">
+                        <i class="bi bi-person-add"></i> Sign Up
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
