@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { handleApiResult } from 'src/app/shared/services';
 import { SecurityService } from 'src/app/shared/services/security.service';
 
 @Component({
@@ -27,14 +28,11 @@ export class SignupComponent {
   signUp() {
     if(this.form.valid) {
       this.service.signUp(this.form.value).subscribe(result => {
-        if(result.success) {
-          this.messages = []
-          this.router.navigate(['/signin'], {queryParams: {
-            message: `Please sign in with passcode ${result.data}.`
-          }})
-        } else {
-          this.messages = result.data
-        }
+        this.messages = []
+        const passcode = handleApiResult(result)
+        this.router.navigate(['/signin'], {queryParams: {
+          message: `Please sign in with passcode ${passcode}.`
+        }})
       })
     }
   }

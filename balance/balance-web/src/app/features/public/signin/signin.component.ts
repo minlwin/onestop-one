@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { handleApiResult } from 'src/app/shared/services';
 import { BalanceAppContext } from 'src/app/shared/services/balance-app.context';
 import { SecurityService } from 'src/app/shared/services/security.service';
 
@@ -35,13 +36,10 @@ export class SigninComponent {
     this.messages = []
     if(this.form.valid) {
       this.service.signIn(this.form.value).subscribe(result => {
-        if(result.success) {
-          this.context.setLoginUser(result.data)
-          let role:string = result.data.role
-          this.router.navigate(["/", role.toLocaleLowerCase()])
-        } else {
-          this.messages = result.data
-        }
+        const loginUser = handleApiResult(result)
+        this.context.setLoginUser(loginUser)
+        let role:string = loginUser.role
+        this.router.navigate(["/", role.toLocaleLowerCase()])
       })
     }
   }

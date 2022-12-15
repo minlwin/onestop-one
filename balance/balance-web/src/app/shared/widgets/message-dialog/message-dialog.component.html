@@ -1,0 +1,25 @@
+<div class="modal fade" id="messageDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-info-lg"></i> Error Messages
+                </h5>
+            </div>
+
+            <div class="modal-body">
+                <ul>
+                    <li *ngFor="let item of messages">
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="modal-footer">
+                <button (click)="close()" class="btn btn-outline-primary">
+                    <i class="bi bi-x-lg"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
