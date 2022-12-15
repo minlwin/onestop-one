@@ -30,7 +30,7 @@ export class MemberDetailsComponent {
   }
 
   changeStatus() {
-    if(this.dto?.denied) {
+    if(this.dto) {
       this.service.updateStatus(this.dto.id, this.dto.denied ? false : true)
         .subscribe(result => this.handleResult(result))
     }

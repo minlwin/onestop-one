@@ -18,10 +18,10 @@ export class MemberService {
     }
 
     updateRole(id:number, role:string) {
-        return this.http.put<ApiResult>(`${API}/${id}`, {value: role})
+        return this.http.put<ApiResult>(`${API}/${id}/role`, {value: role})
     }
 
     updateStatus(id:number, status:boolean) {
-        return this.http.put<ApiResult>(`${API}/${id}`, {value: status})
+        return this.http.put<ApiResult>(`${API}/${id}/status`, {value: status})
     }
 }

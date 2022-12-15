@@ -36,10 +36,8 @@ export class SigninComponent {
     this.messages = []
     if(this.form.valid) {
       this.service.signIn(this.form.value).subscribe(result => {
-        const loginUser = handleApiResult(result)
-        this.context.setLoginUser(loginUser)
-        let role:string = loginUser.role
-        this.router.navigate(["/", role.toLocaleLowerCase()])
+        this.context.setLoginUser(handleApiResult(result))
+        this.router.navigate(["/", `${this.context.loginUser.role}`.toLocaleLowerCase()])
       })
     }
   }
