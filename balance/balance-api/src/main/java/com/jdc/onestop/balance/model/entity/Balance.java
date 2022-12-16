@@ -31,7 +31,10 @@ public class Balance implements Serializable{
 	private boolean deleted;
 	private boolean fixed;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+	@OneToMany(
+			mappedBy = "balance", 
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
+			orphanRemoval = true)
 	private List<BalanceDetails> details;
 	
 	public Balance() {

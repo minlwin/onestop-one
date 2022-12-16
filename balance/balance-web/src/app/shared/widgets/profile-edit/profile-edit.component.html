@@ -1,0 +1,37 @@
+<div class="modal fade" id="profileEdit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="bi bi-person"></i> Edit Profile
+        </h5>
+      </div>
+
+      <form [formGroup]="form" class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input formControlName="name" [class.border-danger]="hasError('name')" type="text" placeholder="Enter Name" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input formControlName="phone" [class.border-danger]="hasError('phone')" type="tel" placeholder="Enter Phone" class="form-control">
+        </div>
+        <div>
+          <label class="form-label">Name</label>
+          <input formControlName="email" [class.border-danger]="hasError('email')" type="email" placeholder="Enter Email" class="form-control">
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary me-2" data-bs-toggle="modal">
+          <i class="bi bi-x-lg"></i> Close
+        </button>
+
+        <button (click)="save()" class="btn btn-outline-primary">
+          <i class="bi bi-save"></i> Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

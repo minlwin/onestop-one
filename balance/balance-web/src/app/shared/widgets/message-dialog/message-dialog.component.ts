@@ -1,6 +1,4 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { BalanceAppContext } from '../../services/balance-app.context';
 
 declare var bootstrap:any
 

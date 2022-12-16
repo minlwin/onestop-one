@@ -1,0 +1,33 @@
+<div class="modal fade" id="changePassword">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="bi bi-key"></i> Change Password
+        </h5>
+      </div>
+
+      <form [formGroup]="form" class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Old Password</label>
+          <input formControlName="oldPass" [class.border-danger]="hasError('oldPass')" type="password" placeholder="Enter Old Password" class="form-control">
+        </div>
+        <div>
+          <label class="form-label">New Password</label>
+          <input formControlName="newPass" [class.border-danger]="hasError('newPass')" type="password" placeholder="Enter New Password" class="form-control">
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary me-2" data-bs-toggle="modal">
+          <i class="bi bi-x-lg"></i> Close
+        </button>
+
+        <button [class.disabled]="!form.valid" (click)="save()" class="btn btn-outline-primary">
+          <i class="bi bi-save"></i> Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

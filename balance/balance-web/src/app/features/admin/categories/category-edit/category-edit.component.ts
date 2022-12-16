@@ -47,6 +47,6 @@ export class CategoryEditComponent implements AfterViewInit {
   }
 
   hasError(name:string) {
-    return this.form.get(name)?.dirty && this.form.get('name')?.touched && !this.form.get(name)?.valid
+    return (this.form.get(name)?.dirty || this.form.get('name')?.touched) && !this.form.get(name)?.valid
   }
 }

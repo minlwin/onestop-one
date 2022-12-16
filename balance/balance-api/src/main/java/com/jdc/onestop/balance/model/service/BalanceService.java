@@ -1,5 +1,6 @@
 package com.jdc.onestop.balance.model.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -106,9 +107,12 @@ public class BalanceService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<BalanceListDto> search(Optional<Type> type, Optional<Integer> category, Optional<String> keyword) {
+	public List<BalanceListDto> search(Optional<Type> type, Optional<Integer> category, Optional<String> keyword, Optional<LocalDate> from, Optional<LocalDate> to) {
 		return balanceRepo.findAll(
-				withCategory(category).and(withType(type).and(withKeyword(keyword.filter(StringUtils::hasLength))))
+				withCategory(category)
+					.and(withType(type))
+					.and(withFrom(from).and(withTo(to))
+					.and(withKeyword(keyword.filter(StringUtils::hasLength))))
 				).stream().map(BalanceListDto::from).toList();
 	}
 	
@@ -120,6 +124,16 @@ public class BalanceService {
 	private Specification<Balance> withType(Optional<Type> where) {
 		return where.isEmpty() ? Specification.where(null) : 
 			(root, query, cb) -> cb.equal(root.get("category").get("type"), where.get());
+	}
+
+	private Specification<Balance> withFrom(Optional<LocalDate> where) {
+		return where.isEmpty() ? Specification.where(null) : 
+			(root, query, cb) -> cb.greaterThanOrEqualTo(root.get("issueAt"), where.get());
+	}
+
+	private Specification<Balance> withTo(Optional<LocalDate> where) {
+		return where.isEmpty() ? Specification.where(null) : 
+			(root, query, cb) -> cb.lessThanOrEqualTo(root.get("issueAt"), where.get());
 	}
 
 	private Specification<Balance> withKeyword(Optional<String> where) {

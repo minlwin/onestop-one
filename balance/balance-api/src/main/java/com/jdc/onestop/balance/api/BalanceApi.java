@@ -1,5 +1,6 @@
 package com.jdc.onestop.balance.api;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +35,11 @@ public class BalanceApi {
 	ApiResult<List<BalanceListDto>> search(
 			@RequestParam Optional<Type> type, 
 			@RequestParam Optional<Integer> category, 
-			@RequestParam Optional<String> keyword) {
-		return ApiResult.from(service.search(type, category, keyword));
+			@RequestParam Optional<String> keyword,
+			@RequestParam Optional<LocalDate> from, 
+			@RequestParam Optional<LocalDate> to 
+			) {
+		return ApiResult.from(service.search(type, category, keyword, from, to));
 	}
 	
 	@GetMapping("{id}")
