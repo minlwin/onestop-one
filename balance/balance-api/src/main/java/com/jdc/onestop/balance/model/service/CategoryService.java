@@ -63,7 +63,16 @@ public class CategoryService {
 			String line = null;
 			
 			while(null != (line = reader.readLine())) {
-				list.add(create(CategoryForm.from(line)));
+				var array = line.split(",");
+				
+				var category = repo.findOneByName(array[0]);
+				if(null != category) {
+					category.setType(Type.valueOf(array[1]));
+					list.add(CategoryDto.from(category));
+				} else {
+					list.add(create(CategoryForm.from(line)));
+				}
+					
 			}
 			
 			return list;

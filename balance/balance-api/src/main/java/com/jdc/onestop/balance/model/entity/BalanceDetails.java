@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class BalanceDetails implements Serializable{
+public class BalanceDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -22,6 +22,16 @@ public class BalanceDetails implements Serializable{
 	private String article;
 	private int quentity;
 	private int unitPrice;
+
+	public BalanceDetails() {
+	}
+
+	public BalanceDetails(String article, int quentity, int unitPrice) {
+		super();
+		this.article = article;
+		this.quentity = quentity;
+		this.unitPrice = unitPrice;
+	}
 
 	public int getId() {
 		return id;

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,17 +23,21 @@ public class MemberApi {
 	@Autowired
 	private AccountService service;
 
-	@PostMapping("profile")
-	@PreAuthorize("username == authentication.name")
-	ApiResult<AccountDto> save(@RequestHeader("balance-user") String username, 
-			@Validated @RequestBody SignUpForm form, BindingResult result) {
+	@PutMapping("profile")
+	@PreAuthorize("#username == authentication.principal.username")
+	ApiResult<AccountDto> save(
+			@RequestHeader("balance-user") String username, 
+			@Validated @RequestBody SignUpForm form, 
+			BindingResult result) {
 		return ApiResult.from(service.save(username, form));
 	}
 	
-	@PostMapping("password")
-	@PreAuthorize("username == authentication.name")
-	ApiResult<String> changePass(@RequestHeader("balance-user") String username, 
-			@Validated @RequestBody PasswordForm form, BindingResult result) {
+	@PutMapping("password")
+	@PreAuthorize("#username == authentication.principal.username")
+	ApiResult<String> changePass(
+			@RequestHeader("balance-user") String username, 
+			@Validated @RequestBody PasswordForm form, 
+			BindingResult result) {
 		
 		service.changePassword(username, form);
 		

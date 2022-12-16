@@ -30,7 +30,7 @@ public class CategoryApi {
 	private CategoryService service;
 
 	@GetMapping
-	ApiResult<List<CategoryDto>> search(Optional<Type> type, Optional<String> keyword) {
+	ApiResult<List<CategoryDto>> search(@RequestParam Optional<Type> type, @RequestParam Optional<String> keyword) {
 		return ApiResult.from(service.search(type, keyword));
 	}
 	

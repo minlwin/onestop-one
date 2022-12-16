@@ -29,6 +29,11 @@ public class Category implements Serializable{
 		this.type = type;
 		this.name = name;
 	}
+	
+	public Category withType(Type type) {
+		this.type = type;
+		return this;
+	}
 
 	public enum Type {
 		Credit, Debit

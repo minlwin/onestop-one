@@ -1,3 +1,62 @@
 <h3>
     <i class="bi bi-tags me-2"></i> Category Management
 </h3>
+
+<form [formGroup]="form" class="row mb-4">
+
+  <div class="col-3">
+    <label class="form-label">Balance Type</label>
+    <select formControlName="type" class="form-select">
+      <option value="">All Types</option>
+      <option value="Credit">Credit</option>
+      <option value="Debit">Debit</option>
+    </select>
+  </div>
+
+  <div class="col-3">
+    <label class="form-label">Name</label>
+    <input formControlName="keyword" type="text" placeholder="Search Name" class="form-control">
+  </div>
+
+  <div class="col btn-wrapper">
+    <button (click)="search()" class="btn btn-outline-primary me-2">
+        <i class="bi bi-search"></i> Search
+    </button>
+    <button (click)="uploadInput.click()" class="btn btn-outline-danger me-2">
+      <i class="bi bi-upload"></i> Upload
+    </button>
+    <button (click)="edit(undefined)" class="btn btn-outline-danger me-2">
+      <i class="bi bi-plus-lg"></i> Add New
+    </button>
+  </div>
+
+</form>
+
+<div class="row row-cols-4 g-3" *ngIf="list.length > 0">
+
+  <div class="col" *ngFor="let item of list">
+    <div class="card">
+      <div class="card-body d-flex justify-content-between">
+        <div>
+          <h5>{{item.name}}</h5>
+          <small>{{item.type}}</small>
+        </div>
+
+        <a (click)="edit(item)" class="btn-link">
+          <i class="bi bi-pencil"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<form class="d-none">
+  <input type="file" #uploadInput (change)="upload(uploadInput.files!)">
+</form>
+
+<div class="alert alert-info" *ngIf="list.length == 0">
+  There is no category, please create or upload categories.
+</div>
+
+<app-category-edit (onSaveListener)="save($event)"></app-category-edit>

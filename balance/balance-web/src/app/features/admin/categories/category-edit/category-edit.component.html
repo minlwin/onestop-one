@@ -1,0 +1,35 @@
+<div class="modal fade" id="categoryEdit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{form.get('id')?.value > 0 ? 'Edit' : 'Add New'}} Category</h5>
+      </div>
+
+      <form [formGroup]="form" class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Type</label>
+          <select formControlName="type" [class.border-danger]="hasError('type')" class="form-select">
+            <option value="">Select Type</option>
+            <option value="Credit">Credit</option>
+            <option value="Debit">Debit</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="form-label">Category Name</label>
+          <input formControlName="name" type="text" [class.border-danger]="hasError('name')"
+            placeholder="Enter Category Name" class="form-control">
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary me-2" data-bs-toggle="modal">
+          <i class="bi bi-x-lg"></i> Close
+        </button>
+        <button (click)="save()" [class.disabled]="!form.valid" class="btn btn-outline-primary">
+          <i class="bi bi-save"></i> Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,4 +7,6 @@ import com.jdc.onestop.balance.model.entity.Category;
 
 public interface CategoryRepo extends JpaRepository<Category, Integer>, JpaSpecificationExecutor<Category>{
 
+	Category findOneByName(String name);
+
 }
