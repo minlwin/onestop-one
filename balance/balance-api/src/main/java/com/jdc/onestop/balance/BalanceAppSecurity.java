@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.jdc.onestop.balance.model.entity.Account.Role;
 import com.jdc.onestop.balance.security.SecurityTokenFilter;
 
 @Configuration
@@ -36,15 +37,14 @@ public class BalanceAppSecurity {
 		return http.csrf().disable().cors().and()
 				.authorizeHttpRequests()
 				.requestMatchers("/security/**").permitAll()
-				.requestMatchers("/account/**").hasAuthority("Admin")
-				.requestMatchers("/category/**").hasAuthority("Admin")
-				.requestMatchers(HttpMethod.GET ,"/category/**").hasAuthority("Member")
+				.requestMatchers("/account/**").hasAuthority(Role.Admin.name())
+				.requestMatchers(HttpMethod.GET ,"/category/**").hasAnyAuthority(Role.Member.name(), Role.Admin.name())
+				.requestMatchers("/category/**").hasAuthority(Role.Admin.name())
 				.anyRequest().authenticated()
 				.and()
 				.addFilterBefore(securityTokenFilter, UsernamePasswordAuthenticationFilter.class)
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().build();
-		
 	}
 	
 	@Bean

@@ -10,10 +10,16 @@ import com.jdc.onestop.balance.model.entity.Account;
 import com.jdc.onestop.balance.model.entity.Balance;
 import com.jdc.onestop.balance.model.entity.Category;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 public record BalanceForm(
-		int categoryId,
+		@NotNull(message = "Please select category.")
+		Integer categoryId,
+		@NotNull(message = "Please enter issue date.")
 		@DateTimeFormat(pattern = "yyyy-MM-dd")
 		LocalDate issueAt,
+		@NotEmpty(message = "Please enter remark.")
 		String remark,
 		List<BalanceDetailsForm> details
 		) {

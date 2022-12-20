@@ -15,6 +15,7 @@ public record BalanceListDto(
 	int totalCount,
 	int totalAmount,
 	String remark,
+	boolean fixed,
 	boolean deleted) {
 
 	public static BalanceListDto from(Balance entity) {
@@ -24,6 +25,6 @@ public record BalanceListDto(
 				entity.getIssueAt(), 
 				entity.getDetails().stream().mapToInt(BalanceDetails::getQuentity).sum(), 
 				entity.getDetails().stream().mapToInt(a -> a.getQuentity() * a.getUnitPrice()).sum(), 
-				entity.getRemark(), entity.isDeleted());
+				entity.getRemark(), entity.isFixed(), entity.isDeleted());
 	}
 }

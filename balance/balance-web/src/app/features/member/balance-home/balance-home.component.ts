@@ -18,6 +18,8 @@ export class BalanceHomeComponent {
       from: '',
       to: ''
     })
+
+    this.search()
   }
 
   search() {

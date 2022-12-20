@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { handleApiResult } from 'src/app/shared/services';
 import { BalanceService } from 'src/app/shared/services/balance.service';
@@ -22,7 +22,7 @@ export class BalanceListComponent implements OnInit{
     private service:BalanceService) {
 
     this.form = builder.group({
-      type: '',
+      type: ['', Validators.required],
       category: '',
       keyword: ''
     })
@@ -30,9 +30,11 @@ export class BalanceListComponent implements OnInit{
     this.form.get('type')?.valueChanges.subscribe(type => {
       this.categories = []
       this.form.patchValue({category: ''})
-      categoryService.search(type).subscribe(
+      categoryService.search({type: type}).subscribe(
         result => this.categories = handleApiResult(result)
       )
+
+      this.search()
     })
   }
 
