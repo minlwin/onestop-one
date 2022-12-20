@@ -14,7 +14,7 @@ import org.springframework.util.StringUtils;
 import com.jdc.onestop.balance.model.BalanceAppBusinessException;
 import com.jdc.onestop.balance.model.dto.AccountDto;
 import com.jdc.onestop.balance.model.dto.form.PasswordForm;
-import com.jdc.onestop.balance.model.dto.form.SignUpForm;
+import com.jdc.onestop.balance.model.dto.form.ProfileForm;
 import com.jdc.onestop.balance.model.entity.Account;
 import com.jdc.onestop.balance.model.entity.Account.Role;
 import com.jdc.onestop.balance.model.repo.AccountRepo;
@@ -40,8 +40,11 @@ public class AccountService {
 		repo.save(entity);
 	}
 
-	public AccountDto save(String username, SignUpForm form) {
-		return null;
+	public AccountDto save(String username, ProfileForm form) {
+		var account = repo.findOneByEmail(username).orElseThrow();
+		account.setName(form.name());
+		account.setPhone(form.phone());
+		return AccountDto.from(account);
 	}
 
 	public void changePassword(String username, PasswordForm form) {

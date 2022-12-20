@@ -4,11 +4,13 @@ import { MessageDialogComponent } from './widgets/message-dialog/message-dialog.
 import { ChangePassComponent } from './widgets/change-pass/change-pass.component';
 import { ProfileEditComponent } from './widgets/profile-edit/profile-edit.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     imports: [
       CommonModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      RouterModule
     ],
     declarations: [
       MessageDialogComponent,

@@ -55,6 +55,6 @@
   <router-outlet></router-outlet>
 </div>
 
-<app-change-pass #changePassDialog></app-change-pass>
+<app-change-pass #changePassDialog (onSave)="changePassword($event); changePassDialog.hide();"></app-change-pass>
 
-<app-profile-edit #profileEditDialog></app-profile-edit>
+<app-profile-edit #profileEditDialog (onSave)="editProfile($event); profileEditDialog.hide();"></app-profile-edit>

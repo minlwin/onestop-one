@@ -40,6 +40,10 @@ export class ChangePassComponent implements AfterViewInit {
     this.dialog.show()
   }
 
+  hide() {
+    this.dialog.hide()
+  }
+
   hasError(name:string) {
     return (this.form.get(name)?.dirty || this.form.get('name')?.touched) && !this.form.get(name)?.valid
   }

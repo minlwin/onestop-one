@@ -20,7 +20,6 @@ export class ProfileEditComponent {
     this.form = builder.group({
       name: ['', Validators.required],
       phone: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
     })
   }
 
@@ -32,6 +31,10 @@ export class ProfileEditComponent {
     if(this.form.valid) {
       this.onSave.emit(this.form.value)
     }
+  }
+
+  hide() {
+    this.dialog.hide()
   }
 
   show() {

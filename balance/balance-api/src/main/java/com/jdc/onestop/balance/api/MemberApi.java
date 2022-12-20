@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jdc.onestop.balance.model.dto.AccountDto;
 import com.jdc.onestop.balance.model.dto.ApiResult;
 import com.jdc.onestop.balance.model.dto.form.PasswordForm;
-import com.jdc.onestop.balance.model.dto.form.SignUpForm;
+import com.jdc.onestop.balance.model.dto.form.ProfileForm;
 import com.jdc.onestop.balance.model.service.AccountService;
 
 @RestController
@@ -24,16 +24,16 @@ public class MemberApi {
 	private AccountService service;
 
 	@PutMapping("profile")
-	@PreAuthorize("#username == authentication.principal.username")
+	@PreAuthorize("#username == authentication.name")
 	ApiResult<AccountDto> save(
 			@RequestHeader("balance-user") String username, 
-			@Validated @RequestBody SignUpForm form, 
+			@Validated @RequestBody ProfileForm form, 
 			BindingResult result) {
 		return ApiResult.from(service.save(username, form));
 	}
 	
 	@PutMapping("password")
-	@PreAuthorize("#username == authentication.principal.username")
+	@PreAuthorize("#username == authentication.name")
 	ApiResult<String> changePass(
 			@RequestHeader("balance-user") String username, 
 			@Validated @RequestBody PasswordForm form, 
