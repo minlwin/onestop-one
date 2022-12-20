@@ -62,8 +62,8 @@ public class BalanceApi {
 		return ApiResult.from(service.updateFixedStatus(id, form));
 	}
 	
-	@DeleteMapping("{id}")
-	ApiResult<BalanceDto> delete(@PathVariable int id, @RequestBody SingleInputForm<Boolean> form, BindingResult result) {
+	@PutMapping("{id}/deleted")
+	ApiResult<BalanceDto> updateDeleteFlug(@PathVariable int id, @RequestBody SingleInputForm<Boolean> form, BindingResult result) {
 		return ApiResult.from(service.delete(id, form));
 	}
 
