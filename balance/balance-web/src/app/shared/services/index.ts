@@ -7,7 +7,7 @@ export interface ApiResult {
 
 export function handleApiResult(result:ApiResult) {
     if(!result.success) {
-        throw new ApplcationError(result.data)
+        throw new ApplcationError(result.data.messages)
     }
     return result.data
 }
