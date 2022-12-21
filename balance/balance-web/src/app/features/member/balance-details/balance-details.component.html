@@ -1,1 +1,70 @@
-<p>balance-details works!</p>
+<h3 class="mb-3"><i class="bi bi-info-circle me-2"></i> {{balance?.category?.type || 'Balance'}} Details</h3>
+
+<div class="row">
+  <div class="col-lg-9 col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="bi bi-list me-2"></i> Details Items
+        </h5>
+      </div>
+
+      <div class="card-body">
+        <div class="row mb-3" *ngFor="let item of details">
+          <div class="col">
+            <label class="form-label">Details</label>
+            <span class="form-control">{{item.article}}</span>
+          </div>
+          <div class="col-2">
+            <label class="form-label d-block text-end">Unit Price</label>
+            <span class="form-control d-block text-end">{{item.unitPrice | number}}</span>
+          </div>
+          <div class="col-2">
+            <label class="form-label d-block text-end">Quentity</label>
+            <span class="form-control d-block text-end">{{item.quentity | number}}</span>
+          </div>
+          <div class="col-2">
+            <label class="form-label d-block text-end">Total</label>
+            <span class="form-control d-block text-end">{{(item.unitPrice * item.quentity) | number}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="bi bi-info-lg me-2"></i> Summary
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">Category</label>
+          <span class="form-control">{{balance?.category?.name || ''}}</span>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Issue Date</label>
+          <span class="form-control">{{balance?.issueAt || ''}}</span>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Total</label>
+          <span class="form-control">{{total | number}} MMK</span>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Remark</label>
+          <div class="form-control">{{balance?.remark || ''}}</div>
+        </div>
+
+        <button class="btn btn-outline-danger d-block w-100">
+          <i class="bi bi-pencil"></i> Edit Balance
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

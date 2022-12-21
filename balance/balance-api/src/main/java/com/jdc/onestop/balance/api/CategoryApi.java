@@ -53,7 +53,7 @@ public class CategoryApi {
 	
 	
 	@PostMapping("upload")
-	ApiResult<List<CategoryDto>> upload(@RequestParam MultipartFile part) {
-		return ApiResult.from(service.upload(part));
+	ApiResult<List<CategoryDto>> upload(@RequestParam MultipartFile file) {
+		return ApiResult.from(service.upload(file));
 	}
 }

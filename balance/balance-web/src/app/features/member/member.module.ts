@@ -8,6 +8,7 @@ import { BalanceHomeComponent } from './balance-home/balance-home.component';
 import { BalanceEditComponent } from './balance-edit/balance-edit.component';
 import { BalanceDetailsComponent } from './balance-details/balance-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     MemberRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class MemberModule { }

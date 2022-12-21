@@ -20,9 +20,9 @@
           <i class="bi bi-search"></i> Search
       </button>
 
-      <button class="btn btn-outline-danger">
+      <a [routerLink]="['/member','list', form.get('type')?.value, 'edit']"  class="btn btn-outline-danger">
         <i class="bi bi-plus-lg"></i> Add New
-      </button>
+      </a>
   </div>
 </form>
 
@@ -45,7 +45,7 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let item of list">
+    <tr *ngFor="let item of list" class="align-middle">
       <td>{{item.category.type}}</td>
       <td>{{item.category.name}}</td>
       <td>{{item.issueAt}}</td>
@@ -53,6 +53,11 @@
       <td>{{item.totalAmount}}</td>
       <td>{{item.remark}}</td>
       <td></td>
+      <td>
+        <a [routerLink]="['/member', 'list', form.get('type')?.value, 'details']" [queryParams]="{id: item.id}" class="btn btn-sm btn-link">
+          <i class="bi bi-folder2-open"></i>
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>

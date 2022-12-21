@@ -11,9 +11,11 @@ const routes: Routes = [{
     component: MemberComponent,
     children: [
       {path: 'home', component: BalanceHomeComponent},
-      {path: 'list/:type', component: BalanceListComponent},
-      {path: 'edit/:type', component: BalanceEditComponent},
-      {path: 'details/:id', component: BalanceDetailsComponent},
+      {path: 'list/:type', children: [
+        {path: 'edit', component: BalanceEditComponent},
+        {path: 'details', component: BalanceDetailsComponent},
+        {path: '', component: BalanceListComponent}
+      ]},
       {path: '', pathMatch: 'full', redirectTo: 'home'}
     ]
   }];

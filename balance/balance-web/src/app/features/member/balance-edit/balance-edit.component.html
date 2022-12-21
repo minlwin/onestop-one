@@ -1,1 +1,88 @@
-<p>balance-edit works!</p>
+<h3>
+  <i class="bi bi-pencil me-2"></i> {{form.get('id')?.value ? 'Edit' : 'Add New'}} {{form.get('type')?.value}}
+</h3>
+
+<form [formGroup]="form" class="row mt-3">
+  <div class="col-lg-9 col-md-8">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <h5 class="card-title"><i class="bi bi-list"></i> {{form.get('type')?.value}} Details</h5>
+
+        <button (click)="addDetailsItem(null)" class="btn btn-sm btn-link">
+          <i class="bi bi-plus-lg"></i>
+        </button>
+      </div>
+
+      <div formArrayName="details" class="card-body">
+        <div *ngFor="let item of detailsList.controls; index as i" >
+          <div [formGroupName]="i" class="row mb-3">
+
+            <div class="col">
+              <label *ngIf="i == 0" class="form-label">Title</label>
+              <input formControlName="article" placeholder="Enter Title" type="text" class="form-control">
+            </div>
+
+            <div class="col-2">
+              <label *ngIf="i == 0" class="form-label">Unit Price</label>
+              <input formControlName="unitPrice" type="number" class="form-control">
+            </div>
+
+            <div class="col-2">
+              <label *ngIf="i == 0" class="form-label">Quentity</label>
+              <input formControlName="quentity" type="number" class="form-control">
+            </div>
+
+            <div class="col-2">
+              <label *ngIf="i == 0" class="form-label">Total</label>
+              <span class="form-control">{{detailsTotal(i) | number}}</span>
+            </div>
+
+            <div class="col-auto" [class.btn-wrapper]="i == 0">
+              <button (click)="removeDetailsItem(i)" [class.disabled]="!detailsList.controls[i].valid" class="btn btn-outline-secondary">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">
+          <i class="bi bi-info-lg"></i> Summary
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">Category</label>
+          <select formControlName="categoryId" class="form-select">
+            <option value="">Select One</option>
+            <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Issue At</label>
+          <input formControlName="issueAt" type="date" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Total</label>
+          <span class="form-control">{{allTotal | number}} MMK</span>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Remark</label>
+          <textarea formControlName="remark" cols="20" rows="4" class="form-control"></textarea>
+        </div>
+
+        <button (click)="save()" [class.disabled]="!form.valid" class="btn btn-outline-danger d-block w-100">
+          <i class="bi bi-save"></i> Save
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
