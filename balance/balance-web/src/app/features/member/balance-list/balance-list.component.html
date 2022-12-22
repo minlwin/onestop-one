@@ -36,10 +36,9 @@
       <th>Type</th>
       <th>Category</th>
       <th>Issue At</th>
-      <th>Total Count</th>
-      <th>Total</th>
+      <th class="text-end">Total Count</th>
+      <th class="text-end">Total</th>
       <th>Remark</th>
-      <th>Status</th>
       <th></th>
     </tr>
   </thead>
@@ -48,11 +47,10 @@
     <tr *ngFor="let item of list" class="align-middle">
       <td>{{item.category.type}}</td>
       <td>{{item.category.name}}</td>
-      <td>{{item.issueAt}}</td>
-      <td>{{item.totalCount}}</td>
-      <td>{{item.totalAmount}}</td>
+      <td>{{item.issueAt | apiDates}}</td>
+      <td class="text-end">{{item.totalCount}}</td>
+      <td class="text-end">{{item.totalAmount | number}}</td>
       <td>{{item.remark}}</td>
-      <td></td>
       <td>
         <a [routerLink]="['/member', 'list', form.get('type')?.value, 'details']" [queryParams]="{id: item.id}" class="btn btn-sm btn-link">
           <i class="bi bi-folder2-open"></i>

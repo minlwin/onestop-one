@@ -47,7 +47,7 @@
 
         <div class="mb-3">
           <label class="form-label">Issue Date</label>
-          <span class="form-control">{{balance?.issueAt || ''}}</span>
+          <span class="form-control">{{(balance?.issueAt || '') | apiDates}}</span>
         </div>
 
         <div class="mb-3">
@@ -60,9 +60,9 @@
           <div class="form-control">{{balance?.remark || ''}}</div>
         </div>
 
-        <button class="btn btn-outline-danger d-block w-100">
+        <a [routerLink]="['/member', 'list', balance?.category?.type, 'edit']" [queryParams]="{id: balance?.id}" class="btn btn-outline-danger d-block w-100">
           <i class="bi bi-pencil"></i> Edit Balance
-        </button>
+        </a>
       </div>
     </div>
 

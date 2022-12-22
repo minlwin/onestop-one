@@ -14,37 +14,34 @@
       </div>
 
       <div formArrayName="details" class="card-body">
-        <div *ngFor="let item of detailsList.controls; index as i" >
-          <div [formGroupName]="i" class="row mb-3">
-
-            <div class="col">
-              <label *ngIf="i == 0" class="form-label">Title</label>
-              <input formControlName="article" placeholder="Enter Title" type="text" class="form-control">
-            </div>
-
-            <div class="col-2">
-              <label *ngIf="i == 0" class="form-label">Unit Price</label>
-              <input formControlName="unitPrice" type="number" class="form-control">
-            </div>
-
-            <div class="col-2">
-              <label *ngIf="i == 0" class="form-label">Quentity</label>
-              <input formControlName="quentity" type="number" class="form-control">
-            </div>
-
-            <div class="col-2">
-              <label *ngIf="i == 0" class="form-label">Total</label>
-              <span class="form-control">{{detailsTotal(i) | number}}</span>
-            </div>
-
-            <div class="col-auto" [class.btn-wrapper]="i == 0">
-              <button (click)="removeDetailsItem(i)" [class.disabled]="!detailsList.controls[i].valid" class="btn btn-outline-secondary">
-                <i class="bi bi-trash"></i>
-              </button>
-            </div>
+        <div *ngFor="let item of detailsList.controls; index as i" [formGroupName]="i" class="row mb-3" [class.d-none]="isDeleteItem(i)">
+          <div class="col">
+            <label *ngIf="i == 0" class="form-label">Title</label>
+            <input formControlName="article" placeholder="Enter Title" type="text" class="form-control">
           </div>
 
+          <div class="col-2">
+            <label *ngIf="i == 0" class="form-label">Unit Price</label>
+            <input formControlName="unitPrice" type="number" class="form-control">
+          </div>
+
+          <div class="col-2">
+            <label *ngIf="i == 0" class="form-label">Quentity</label>
+            <input formControlName="quentity" type="number" class="form-control">
+          </div>
+
+          <div class="col-2">
+            <label *ngIf="i == 0" class="form-label">Total</label>
+            <span class="form-control">{{detailsTotal(i) | number}}</span>
+          </div>
+
+          <div class="col-auto" [class.btn-wrapper]="i == 0">
+            <button (click)="removeDetailsItem(i)" [class.disabled]="!detailsList.controls[i].valid" class="btn btn-outline-secondary">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
         </div>
+
       </div>
     </div>
   </div>

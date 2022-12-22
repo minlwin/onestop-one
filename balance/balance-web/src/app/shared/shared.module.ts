@@ -5,6 +5,8 @@ import { ChangePassComponent } from './widgets/change-pass/change-pass.component
 import { ProfileEditComponent } from './widgets/profile-edit/profile-edit.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { AmountByTypePipe } from './pipes/amount-by-type.pipe';
+import { ApiDatesPipe } from './pipes/api-dates.pipe';
 
 @NgModule({
     imports: [
@@ -16,11 +18,15 @@ import { RouterModule } from "@angular/router";
       MessageDialogComponent,
       ChangePassComponent,
       ProfileEditComponent,
+      AmountByTypePipe,
+      ApiDatesPipe,
     ],
     exports: [
       MessageDialogComponent,
       ChangePassComponent,
       ProfileEditComponent,
+      AmountByTypePipe,
+      ApiDatesPipe,
     ]
 })
 export class SharedModule {}

@@ -63,6 +63,11 @@ export class BalanceEditComponent {
     return this.form.get('details') as FormArray
   }
 
+  isDeleteItem(index:number) {
+    const target =  this.detailsList.at(index) as FormGroup
+    return target.get('deleted')?.value
+  }
+
   patchDetails(list:any[]) {
     for(const item of list) {
       this.addDetailsItem(item)
@@ -82,14 +87,20 @@ export class BalanceEditComponent {
   removeDetailsItem(index:number) {
     const item = this.detailsList.at(index).value
     if(item.id) {
-      item.patchValue({deleted: true})
+      item.deleted = true
+      this.detailsList.at(index).patchValue(item)
     } else {
       this.detailsList.removeAt(index)
 
-      if(this.detailsList.controls.length == 0) {
+      if(this.isEmptyDetails()) {
         this.addDetailsItem(undefined)
       }
     }
+  }
+
+  isEmptyDetails() {
+    const detailsArray = this.form.get('details')?.value as any[]
+    return detailsArray.filter(a => !a.deleted).length == 0
   }
 
   detailsTotal(index:number):number {

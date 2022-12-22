@@ -36,14 +36,20 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let item of list">
+    <tr *ngFor="let item of list; index as i">
       <td>{{item.category.name}}</td>
       <td>{{item.category.type}}</td>
-      <td>{{item.issueAt}}</td>
+      <td>{{item.issueAt | apiDates}}</td>
       <td>{{item.remark}}</td>
-      <td class="text-end"></td>
-      <td class="text-end"></td>
-      <td class="text-end"></td>
+      <td class="text-end">
+        {{item.totalAmount | amountOf : item.category.type : 'Credit' | number}}
+      </td>
+      <td class="text-end">
+        {{item.totalAmount | amountOf : item.category.type : 'Debit' | number}}
+      </td>
+      <td class="text-end">
+        {{calResult[i] | number}}
+      </td>
     </tr>
   </tbody>
 </table>
